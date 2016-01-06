@@ -1,0 +1,14 @@
+[
+	{
+    	"keys": ["ctrl+shift+s"], "command": "gold_search_entity"
+	},
+	{
+    	"keys": ["ctrl+shift+o"], "command": "gold_open_class"
+	},
+	{
+    	"keys": ["ctrl+shift+i"], "command": "gold_check_in"
+	},
+	{
+    	"keys": ["ctrl+shift+u"], "command": "gold_check_out"
+	}
+]

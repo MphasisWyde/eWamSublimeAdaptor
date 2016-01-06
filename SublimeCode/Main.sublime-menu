@@ -27,6 +27,16 @@
             "args" : {"refresh": "True"}
          },
          {
+            "id": "gold_check_in",
+            "caption": "Check in",
+            "command": "gold_check_in"  
+         },
+         {
+            "id": "gold_check_out",
+            "caption": "Check out",
+            "command": "gold_check_out"  
+         },
+         {
             "id": "gold_save_class",
             "caption": "Save",
             "command": "gold_save_class"
