@@ -11,6 +11,16 @@
             "command": "gold_open_class"
          },
          {
+            "id": "gold_search_entity",
+            "caption": "Search Entity",
+            "command": "gold_search_entity"
+         },
+         {
+            "id": "gold_push_entity",
+            "caption": "Push to eWam",
+            "command": "gold_push_entity"
+         },
+         {
             "id": "gold_parse_code",
             "caption": "Parse",
             "command": "gold_parse_code",
@@ -41,6 +51,7 @@
             "caption": "Show error window",
             "command": "gold_show_error_window"
          }
+
       ]
    }
 ]
