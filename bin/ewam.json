@@ -1,0 +1,27 @@
+{
+	options: {
+		//none
+	},
+	services: {
+		"restAPI": {
+			classname:"aRestAPI",
+		},
+		"aeWamManager": {
+			classname:"aeWamManager",
+		},
+		"compiler": {
+			classname:"aSystemCompilerService",
+		},
+		"http-service": {
+			classname:"aSystemHttpService",
+			options: {
+				url:"http://+:8082/",
+				map: {
+					"*/api/rest/*":{service:"restAPI",method:"InterpretHttpTransaction"}, 
+					"*":{service:"http-service",method:"InterpretHttpTransaction"}
+				},
+			}
+		}
+	}
+}
+
