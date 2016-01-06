@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>gold</string>
+		<string>god</string>
+	</array>
+	<key>foldingStartMarker</key>
+	<string>(Function)|(Procedure)</string>
+	<key>foldingStopMarker</key>
+	<string>(EndFunc)|(EndProc)</string>
+	<key>name</key>
+	<string>Gold</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>comment</key>
+			<string>Comments</string>
+			<key>match</key>
+			<string>[;].*</string>
+			<key>name</key>
+			<string>comment.line.character</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Numeric constants</string>
+			<key>match</key>
+			<string>[0-9]+[.]{0-1}[0-9]*</string>
+			<key>name</key>
+			<string>constant.numeric</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Character constants</string>
+			<key>match</key>
+			<string>[#][0-9]{3}</string>
+			<key>name</key>
+			<string>constant.character</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Language constants</string>
+			<key>match</key>
+			<string>(true|True|false|False|nil|Nil)</string>
+			<key>name</key>
+			<string>constant.language</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Language constants</string>
+			<key>match</key>
+			<string>(self|Self|_Result)</string>
+			<key>name</key>
+			<string>variable.language</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>General keywords</string>
+			<key>match</key>
+			<string>\b(_MethodName|_ModuleName|_move|absolute|allVersionsOf|and|array|bAnd|begin|bNot|bOr|bXor|char|chr|concat|const|continue|CString|Decimal|descending|dispose|distinct|exit|first|from|Group|by|in|inherited|instanceOf|inOut|int|inverse|last|length|like|listOf|member|memory|MetaModelEntity|new|nil|not|num|of|fetch|select|OQLClassId|OQLCount|OQLMax|OQLMin|OQLSum|OqlUpdateDate|OqlUpdateTime|or|ord|order|by|out|pass|PhantomsToo|pred|refTo|reimplem|return|Scenario|sizeof|step|string|succ|throw|type|Upcase|uses|using|var|versioned|when|where|Write|WriteLn|xor|into|Sql|at|Sql|packed|anycase|dynamic|rem|global|remote|multiLang)\b</string>
+			<key>name</key>
+			<string>keyword.other</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Structural keywords</string>
+			<key>match</key>
+			<string>\b(class|endClass|module|endModule|function|endFunc|procedure|endProc|nativeRecord|record|endRecord|end)\b</string>
+			<key>name</key>
+			<string>keyword.structure</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Flow control keywords</string>
+			<key>match</key>
+			<string>\b(if|then|elseIf|else|endIf|while|endWhile|for|to|downTo|forEach|endFor|repeat|until|loop|endLoop|break|try|catch|when|endWhen|finally|endTry|switch|endSwitch)\b</string>
+			<key>name</key>
+			<string>keyword.control</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Entity declaration</string>
+			<key>match</key>
+			<string>(class|module|function|procedure|nativeRecord|record)</string>
+			<key>name</key>
+			<string>storage.type</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Modifiers keywords</string>
+			<key>match</key>
+			<string>\b(public|private|protected|final|override|forward|external|memory)\b</string>
+			<key>name</key>
+			<string>storage.modifier</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>"</string>
+			<key>comment</key>
+			<string>Strings in ""</string>
+			<key>end</key>
+			<string>"</string>
+			<key>name</key>
+			<string>string.quoted.double</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>= '[#][0-9]{3}'</string>
+					<key>name</key>
+					<string>constant.character</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\'</string>
+			<key>comment</key>
+			<string>Strings in ''</string>
+			<key>end</key>
+			<string>\'</string>
+			<key>name</key>
+			<string>string.quoted.simple</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>[#][0-9]{3}</string>
+					<key>name</key>
+					<string>constant.character</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(function)\b([a-zA-Z][a-zA-Z0-9]*)\b(\(.*\))?\b(return)\b([a-zA-Z][a-zA-Z0-9]*)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Function definition</string>
+			<key>end</key>
+			<string>(endFunc)</string>
+			<key>name</key>
+			<string>entity.other</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(procedure)\b([a-zA-Z][a-zA-Z0-9]*)\b(\(.*\))?</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Procedure definition</string>
+			<key>end</key>
+			<string>(endProc)</string>
+			<key>name</key>
+			<string>entity.other</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.gold</string>
+	<key>uuid</key>
+	<string>63661b9d-cf52-4bbe-b3e2-251d5072cf91</string>
+</dict>
+</plist>

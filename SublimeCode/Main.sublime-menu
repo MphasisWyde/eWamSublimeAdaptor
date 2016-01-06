@@ -1,0 +1,46 @@
+[
+   {
+      "id": "ewam",
+      "caption": "eWAM",
+      "mnemonic": "W",
+      "children":
+      [
+         {
+            "id": "gold_open_class",
+            "caption": "Open class or module",
+            "command": "gold_open_class"
+         },
+         {
+            "id": "gold_parse_code",
+            "caption": "Parse",
+            "command": "gold_parse_code",
+            "args" : {"refresh": "True"}
+         },
+         {
+            "id": "gold_save_class",
+            "caption": "Save",
+            "command": "gold_save_class"
+         },
+         {
+            "id": "gold_new_env_proj",
+            "caption": "New environnement project",
+            "command": "gold_new_env_proj"
+         },
+         {
+            "id": "gold_open_env_proj",
+            "caption": "Open environnement project",
+            "command": "gold_open_env_proj"
+         },
+         {
+            "id": "gold_close_env_proj",
+            "caption": "Close environnement project",
+            "command": "gold_close_env_proj"
+         },
+         {
+            "id": "gold_show_error_window",
+            "caption": "Show error window",
+            "command": "gold_show_error_window"
+         }
+      ]
+   }
+]
