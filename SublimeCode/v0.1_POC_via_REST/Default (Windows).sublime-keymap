@@ -10,5 +10,8 @@
 	},
 	{
     	"keys": ["ctrl+shift+u"], "command": "gold_check_out"
+	},
+	{
+    	"keys": ["ctrl+shift+p"], "command": "gold_push_entity"
 	}
 ]

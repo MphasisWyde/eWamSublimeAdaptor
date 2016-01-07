@@ -1,5 +1,6 @@
 import sublime, sublime_plugin, ctypes, json, User.gold_environnement, sys, http.client
 
+
 class GoldCheckInCommand(sublime_plugin.TextCommand):
 
    def run(self, edit):
@@ -15,4 +16,10 @@ class GoldCheckInCommand(sublime_plugin.TextCommand):
       User.gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
 
    def is_enabled(self):
-      return User.gold_helpers.IsGoldCode(self.view)
+      className = self.view.name().split('.')[0]
+      conn = http.client.HTTPConnection('localhost',8082, 1)
+      conn.request("GET", "/aeWamManager/entitystatus/"+className)
+      resp = conn.getresponse()
+      parsed = json.loads(resp.read().decode("ascii").replace('\r\n', '\n'))
+      return User.gold_helpers.IsGoldCode(self.view) and parsed['checkedOut']
+      

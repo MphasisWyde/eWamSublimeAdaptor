@@ -8,11 +8,13 @@
          {
             "id": "gold_open_class",
             "caption": "Open class or module",
+            "mnemonic": "O",
             "command": "gold_open_class"
          },
          {
             "id": "gold_search_entity",
             "caption": "Search Entity",
+            "mnemonic": "S",
             "command": "gold_search_entity"
          },
          {
@@ -42,24 +44,54 @@
             "command": "gold_save_class"
          },
          {
-            "id": "gold_new_env_proj",
-            "caption": "New environnement project",
-            "command": "gold_new_env_proj"
+            "id": "gold_multi_user",
+            "caption": "Multi User",
+            "children":
+                [
+                  {
+                        "id": "gold_generic_history",
+                        "caption": "Ref base History",
+                        "command": "gold_generic_command",
+                        "args" : {"command": "/aMultiUserManager/refbasehistory"}
+                  },
+                  {
+                        "id": "gold_search_bundles",
+                        "caption": "Bundles",
+                        "command": "gold_generic_command",
+                        "args" : {"command": "/aeWamManager/bundles"}
+                  },
+                  {
+                        "id": "gold_class_scenarios",
+                        "caption": "scenarios",
+                        "command": "gold_generic_command_on_window",
+                        "args" : {"command": "/aeWamManager/scenarios"}
+                  }                   
+                ]
          },
          {
-            "id": "gold_open_env_proj",
-            "caption": "Open environnement project",
-            "command": "gold_open_env_proj"
-         },
-         {
-            "id": "gold_close_env_proj",
-            "caption": "Close environnement project",
-            "command": "gold_close_env_proj"
-         },
-         {
-            "id": "gold_show_error_window",
-            "caption": "Show error window",
-            "command": "gold_show_error_window"
+            "id": "gold_ide_options",
+            "caption": "Options",
+            "children":
+                [
+                  {
+                        "id": "gold_option_main",
+                        "caption": "Main",
+                        "command": "gold_generic_command",
+                        "args" : {"command": "/aeWamManager/config/main"}
+                  },
+                  {
+                        "id": "gold_option_sql",
+                        "caption": "SQL",
+                        "command": "gold_generic_command",
+                        "args" : {"command": "/aeWamManager/config/sql"}
+                  },
+                  {
+                        "id": "gold_option_interpreter",
+                        "caption": "Interpreter",
+                        "command": "gold_generic_command",
+                        "args" : {"command": "/aeWamManager/config/interpreter"}
+                  }
+                ]
          }
 
       ]

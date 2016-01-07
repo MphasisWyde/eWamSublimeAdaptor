@@ -16,20 +16,30 @@ class GoldSearchEntityCommand(sublime_plugin.TextCommand):
 
 class GoldDoSearchEntityCommand(sublime_plugin.TextCommand):
 
+   def log_panel_done(self, picked):
+        if 0 > picked < len(self.results):
+            return
+        item = self.results[picked]
+        self.view.run_command("gold_do_open_class", {"className": item})
+        print(item)
+
    def run(self, edit, className):
       conn = http.client.HTTPConnection('localhost:8082')
 
       conn.request("GET", "/aeWamManager/searchEntities/"+className)
       resp = conn.getresponse()
-      newView = sublime.active_window().new_file()
-
-      #newView.set_scratch(True)
-      newView.set_name(className + ".gold")
-      newView.insert(edit, 0, resp.read().decode("ascii").replace('\r\n', '\n'))
-      #newView.insert(edit, 0, jsonObj['eWamReply']['myResult'])
-
-
-      print(resp.status, resp.reason, resp.read())
+   
+      self.results = json.loads(resp.read().decode("ascii").replace('\r\n', '\n'))
+       
+      window = sublime.active_window()
+      window.show_quick_panel(self.results, self.log_panel_done, sublime.MONOSPACE_FONT)
+         
       conn.close()
 
       User.gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
+
+
+
+
+  
+       

@@ -1,0 +1,26 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Babel",
+		"ColorPicker",
+		"DocBlockr",
+		"Git",
+		"jQuery",
+		"Package Control",
+		"RESTer HTTP Client",
+		"Shell Exec",
+		"Shell Turtlestein",
+		"SideBarEnhancements",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"SublimeLinter-contrib-eslint",
+		"SublimeLinter-csslint",
+		"SublimeLinter-hlint",
+		"SublimeLinter-jshint",
+		"SublimeLinter-json"
+	]
+}
