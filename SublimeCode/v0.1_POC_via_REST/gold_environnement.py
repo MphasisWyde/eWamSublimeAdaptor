@@ -1,4 +1,5 @@
-import sublime, ctypes, User.gold_environnement, sys, json
+import sublime, ctypes, sys, json
+from . import *
 
 hWamAPI = None
 goldErrorsView = None
@@ -18,13 +19,13 @@ def IsEnvironnementInitialized():
     return True
 
 def InitializeErrorList():
-   User.gold_environnement.goldErrorsView = sublime.active_window().create_output_panel("golderrors")
+   gold_environnement.goldErrorsView = sublime.active_window().create_output_panel("golderrors")
 
 def InitializeEnvironnement(path):
     # TODO : use env variables or project setting to initialize env. ?
     # TODO : Fix the path (\dll or \dll.debug)
-    User.gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + sys._getframe().f_code.co_name)
-    User.gold_environnement.hWamAPI = ctypes.cdll.LoadLibrary("eWamAPI.dll")
+    gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + sys._getframe().f_code.co_name)
+    gold_environnement.hWamAPI = ctypes.cdll.LoadLibrary("eWamAPI.dll")
     request = b"""
         {   
             "eWamRequest":
@@ -39,12 +40,12 @@ def InitializeEnvironnement(path):
         }
     """
     # TODO: handle initialization error
-    result = ctypes.c_char_p( User.gold_environnement.hWamAPI.execEwamCmd(0, request) )
+    result = ctypes.c_char_p( gold_environnement.hWamAPI.execEwamCmd(0, request) )
 
     InitializeErrorList()
 
     # TODO: if result OK : say ok, otherwise say error + message_error to inform user
-    User.gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + sys._getframe().f_code.co_name)
+    gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + sys._getframe().f_code.co_name)
 
 def GetPath():
    projName = sublime.active_window().project_file_name()
@@ -54,7 +55,7 @@ def GetPath():
       return sublime.active_window().project_data()['wyde-root']
 
 def Parse(view):
-   User.gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + sys._getframe().f_code.co_name)
+   gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + sys._getframe().f_code.co_name)
 
    className = view.name().split('.')[0]
    source = view.substr(sublime.Region(0, view.size())).translate(str.maketrans( {'"': '\\\"' } ))
@@ -81,14 +82,14 @@ def Parse(view):
    """
 
    #print(request.decode('ascii'))
-   result = ctypes.c_char_p( User.gold_environnement.hWamAPI.execEwamCmd(0, request) )
+   result = ctypes.c_char_p( gold_environnement.hWamAPI.execEwamCmd(0, request) )
    print(result.value.decode('ascii'))
 
    #jsonObj = json.loads(result.value.decode('ascii').replace('\r\n', '\n'))
    #jsonObj = sublime.decode_value(result.value.decode('ascii').replace('\r\n', '\\n'))
    jsonObj = sublime.decode_value(result.value.decode('ascii'))
 
-   User.gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + sys._getframe().f_code.co_name)
+   gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + sys._getframe().f_code.co_name)
 
    #return jsonObj['eWamReply']['myResult'].replace('\r\n', '\\n')
    #print(jsonObj['eWamReply']['myResult'].replace('\r\n', '\\n'))

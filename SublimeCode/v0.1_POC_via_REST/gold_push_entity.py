@@ -1,9 +1,10 @@
-import sublime, sublime_plugin, ctypes, json, User.gold_environnement, sys, http.client
+import sublime, sublime_plugin, ctypes, json, sys, http.client
+from . import *
 
 class GoldPushEntityCommand(sublime_plugin.TextCommand):
 
    def run(self, edit):
-      User.gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
+      gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
       # Callback "open_class" when name has been entered
 
       className = self.view.name().split('.')[0]
@@ -17,7 +18,7 @@ class GoldPushEntityCommand(sublime_plugin.TextCommand):
       print(resp.status)
       print(resp.read())
 
-      User.gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
+      gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
 
    def is_enabled(self):
       className = self.view.name().split('.')[0]
@@ -26,7 +27,7 @@ class GoldPushEntityCommand(sublime_plugin.TextCommand):
       resp = conn.getresponse()
       parsed = json.loads(resp.read().decode("ascii").replace('\r\n', '\n'))
 
-      return User.gold_helpers.IsGoldCode(self.view) and parsed['checkedOut']
+      return gold_helpers.IsGoldCode(self.view) and parsed['checkedOut']
 
 
 

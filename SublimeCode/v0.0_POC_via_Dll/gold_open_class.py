@@ -1,18 +1,19 @@
-import sublime, sublime_plugin, ctypes, json, User.gold_environnement, sys
+import sublime, sublime_plugin, ctypes, json, sys
+from . import *
 
 class GoldOpenClassCommand(sublime_plugin.TextCommand):
 
    def run(self, edit):
-      User.gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
+      gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
       # Callback "open_class" when name has been entered
       sublime.active_window().show_input_panel("Enter class name:", "", self.open_class, None, None)
 
    def is_enabled(self):
-      if not User.gold_environnement.IsEnvironnementInitialized():
-         if User.gold_helpers.IsGoldProjectLoaded():
-            User.gold_environnement.InitializeEnvironnement(User.gold_environnement.GetPath())
+      if not gold_environnement.IsEnvironnementInitialized():
+         if gold_helpers.IsGoldProjectLoaded():
+            gold_environnement.InitializeEnvironnement(gold_environnement.GetPath())
 
-      return User.gold_environnement.IsEnvironnementInitialized()
+      return gold_environnement.IsEnvironnementInitialized()
 
    # Forward call to another command that will actually create a new view. We are forced to do this because at the time this callback is called, the run function has ended, and the "edit" object isn't valid  anymore. Problem is that we need it to insert text in the new view.
    def open_class(self, className):
@@ -44,7 +45,7 @@ class GoldDoOpenClassCommand(sublime_plugin.TextCommand):
          }
       }"""
 
-      result = ctypes.c_char_p( User.gold_environnement.hWamAPI.execEwamCmd(0, request) )
+      result = ctypes.c_char_p( gold_environnement.hWamAPI.execEwamCmd(0, request) )
       print(result.value.decode('ascii'))
       jsonObj = json.loads(result.value.decode('ascii'))
       
@@ -57,4 +58,4 @@ class GoldDoOpenClassCommand(sublime_plugin.TextCommand):
 
       # Probably rather use 'Packages/Gold/gold.tmLanguage' : consider the user has installed the plugin package 'Gold'
       newView.set_syntax_file('Packages/User/gold.tmLanguage')
-      User.gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
+      gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)

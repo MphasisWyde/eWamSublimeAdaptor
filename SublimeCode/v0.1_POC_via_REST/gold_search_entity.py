@@ -1,9 +1,10 @@
-import sublime, sublime_plugin, ctypes, json, User.gold_environnement, sys, http.client
+import sublime, sublime_plugin, ctypes, json, sys, http.client
+from . import *
 
 class GoldSearchEntityCommand(sublime_plugin.TextCommand):
 
    def run(self, edit):
-      User.gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
+      gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
       # Callback "open_class" when name has been entered
       sublime.active_window().show_input_panel("Enter entity name:", "", self.search_entity, None, None)
 
@@ -36,7 +37,7 @@ class GoldDoSearchEntityCommand(sublime_plugin.TextCommand):
          
       conn.close()
 
-      User.gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
+      gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
 
 
 

@@ -17,7 +17,7 @@ Be advised, for now this code is a prototype, a draft. Hence, you will spot some
 ### Sublime install
 The subfolder SublimeCode/ contains the source code (essentially python) used in the SublimeText package for eWAM Plugin
 
-If you want to use these files "as is", say for testing (i.e. without packaging it in a clean .sublime-package file), you must copy those files directly in the folder (not in a subfolder!) "<user folder>/AppData/Roaming/Sublime Text 3/Packages/User/", where <user folder> is usualy something like C:\Users\username\.
+If you want to use these files "as is", say for testing (i.e. without packaging it in a clean .sublime-package file), you must copy the folder you want (say v0.1_POC_via_REST) in "<user folder>/AppData/Roaming/Sublime Text 3/Packages/", where <user folder> is usualy something like C:\Users\username\.
 
 ## Features
 
