@@ -1,5 +1,7 @@
 # eWamSublimeAdaptor
 
+![front end screen shot](screenshot.png)
+
 ## SublimeText "Gold plugin" source code.
 Be advised, for now this code is a prototype, a draft. Hence, you will spot some ugly code, some code that's here only for testing purpose, a bunch of commented code lines, clumsy design and lots of debug output in the console. Work in progress.
 
