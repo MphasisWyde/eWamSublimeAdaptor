@@ -1,24 +1,80 @@
-; aeWamManager (aSystemService) (Def Version:6) (Implem Version:12)
+; aeWamManager (aSystemService) (Def Version:18) (Implem Version:32)
 
 class aeWamManager (aSystemService) 
 
-uses aSystemHttpTransaction, aSystemServiceManager, aModuleDef, aEntity
+uses aSystemHttpTransaction, aSystemServiceManager, aModuleDef, aEntity, aWideContext, 
+   aRecordDesc
 
+type tEntityStatus : record
+   checkedOut : Boolean
+endRecord
 type tRec : record
    x : Int4
    y : CString
 endRecord
+type tNamedEntities : sequence [UnBounded] of IDEName
+type tEntities : sequence [UnBounded] of tRec
 
 something : CString
 
 
+procedure ManageConfig(transaction : aSystemHttpTransaction)
+   uses aWideIde, Risky, aOption, JSON, aTextType
+   
+   var context : aWideContext
+   var response : Text
+   var option : aOption
+   var isFirst : Boolean
+   var name : CString
+   
+   isFirst = True
+   context = aWideContext(aWideIde(Risky.GetIDE).Context)
+   name = transaction.HttpIdentifier.type.AsCString(@transaction.HttpIdentifier)
+   if name = ''
+      response = JSON.Stringify(context)
+   else
+      forEach option in context.WydeOptions
+         if Upcase(option.Name) = Upcase(name)
+            response = JSON.Stringify(option)
+         endIf
+      endFor
+   endIf
+   ;
+   transaction.SetResponseBodyText(response)
+endProc 
+
+procedure GetBundles(transaction : aSystemHttpTransaction)
+   uses aPreparedDeliveriesBundleList, aDeliveriesBundlePreparer, xBundle, JSON, 
+      aSequenceType
+   
+   var bundleList : aPreparedDeliveriesBundleList
+   var bundle : aDeliveriesBundlePreparer
+   var response : Text
+   var isFirst : Boolean
+   var bundles : tNamedEntities
+   
+   bundleList = xBundle.GetPreparedbundleCatalog
+   forEach bundle in bundleList.DelBPreparers
+      bundles[-1] = bundle.Name
+   endFor
+   response = JSON.StringifyEx(@bundles, bundles.type)
+   transaction.SetResponseBodyText(response)
+   ; response := ''
+endProc 
+
+procedure GetNameSuggestor(transaction : aSystemHttpTransaction)
+   ; body
+   ; position: line, column
+endProc 
+
 procedure SearchEntities(transaction : aSystemHttpTransaction)
-   uses aMMBrowser, Motor, aClassDef, aTextType
+   uses aMMBrowser, Motor, aClassDef, aTextType, JSON, aSequenceType
    
    var myMMBrowser : aMMBrowser
    var result : aEntity
    var name : CString
    var response : Text
+   var entities : tNamedEntities
    
    new(myMMBrowser)
    transaction.HttpStatusCode = 200
@@ -33,10 +89,14 @@ procedure SearchEntities(transaction : aSystemHttpTransaction)
       False, mClass)
    forEach result in myMMBrowser.FoundEntities
       if member(result, aModuleDef)
-         WriteLn(response, 'http://localhost:8082/aeWamManager/aModuleDef/', result.Name)
+         entities[-1] = result.Name
+      else
+         entities[-1] = result.Name
       endIf
    endFor
+   response = JSON.StringifyEx(@entities, entities.type)
    transaction.SetResponseBodyText(response)
+   ; response := ''
    dispose(myMMBrowser)
 endProc 
 
@@ -70,6 +130,28 @@ function GetModuleDef(transaction : aSystemHttpTransaction) return aModuleDef
       transaction.HttpStatusCode = 404
    endIf
 endFunc 
+
+procedure Scenarios(transaction : aSystemHttpTransaction)
+   uses JSON, aSequenceType, aScenario
+   
+   var result : aScenario
+   var response : Text
+   var entities : tNamedEntities
+   var myModule : aModuleDef
+   
+   myModule = self.GetModuleDef(transaction)
+   if myModule <> Nil
+      forEach result in myModule.AvailableScenarios
+         if member(result, aModuleDef)
+            entities[-1] = result.Name
+         else
+            entities[-1] = result.Name
+         endIf
+      endFor
+      response = JSON.StringifyEx(@entities, entities.type)
+      transaction.SetResponseBodyText(response)
+   endIf
+endProc 
 
 procedure CheckIn(transaction : aSystemHttpTransaction)
    uses wWamIde
@@ -165,6 +247,25 @@ function Method2(a : tRec) return tRec
    return a
 endFunc 
 
+procedure entityStatus(transaction : aSystemHttpTransaction)
+   uses aClassPreparer, JSON
+   
+   var myModule : aModuleDef
+   var myClassPreparer : aClassPreparer
+   var status : tEntityStatus
+   var response : Text
+   
+   myModule = self.GetModuleDef(transaction)
+   if myModule <> Nil
+      new(myClassPreparer)
+      myClassPreparer.Name = myModule.Name
+      status.checkedOut = myClassPreparer.IsOwnedByLoggedUser
+      dispose(myClassPreparer)
+      response = JSON.StringifyEx(@status, status.type)
+      transaction.SetResponseBodyText(response)
+   endIf
+endProc 
+
 function InitService(manager : aSystemServiceManager, something : CString) return Boolean
    uses aSystemServiceMethod, aMethodDesc
    
@@ -175,6 +276,10 @@ function InitService(manager : aSystemServiceManager, something : CString) retur
    m = manager.InstallMethod('http', 'checkIn', self, MetaModelEntity(aeWamManager.CheckIn))
    m = manager.InstallMethod('http', 'checkOut', self, MetaModelEntity(aeWamManager.CheckOut))
    m = manager.InstallMethod('http', 'searchEntities', self, MetaModelEntity(aeWamManager.SearchEntities))
+   m = manager.InstallMethod('http', 'bundles', self, MetaModelEntity(aeWamManager.GetBundles))
+   m = manager.InstallMethod('http', 'config', self, MetaModelEntity(aeWamManager.ManageConfig))
+   m = manager.InstallMethod('http', 'entityStatus', self, MetaModelEntity(aeWamManager.entityStatus))
+   m = manager.InstallMethod('http', 'scenarios', self, MetaModelEntity(aeWamManager.Scenarios))
    ;
    m = manager.InstallMethod('http', 'doHttp', self, MetaModelEntity(aeWamManager.HttpMethod))
    m = manager.InstallMethod('raw', 'doRaw', self, MetaModelEntity(aeWamManager.RawMethod))
