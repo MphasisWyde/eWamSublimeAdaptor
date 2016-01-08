@@ -22,7 +22,7 @@ def IsGoldCode(view):
          name = viewname
    else:
       name = filename
-
+   
    return name.rfind(".gold") == len(name)-5 or name.rfind(".god") == len(name)-4
 
 def LogMessage(message):
