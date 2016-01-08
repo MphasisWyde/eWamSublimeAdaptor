@@ -19,7 +19,8 @@ def IsEnvironnementInitialized():
     return True
 
 def InitializeErrorList():
-   gold_environnement.goldErrorsView = sublime.active_window().create_output_panel("golderrors")
+    if gold_environnement.goldErrorsView == None:
+        gold_environnement.goldErrorsView = sublime.active_window().create_output_panel("golderrors")
 
 def InitializeEnvironnement(path):
     # TODO : use env variables or project setting to initialize env. ?

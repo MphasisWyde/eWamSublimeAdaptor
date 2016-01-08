@@ -6,8 +6,7 @@ class GoldPushEntityCommand(sublime_plugin.TextCommand):
       gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
       # Callback "open_class" when name has been entered
 
-      if gold_environnement.goldErrorsView == None:
-         gold_environnement.InitializeErrorList()
+      gold_environnement.InitializeErrorList()
          
       self.view.erase_regions('errors')
 
@@ -43,7 +42,7 @@ class GoldPushEntityCommand(sublime_plugin.TextCommand):
             print(message)
             gold_environnement.goldErrorsView.run_command("insert", { 'characters' : message })
 
-         self.view.add_regions('errors', errRegions, 'invalid', 'Packages/User/dot.png', sublime.DRAW_NO_FILL | sublime.DRAW_NO_OUTLINE | sublime.DRAW_SQUIGGLY_UNDERLINE)
+         self.view.add_regions('errors', errRegions, 'invalid', 'Packages/Gold/dot.png', sublime.DRAW_NO_FILL | sublime.DRAW_NO_OUTLINE | sublime.DRAW_SQUIGGLY_UNDERLINE)
 
       gold_environnement.goldErrorsView.set_read_only(True)
       sublime.active_window().run_command("show_panel", { 'panel': 'output.golderrors' })
