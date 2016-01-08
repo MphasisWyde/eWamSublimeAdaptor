@@ -1,0 +1,15 @@
+[
+   {
+      "id": "ewam",
+      "caption": "eWAM",
+      "mnemonic": "W",
+      "children":
+      [
+         {
+            "id": "gold_test",
+            "caption": "Test current feature",
+            "command": "gold_test"
+         },
+      ]
+   }
+]

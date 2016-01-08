@@ -21,14 +21,17 @@ class GoldPushEntityCommand(sublime_plugin.TextCommand):
       gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
 
    def is_enabled(self):
-      className = self.view.name().split('.')[0]
-      conn = http.client.HTTPConnection('localhost',8082, 1)
-      conn.request("GET", "/aeWamManager/entitystatus/"+className)
-      resp = conn.getresponse()
-      parsed = json.loads(resp.read().decode("ascii").replace('\r\n', '\n'))
+      try:
+         className = self.view.name().split('.')[0]
+         conn = http.client.HTTPConnection('localhost', 8082, timeout=0.1)
+         conn.request("GET", "/aeWamManager/entitystatus/"+className)
+         resp = conn.getresponse()
+         parsed = json.loads(resp.read().decode("ascii").replace('\r\n', '\n'))
 
-      return gold_helpers.IsGoldCode(self.view) and parsed['checkedOut']
-
+         return gold_helpers.IsGoldCode(self.view) and parsed['checkedOut']
+      except socket.timeout:
+         sublime.status_message("*** WARNING: EWAM SERVICE UNREACHABLE ! ***")
+         return False
 
 
       
