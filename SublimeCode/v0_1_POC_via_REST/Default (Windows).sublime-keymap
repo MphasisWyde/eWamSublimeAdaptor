@@ -1,6 +1,6 @@
 [
 	{
-    	"keys": ["ctrl+shift+s"], "command": "gold_search_entity"
+    	"keys": ["ctrl+shift+f"], "command": "gold_search_entity"
 	},
 	{
     	"keys": ["ctrl+shift+o"], "command": "gold_open_class"

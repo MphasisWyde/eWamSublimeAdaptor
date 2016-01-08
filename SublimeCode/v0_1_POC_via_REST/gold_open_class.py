@@ -18,22 +18,18 @@ class GoldDoOpenClassCommand(sublime_plugin.TextCommand):
    def run(self, edit, className):
       conn = http.client.HTTPConnection('localhost:8082')
 
-      conn.request("GET", "/aeWamManager/aModuleDef/"+className)
+      conn.request("GET", "/aeWamManager/openentity/"+className)
       resp = conn.getresponse()
-      newView = sublime.active_window().new_file()
 
       if resp.status == 200:
+         newView = sublime.active_window().new_file()
+         newView.set_scratch(True)
          newView.set_name(className + ".gold")
          newView.insert(edit, 0, resp.read().decode("ascii").replace('\r\n', '\n'))
-      else:
-         newView.set_name("Found classes matching "+className+"*")
-         self.view.run_command("gold_do_search_entity", {"className": className})
-
-      #newView.set_scratch(True)
-         #newView.insert(edit, 0, jsonObj['eWamReply']['myResult'])
-
-      # Probably rather use 'Packages/Gold/gold.tmLanguage' : consider the user has installed the plugin package 'Gold'
-      newView.set_syntax_file('Packages/User/gold.tmLanguage')
+         newView.set_syntax_file('Packages/User/gold.tmLanguage')
+      #elif resp.status == 404:
+      #  self.view.run_command("gold_do_open_class", {"className": className})
+          
 
       print(resp.status, resp.reason, resp.read())
       conn.close()
