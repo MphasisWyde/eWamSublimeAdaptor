@@ -15,7 +15,7 @@ class GoldGenericCommandCommand(sublime_plugin.TextCommand):
 
       parsed = json.loads(resp.read().decode("ascii").replace('\r\n', '\n'))
       newView.insert(edit, 0, json.dumps(parsed, indent=4, sort_keys=True))
-      newView.set_syntax_file('Packages/User/gold.tmLanguage')
+      newView.set_syntax_file('Packages/Gold/gold.tmLanguage')
       
       conn.close()
    

@@ -26,7 +26,7 @@ class GoldDoOpenClassCommand(sublime_plugin.TextCommand):
          newView.set_scratch(True)
          newView.set_name(className + ".gold")
          newView.insert(edit, 0, resp.read().decode("ascii").replace('\r\n', '\n'))
-         newView.set_syntax_file('Packages/User/gold.tmLanguage')
+         newView.set_syntax_file('Packages/Gold/gold.tmLanguage')
       #elif resp.status == 404:
       #  self.view.run_command("gold_do_open_class", {"className": className})
           

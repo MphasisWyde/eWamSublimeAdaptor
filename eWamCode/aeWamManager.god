@@ -1,10 +1,24 @@
-; aeWamManager (aSystemService) (Def Version:18) (Implem Version:32)
+; aeWamManager (aSystemService) (Def Version:20) (Implem Version:42)
 
 class aeWamManager (aSystemService) 
 
 uses aSystemHttpTransaction, aSystemServiceManager, aModuleDef, aEntity, aWideContext, 
-   aRecordDesc
+   aRecordDesc, aWT_TypeExtension
 
+type tInternalParseError : record
+   theVMT : Pointer
+   Wording : String255
+   LineNumber : Int4
+   CharPos : Int4
+   ErrorNum : Int4
+endRecord
+type tpInternalParseError : .tInternalParseError
+type tError : record
+   line : Int4
+   offSet : Int2
+   msg : CString
+endRecord
+type tErrors : sequence [UnBounded] of tError
 type tEntityStatus : record
    checkedOut : Boolean
 endRecord
@@ -12,7 +26,7 @@ type tRec : record
    x : Int4
    y : CString
 endRecord
-type tNamedEntities : sequence [UnBounded] of IDEName
+type tNamedEntities : sequence [UnBounded] of Text
 type tEntities : sequence [UnBounded] of tRec
 
 something : CString
@@ -55,7 +69,7 @@ procedure GetBundles(transaction : aSystemHttpTransaction)
    
    bundleList = xBundle.GetPreparedbundleCatalog
    forEach bundle in bundleList.DelBPreparers
-      bundles[-1] = bundle.Name
+      bundles[-1] := bundle.Name
    endFor
    response = JSON.StringifyEx(@bundles, bundles.type)
    transaction.SetResponseBodyText(response)
@@ -68,7 +82,7 @@ procedure GetNameSuggestor(transaction : aSystemHttpTransaction)
 endProc 
 
 procedure SearchEntities(transaction : aSystemHttpTransaction)
-   uses aMMBrowser, Motor, aClassDef, aTextType, JSON, aSequenceType
+   uses aMMBrowser, Motor, aTextType, JSON, aSequenceType
    
    var myMMBrowser : aMMBrowser
    var result : aEntity
@@ -85,13 +99,16 @@ procedure SearchEntities(transaction : aSystemHttpTransaction)
    myMMBrowser.Criterium = name + '*'
    ;
    myMMBrowser.ExecutingSelection = True
-   myMMBrowser.SelectFromClassId(MetaModelEntity(aClassDef).Id, MetaModelEntity(aClassDef).Id, 
-      False, mClass)
+   myMMBrowser.BrowseAbleEntitys = [mClass, mModule, mMethod, mOverrideMethod, mVariable, 
+      mType, mConstant]
+   myMMBrowser.Select
+   ;myMMBrowser.SelectFromClassId(MetaModelEntity(aClassDef).Id, MetaModelEntity(aClassDef).Id, 
+   ;   False, mClass)
    forEach result in myMMBrowser.FoundEntities
-      if member(result, aModuleDef)
-         entities[-1] = result.Name
+      if result.myOwner <> Nil
+         entities[-1] := result.myOwner.Name + '/' + result.Name
       else
-         entities[-1] = result.Name
+         entities[-1] := result.Name
       endIf
    endFor
    response = JSON.StringifyEx(@entities, entities.type)
@@ -119,6 +136,73 @@ procedure Get(name : aModuleDef, transaction : aSystemHttpTransaction)
    endIf
 endProc 
 
+procedure OpenEntity(transaction : aSystemHttpTransaction)
+   uses aTextType, Motor, aWT_SequenceTypeExtension, lib, aWT_TextTypeExtension, 
+      aMMBrowser
+   
+   var name : CString
+   var input : Text
+   var output : tWT_TextSequence
+   var Seq : tWT_TextSequence
+   var criteria : CString
+   var myMMBrowser : aMMBrowser
+   var result : aEntity
+   var response : Text
+   var src : Text
+   var entities : tNamedEntities
+   var ownerName : IDEName
+   var tmpName : IDEName
+   var l : Int4
+   
+   input := transaction.HttpIdentifier
+   Seq = lib.TextType.Explode(input, '/', c_unlimited)
+   l = lib.SequenceType.Len(Seq)
+   if l > 0
+      src = Seq[l - 1]
+      name = src.type.AsCString(@src)
+   endIf
+   if l > 1
+      src = Seq[l - 2]
+      ownerName = src.type.AsCString(@src)
+   endIf
+   ;
+   new(myMMBrowser)
+   transaction.HttpStatusCode = 200
+   myMMBrowser.CleanUpFoundEntities
+   Motor.SetCurrentNsIdContext(13) ;cDevNSIdContext
+   ;
+   myMMBrowser.Criterium = name
+   myMMBrowser.ExecutingSelection = True
+   myMMBrowser.BrowseAbleEntitys = [mClass, mModule, mMethod, mOverrideMethod, mVariable, 
+      mType, mConstant]
+   myMMBrowser.Select
+   forEach result in myMMBrowser.FoundEntities
+      if Upcase(ownerName) <> ''
+         if result.myOwner <> Nil
+            tmpName = result.myOwner.Name
+            if Upcase(ownerName) = Upcase(tmpName)
+               ; it is a redirect to eWam
+               transaction.HttpStatusCode = 301
+               if result.Interact(Nil, Consultation, True) = rValid
+               endIf
+               break
+            endIf
+         endIf
+      else
+         if member(result, aModuleDef) and (aModuleDef(result).myCurImplem <> Nil)
+            self.Get(aModuleDef(result), transaction)
+         else
+            ; it is a redirect to eWam
+            transaction.HttpStatusCode = 301
+            if result.Interact(Nil, Consultation, True) = rValid
+            endIf
+         endIf
+      endIf
+   endFor
+   ; response := ''
+   dispose(myMMBrowser)
+endProc 
+
 function GetModuleDef(transaction : aSystemHttpTransaction) return aModuleDef
    uses aTextType, Motor
    
@@ -143,9 +227,9 @@ procedure Scenarios(transaction : aSystemHttpTransaction)
    if myModule <> Nil
       forEach result in myModule.AvailableScenarios
          if member(result, aModuleDef)
-            entities[-1] = result.Name
+            entities[-1] := result.Name
          else
-            entities[-1] = result.Name
+            entities[-1] := result.Name
          endIf
       endFor
       response = JSON.StringifyEx(@entities, entities.type)
@@ -177,8 +261,9 @@ procedure CheckOut(transaction : aSystemHttpTransaction)
    endIf
 endProc 
 
-function GetOrModifyClassDef(transaction : aSystemHttpTransaction) return Boolean
-   uses aClassPreparer, Motor, aTextType
+procedure GetOrModifyClassDef(transaction : aSystemHttpTransaction)
+   uses aClassPreparer, Motor, aTextType, aModuleImplem, lib, aWT_SequenceTypeExtension, 
+      aSequenceType, JSON
    
    var myClassPreparer : aClassPreparer
    var myModule : aModuleDef
@@ -186,15 +271,17 @@ function GetOrModifyClassDef(transaction : aSystemHttpTransaction) return Boolea
    var ancestor : CString
    var name : CString
    var theText : Text
+   var Response : Text
+   var myModuleImplem : aModuleImplem
+   var myError : tError
+   var myErrors : tErrors
+   var parseError : tpInternalParseError
    
-   ;name : CString, body : Text
-   ;hello
-   ;var myJsonSerializer : aWT_JsonSerializer
+   ;
    name = transaction.HttpIdentifier.type.AsCString(@transaction.HttpIdentifier)
    myModule = Motor.FindModuleOrClassFromName(name)
    if myModule = Nil
-      _Result = False
-      ; self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
+      ; 
    else
       if transaction.HttpVerb = 'GET'
          self.Get(myModule, transaction)
@@ -204,18 +291,32 @@ function GetOrModifyClassDef(transaction : aSystemHttpTransaction) return Boolea
          myClassPreparer.Ancestor = ancestor
          theText = transaction.GetRequestBodyText
          myClassPreparer.CodeText := theText
-         ;Save the class
-         if myClassPreparer.IsOwnedByLoggedUser
-            myClassPreparer.StoreClass
-            _Result = True
-            transaction.HttpStatusCode = 200
+         myClassPreparer.TestSyntax
+         myModuleImplem = aModuleImplem(myModule.myCurImplem)
+         if myClassPreparer.ParsingStatus = SyntaxOk
+            Response := myModuleImplem.myTextFromMM
+            ;Save the class
+            if myClassPreparer.IsOwnedByLoggedUser
+               myClassPreparer.StoreClass
+               transaction.HttpStatusCode = 200
+            else
+               transaction.HttpStatusCode = 403
+            endIf
          else
-            _Result = False
+            forEach parseError in myModuleImplem.ParseErrors
+               myError.line = parseError.LineNumber
+               myError.offSet = parseError.CharPos
+               myError.msg = parseError.Wording
+               lib.SequenceType.Append(myError, myErrors, myErrors.type)
+            endFor
+            transaction.HttpStatusCode = 403
+            Response = JSON.StringifyEx(@myErrors, myErrors.type)
          endIf
          dispose(myClassPreparer)
+         transaction.SetResponseBodyText(Response)
       endIf
    endIf
-endFunc 
+endProc 
 
 procedure HttpMethod(transaction : aSystemHttpTransaction)
    var response : Text
@@ -276,6 +377,7 @@ function InitService(manager : aSystemServiceManager, something : CString) retur
    m = manager.InstallMethod('http', 'checkIn', self, MetaModelEntity(aeWamManager.CheckIn))
    m = manager.InstallMethod('http', 'checkOut', self, MetaModelEntity(aeWamManager.CheckOut))
    m = manager.InstallMethod('http', 'searchEntities', self, MetaModelEntity(aeWamManager.SearchEntities))
+   m = manager.InstallMethod('http', 'openEntity', self, MetaModelEntity(aeWamManager.OpenEntity))
    m = manager.InstallMethod('http', 'bundles', self, MetaModelEntity(aeWamManager.GetBundles))
    m = manager.InstallMethod('http', 'config', self, MetaModelEntity(aeWamManager.ManageConfig))
    m = manager.InstallMethod('http', 'entityStatus', self, MetaModelEntity(aeWamManager.entityStatus))

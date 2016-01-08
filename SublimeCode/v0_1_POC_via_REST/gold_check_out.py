@@ -1,4 +1,4 @@
-import sublime, sublime_plugin, ctypes, json, sys, http.client
+import sublime, sublime_plugin, ctypes, json, sys, http.client, socket
 from . import *
 
 class GoldCheckOutCommand(sublime_plugin.TextCommand):
