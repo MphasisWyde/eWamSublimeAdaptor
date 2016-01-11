@@ -1,5 +1,5 @@
 import sublime, sublime_plugin, ctypes, json, sys, http.client, socket
-from . import *
+from . import gold_helpers, gold_environnement
 
 class GoldCheckInCommand(sublime_plugin.TextCommand):
 

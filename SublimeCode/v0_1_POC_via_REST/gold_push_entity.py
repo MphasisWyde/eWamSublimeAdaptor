@@ -1,5 +1,5 @@
-import sublime, sublime_plugin, ctypes, json, sys, http.client
-from . import *
+import sublime, sublime_plugin, ctypes, json, sys, http.client, socket
+from . import gold_helpers, gold_environnement
 
 class GoldPushEntityCommand(sublime_plugin.TextCommand):
    def run(self, edit):

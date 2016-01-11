@@ -1,5 +1,5 @@
 import sublime, sublime_plugin, sys
-from . import *
+from . import gold_helpers
 
 class GoldOpenEnvProjCommand(sublime_plugin.ApplicationCommand):
 

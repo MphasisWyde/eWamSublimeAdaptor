@@ -1,5 +1,4 @@
 import sublime, sublime_plugin, ctypes, json, sys, http.client
-from . import *
 
 class GoldGitLogCommand(sublime_plugin.TextCommand):
     def run(self, edit=None):

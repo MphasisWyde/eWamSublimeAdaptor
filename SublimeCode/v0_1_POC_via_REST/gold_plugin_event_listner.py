@@ -1,5 +1,7 @@
-import sublime, sublime_plugin, ctypes, sys, string
-from . import *
+import sublime, sublime_plugin, ctypes, sys, string, http.client, json
+from . import gold_environnement, gold_helpers
+from xml.etree import ElementTree as ET
+import urllib
 
 class GoldPluginEventListner(sublime_plugin.EventListener):
    # def on_new(self, view):
@@ -165,6 +167,19 @@ class GoldPluginEventListner(sublime_plugin.EventListener):
    #    gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
    #    gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
    #    None
+
+   def on_query_completions(self, view, prefix, locations):
+      elements = None
+      suggestions = None
+
+      if gold_helpers.IsGoldCode(view):
+         conn = http.client.HTTPConnection('localhost:8082')
+         conn.request("GET", "/aeWamManager/searchEntities/"+prefix)
+         resp = conn.getresponse()
+         elements = json.loads(resp.read().decode("ascii").replace('\r\n', '\n'))
+         suggestions = [(x, x) for x in elements]
+
+      return suggestions
 
    # None
    

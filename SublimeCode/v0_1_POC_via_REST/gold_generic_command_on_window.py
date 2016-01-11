@@ -1,5 +1,4 @@
 import sublime, sublime_plugin, ctypes, json, sys, http.client
-from . import *
 
 class GoldGenericCommandOnWindowCommand(sublime_plugin.TextCommand):
 

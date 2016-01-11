@@ -1,5 +1,5 @@
 import sublime, sublime_plugin, ctypes, json, sys, http.client
-from . import *
+from . import gold_helpers
 
 class GoldGotoDefinitionCommand(sublime_plugin.TextCommand):
    
