@@ -1,18 +1,19 @@
 import sublime, sublime_plugin, ctypes, json, sys, http.client, socket
-from . import gold_environnement, gold_helpers
+from . import gold_environnement, gold_helpers, gold_globals
 
 class GoldPushEntityCommand(sublime_plugin.TextCommand):
    def run(self, edit):
       gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
       # Callback "open_class" when name has been entered
 
-      gold_environnement.InitializeErrorList()
+      if gold_globals.goldErrorsView == None:
+         gold_environnement.InitializeErrorList()
          
       self.view.erase_regions('errors')
 
-      gold_environnement.goldErrorsView.set_read_only(False)
-      gold_environnement.goldErrorsView.run_command("select_all")
-      gold_environnement.goldErrorsView.run_command("right_delete")
+      gold_globals.goldErrorsView.set_read_only(False)
+      gold_globals.goldErrorsView.run_command("select_all")
+      gold_globals.goldErrorsView.run_command("right_delete")
 
       className = self.view.name().split('.')[0]
       source = self.view.substr(sublime.Region(0, self.view.size())).translate(str.maketrans( {'"': '\\\"' } ))

@@ -1,0 +1,2 @@
+hWamAPI = None
+goldErrorsView = None
