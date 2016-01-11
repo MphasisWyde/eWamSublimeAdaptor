@@ -1,5 +1,5 @@
 import sublime, sublime_plugin, ctypes, json, sys
-from . import *
+from . import gold_environnement, gold_helpers
 
 class GoldSaveClassCommand(sublime_plugin.TextCommand):
 

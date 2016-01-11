@@ -1,5 +1,5 @@
 import sublime, sublime_plugin
-from . import *
+from . import gold_environnement, gold_helpers
 
 class GoldNewEnvProjCommand(sublime_plugin.ApplicationCommand):
 

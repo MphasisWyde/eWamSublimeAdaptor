@@ -63,9 +63,15 @@
                   {
                         "id": "gold_class_scenarios",
                         "caption": "scenarios",
-                        "command": "gold_generic_command_on_window",
+                        "command": "gold_open_scenario",
                         "args" : {"command": "/aeWamManager/scenarios"}
-                  }                   
+                  },
+                  {
+                        "id": "gold_class_descendants",
+                        "caption": "descendants",
+                        "command": "gold_generic_command_on_window",
+                        "args" : {"command": "/aeWamManager/descendants"}
+                  }                  
                 ]
          },
          {
@@ -94,6 +100,34 @@
                 ]
          }
 
+      ]
+   },
+   {
+      "id": "documentation",
+      "caption": "Documentation",
+      "mnemonic": "D",
+      "children":
+      [
+         {
+            "id": "github",
+            "caption": "Github",
+            "mnemonic": "G",
+            "command": "open_url",
+            "args" : {"url": "https://github.com/MphasisWyde/eWamSublimeAdaptor"}
+         },
+         {
+            "id": "questions_answers",
+            "caption": "Q&A",
+            "mnemonic": "Q",
+            "command": "open_url",
+            "args" : {"url": "http://stackoverflow.com/search?q=ewam"}
+         },
+                  {
+                        "id": "gold_api",
+                        "caption": "eWam API",
+                        "command": "gold_generic_command",
+                        "args" : {"command": "/http-service/help"}
+                  }
       ]
    }
 ]

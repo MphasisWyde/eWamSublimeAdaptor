@@ -1,5 +1,5 @@
 import sublime, sublime_plugin, ctypes, json, sys, http.client
-from . import *
+from . import gold_helpers
 
 class GoldGotoDefinitionCommand(sublime_plugin.TextCommand):
    
@@ -33,7 +33,7 @@ class GoldGotoDefinitionCommand(sublime_plugin.TextCommand):
 
    def is_enabled(self):
       # print(self.view.file_name(), self.view.name())
-      return gold_helpers.IsGoldCode(self.view)
+      return True #gold_helpers.IsGoldCode(self.view)
 
    def want_event(self):
       return True

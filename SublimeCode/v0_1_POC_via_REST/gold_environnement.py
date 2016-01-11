@@ -1,5 +1,5 @@
 import sublime, ctypes, sys, json
-from . import *
+from . import gold_helpers
 
 hWamAPI = None
 goldErrorsView = None

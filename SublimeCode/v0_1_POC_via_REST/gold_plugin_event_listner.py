@@ -1,5 +1,5 @@
 import sublime, sublime_plugin, ctypes, sys, string
-from . import *
+from . import gold_environnement, gold_helpers
 
 class GoldPluginEventListner(sublime_plugin.EventListener):
    # def on_new(self, view):

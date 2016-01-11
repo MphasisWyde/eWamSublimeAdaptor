@@ -1,5 +1,5 @@
-import sublime, sublime_plugin, ctypes, json, sys, http.client
-from . import *
+import sublime, sublime_plugin, ctypes, json, sys, http.client, socket
+from . import gold_environnement, gold_helpers
 
 class GoldPushEntityCommand(sublime_plugin.TextCommand):
    def run(self, edit):
@@ -15,7 +15,6 @@ class GoldPushEntityCommand(sublime_plugin.TextCommand):
       gold_environnement.goldErrorsView.run_command("right_delete")
 
       className = self.view.name().split('.')[0]
-      print(className)
       source = self.view.substr(sublime.Region(0, self.view.size())).translate(str.maketrans( {'"': '\\\"' } ))
       
       
