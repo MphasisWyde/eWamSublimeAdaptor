@@ -32,7 +32,6 @@ class GoldGotoDefinitionCommand(sublime_plugin.TextCommand):
       gold_helpers.LogAndStatusMessage("<-- " + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name)
 
    def is_enabled(self):
-      # print(self.view.file_name(), self.view.name())
       return gold_helpers.IsGoldCode(self.view)
 
    def want_event(self):

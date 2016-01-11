@@ -1,9 +1,9 @@
-; aeWamManager (aSystemService) (Def Version:20) (Implem Version:42)
+; aeWamManager (aSystemService) (Def Version:23) (Implem Version:52)
 
 class aeWamManager (aSystemService) 
 
 uses aSystemHttpTransaction, aSystemServiceManager, aModuleDef, aEntity, aWideContext, 
-   aRecordDesc, aWT_TypeExtension
+   aRecordDesc, aWT_TypeExtension, aScenario
 
 type tInternalParseError : record
    theVMT : Pointer
@@ -215,8 +215,55 @@ function GetModuleDef(transaction : aSystemHttpTransaction) return aModuleDef
    endIf
 endFunc 
 
+procedure EditScenario(thescenario : aScenario)
+      
+  
+      if thescenario.Interact(Nil, Consultation, True) = rValid
+      endIf
+  
+endProc 
+
+procedure OpenScenario(transaction : aSystemHttpTransaction)
+   uses aTextType, Motor, aWT_SequenceTypeExtension, lib, aWT_TextTypeExtension
+   
+   var name : CString
+   var input : Text
+   var output : tWT_TextSequence
+   var Seq : tWT_TextSequence
+   var result : aEntity
+   var response : Text
+   var src : Text
+   var entities : tNamedEntities
+   var ownerName : IDEName
+   var tmpName : IDEName
+   var l : Int4
+   var moduledef : aModuleDef
+   var thescenario : aScenario
+   
+   input := transaction.HttpIdentifier
+   Seq = lib.TextType.Explode(input, '/', c_unlimited)
+   l = lib.SequenceType.Len(Seq)
+   if l > 0
+      src = Seq[l - 1]
+      name = src.type.AsCString(@src)
+   endIf
+   if l > 1
+      src = Seq[l - 2]
+      ownerName = src.type.AsCString(@src)
+   endIf
+   moduledef = Motor.FindModuleOrClassFromName(ownerName)
+   if moduledef <> Nil
+      thescenario = moduledef.GetScenarioFromName(name)
+      if thescenario <> Nil
+         ; 
+         self.EditScenario(thescenario)
+         transaction.HttpStatusCode = 200
+      endIf
+   endIf
+endProc 
+
 procedure Scenarios(transaction : aSystemHttpTransaction)
-   uses JSON, aSequenceType, aScenario
+   uses JSON, aSequenceType
    
    var result : aScenario
    var response : Text
@@ -226,14 +273,30 @@ procedure Scenarios(transaction : aSystemHttpTransaction)
    myModule = self.GetModuleDef(transaction)
    if myModule <> Nil
       forEach result in myModule.AvailableScenarios
-         if member(result, aModuleDef)
-            entities[-1] := result.Name
-         else
-            entities[-1] := result.Name
-         endIf
+         entities[-1] := myModule.Name + '/' + result.Name
       endFor
       response = JSON.StringifyEx(@entities, entities.type)
       transaction.SetResponseBodyText(response)
+      transaction.HttpStatusCode = 200
+   endIf
+endProc 
+
+procedure Descendants(transaction : aSystemHttpTransaction)
+   uses JSON, aClassDef, aSequenceType
+   
+   var result : aClassDef
+   var response : Text
+   var entities : tNamedEntities
+   var myModule : aClassDef
+   
+   myModule = aClassDef(self.GetModuleDef(transaction))
+   if (myModule <> Nil) and member(myModule, aClassDef)
+      forEach result in myModule.Descendants
+         entities[-1] := myModule.Name + '/' + result.Name
+      endFor
+      response = JSON.StringifyEx(@entities, entities.type)
+      transaction.SetResponseBodyText(response)
+      transaction.HttpStatusCode = 200
    endIf
 endProc 
 
@@ -382,6 +445,8 @@ function InitService(manager : aSystemServiceManager, something : CString) retur
    m = manager.InstallMethod('http', 'config', self, MetaModelEntity(aeWamManager.ManageConfig))
    m = manager.InstallMethod('http', 'entityStatus', self, MetaModelEntity(aeWamManager.entityStatus))
    m = manager.InstallMethod('http', 'scenarios', self, MetaModelEntity(aeWamManager.Scenarios))
+   m = manager.InstallMethod('http', 'scenario', self, MetaModelEntity(aeWamManager.OpenScenario))
+   m = manager.InstallMethod('http', 'descendants', self, MetaModelEntity(aeWamManager.Descendants))
    ;
    m = manager.InstallMethod('http', 'doHttp', self, MetaModelEntity(aeWamManager.HttpMethod))
    m = manager.InstallMethod('raw', 'doRaw', self, MetaModelEntity(aeWamManager.RawMethod))

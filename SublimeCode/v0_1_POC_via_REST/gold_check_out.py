@@ -1,5 +1,5 @@
 import sublime, sublime_plugin, ctypes, json, sys, http.client, socket
-from . import gold_helpers, gold_environnement
+from . import gold_helpers
 
 class GoldCheckOutCommand(sublime_plugin.TextCommand):
 
@@ -22,7 +22,6 @@ class GoldCheckOutCommand(sublime_plugin.TextCommand):
          conn.request("GET", "/aeWamManager/entitystatus/"+className)
          resp = conn.getresponse()
          parsed = json.loads(resp.read().decode("ascii").replace('\r\n', '\n'))
-         print('check out: ',parsed['checkedOut'])
 
          return gold_helpers.IsGoldCode(self.view) and not parsed['checkedOut']
       except socket.timeout:
