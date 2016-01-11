@@ -16,8 +16,7 @@ class GoldPushEntityCommand(sublime_plugin.TextCommand):
       gold_globals.goldErrorsView.run_command("right_delete")
 
       className = self.view.name().split('.')[0]
-      source = self.view.substr(sublime.Region(0, self.view.size())).translate(str.maketrans( {'"': '\\\"' } ))
-      
+      source = self.view.substr(sublime.Region(0, self.view.size()))
       
       conn = http.client.HTTPConnection('localhost:8082')
       conn.request("POST", "/aeWamManager/aModuleDef/"+className, source)
