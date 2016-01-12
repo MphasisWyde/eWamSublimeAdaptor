@@ -1,0 +1,66 @@
+edit (class, module, scenarios, Produce C++, CPP Project, Bundle, ... whatever)
+   data:
+      uri (string that identifies the editable: class or module name, or <owner name>.name.)
+      owner (other editable)
+      associated view
+      associated file
+   API:
+      checkout (will actually checkout the top level parent : the owning class or module)
+      parse / check
+      save / push (must also save / push the top level parent : the owning class or module)
+      checkin (will also checkin the top level parent : the owning class or module)
+      status : checked-out
+      close (check state, ask if want to save, or discard)
+
+environment
+   data:
+      id (string that uniquely identifies this environment)
+      base url
+      modules
+   datatypes:
+      request (destined to be json serialized)
+   API:
+      initalize
+      is_initialized
+      reset
+      [all eWam API]
+         get API version
+         get source
+         parse
+         save
+         checkout
+         checkin
+
+project
+   data:
+      associated project file
+      associated environment(s) <= will allow multi env. merges
+      working env.
+   API:
+      restore (re-open all modules)
+      add module
+      remove/close module (warn about unsaved changes)
+      focus module
+      is_module_in_project (lookups in all env. to see if the modules is in one of them)
+
+error window 
+   data:
+      error list
+   API:
+      add error
+      clear errors
+      focus error
+      show
+      hide
+
+helper 
+   data:
+   API:
+      is_a_valid_gold_module (i.e. is a .gold file, associated with the currently open project)
+
+plugin - see how to maintain an instance of this at plugin initialization 
+   data:
+      error window
+      gold project(s)
+   API: 
+

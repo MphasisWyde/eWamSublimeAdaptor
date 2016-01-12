@@ -1,5 +1,5 @@
 import sublime, sublime_plugin, ctypes, sys, string, http.client, json
-from . import gold_environnement, gold_helpers
+from . import gold_environnement, gold_helpers, gold_globals
 from xml.etree import ElementTree as ET
 import urllib
 
@@ -120,7 +120,7 @@ class GoldPluginEventListner(sublime_plugin.EventListener):
 
       evt = args['event']
 
-      if view == gold_environnement.goldErrorsView and evt['button'] == 1:
+      if view == gold_globals.goldErrorsView and evt['button'] == 1:
          pt = view.window_to_text((evt["x"], evt["y"]))
          lineReg = view.line(pt)
          line = view.substr(lineReg)
@@ -171,6 +171,10 @@ class GoldPluginEventListner(sublime_plugin.EventListener):
    def on_query_completions(self, view, prefix, locations):
       elements = None
       suggestions = None
+
+      linecol = view.rowcol(locations[0])
+      x = linecol[0]
+      y = linecol[1]
 
       if gold_helpers.IsGoldCode(view):
          conn = http.client.HTTPConnection('localhost:8082')

@@ -1,0 +1,70 @@
+ Re-Write using APIs for various elements : 
+    error window 
+       data:
+          error list
+       API:
+          add error
+          clear errors
+          focus error
+          show
+          hide
+          
+    project
+       data:
+          modules
+          associated project file
+          associated environment(s) <= will allow multi env. merges
+          working env.
+       API:
+          restore (re-open all modules)
+          add module
+          remove/close module (warn about unsaved changes)
+          focus module
+          is_module_in_project
+          
+    module
+       data:
+          associated view
+       API:
+          checkout
+          parse
+          save
+          checkin
+          
+    environment
+       data:
+          dll handle
+          path
+       datatypes:
+          request (destined to be json serialized)
+       API:
+          initalize
+          is_initialized
+          reset
+          [all eWam API]
+             getsource
+             parsesource
+             putsource
+             checkout
+             checkin
+             ...
+    helper 
+       data:
+       API:
+          is_a_valid_gold_module (i.e. is a .gold file, associated with the currently open project)
+          
+    plugin - see how to maintain an instance of this at plugin initialization 
+       data:
+          error window
+          gold project(s)
+       API: 
+          
+ reminder:
+ class Bag:
+     def __init__(self):
+         self.data = []
+     def add(self, x):
+         self.data.append(x)
+     def addtwice(self, x):
+         self.add(x)
+         self.add(x)

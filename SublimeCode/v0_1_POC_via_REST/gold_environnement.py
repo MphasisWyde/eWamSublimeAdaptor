@@ -2,7 +2,7 @@ import sublime, ctypes, sys, json
 from . import gold_helpers, gold_globals
 
 def IsEnvironnementInitialized():
-    if hWamAPI == None:
+    if gold_globals.hWamAPI == None:
         return False
 
     projName = sublime.active_window().project_file_name()
@@ -23,7 +23,7 @@ def InitializeEnvironnement(path):
     # TODO : use env variables or project setting to initialize env. ?
     # TODO : Fix the path (\dll or \dll.debug)
     gold_helpers.LogAndStatusMessage("--> " + __name__ + ": " + sys._getframe().f_code.co_name)
-    hWamAPI = ctypes.cdll.LoadLibrary("eWamAPI.dll")
+    gold_globals.hWamAPI = ctypes.cdll.LoadLibrary("eWamAPI.dll")
     request = b"""
         {   
             "eWamRequest":
@@ -38,7 +38,7 @@ def InitializeEnvironnement(path):
         }
     """
     # TODO: handle initialization error
-    result = ctypes.c_char_p( gold_environnement.hWamAPI.execEwamCmd(0, request) )
+    result = ctypes.c_char_p( gold_globals.hWamAPI.execEwamCmd(0, request) )
 
     InitializeErrorList()
 
@@ -80,7 +80,7 @@ def Parse(view):
    """
 
    #print(request.decode('ascii'))
-   result = ctypes.c_char_p( hWamAPI.execEwamCmd(0, request) )
+   result = ctypes.c_char_p( gold_globals.hWamAPI.execEwamCmd(0, request) )
    print(result.value.decode('ascii'))
 
    #jsonObj = json.loads(result.value.decode('ascii').replace('\r\n', '\n'))
