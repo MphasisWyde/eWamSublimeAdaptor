@@ -1,4 +1,4 @@
-; aeWamManager (aSystemService) (Def Version:23) (Implem Version:52)
+; aeWamManager (aSystemService) (Def Version:3) (Implem Version:5)
 
 class aeWamManager (aSystemService) 
 
@@ -215,12 +215,47 @@ function GetModuleDef(transaction : aSystemHttpTransaction) return aModuleDef
    endIf
 endFunc 
 
+procedure DisplayIDEInfoViewer
+   uses aWideIde, Risky
+   
+   var theIDE : aWideIde
+   
+   theIDE = Risky.GetIDE
+   theIDE.DisplayWideComment
+endProc 
+
+procedure CloseIDEInfoViewer
+   uses aWideIde, aUIAgent, Risky
+   
+   var theIDE : aWideIde
+   var Agent : aUIAgent
+   
+   theIDE = Risky.GetIDE
+   Agent = theIDE.GetUIAgentFromName('WideComment')
+   Agent.Close(False)
+endProc 
+
 procedure EditScenario(thescenario : aScenario)
-      
-  
+   uses wClassOrModuleMaker, aListofReftosType, xGraphMMModif
+   
+   var owner : aModuleDef
+   var ownerProject : aModuleDef
+   
+   owner = aModuleDef(thescenario.myOwner)
+   ownerProject = wClassOrModuleMaker.ProjectOfClassOrModule(owner)
+   if ownerProject <> Nil
+      xGraphMMModif.SetScenarioMakerModal(True)
+      self.DisplayIDEInfoViewer ; temporary : need to have the IDE displayed
+      if ownerProject.AvailableScenarios.type.ModifyAt(Nil, ownerProject, ownerProject.AvailableScenarios.RankOfOneVersionOfThisObject(thescenario), 
+         @ownerProject.AvailableScenarios) <> Nil
+      endIf
+      self.CloseIDEInfoViewer ; temporary : need to have the IDE displayed
+      xGraphMMModif.SetScenarioMakerModal(False)
+      wClassOrModuleMaker.AcceptAndRegisterClassOrModule(ownerProject)
+   else
       if thescenario.Interact(Nil, Consultation, True) = rValid
       endIf
-  
+   endIf
 endProc 
 
 procedure OpenScenario(transaction : aSystemHttpTransaction)
