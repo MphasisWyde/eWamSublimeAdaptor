@@ -4,6 +4,7 @@ edit (class, module, scenarios, Produce C++, CPP Project, Bundle, ... whatever)
       owner (other editable)
       associated view
       associated file
+      environment (env from which it has been opened)
    API:
       checkout (will actually checkout the top level parent : the owning class or module)
       parse / check
@@ -16,14 +17,14 @@ environment
    data:
       id (string that uniquely identifies this environment)
       base url
-      modules
-   datatypes:
-      request (destined to be json serialized)
+      edits
+      route (table of API name, URL, method)
    API:
       initalize
       is_initialized
       reset
       [all eWam API]
+         UpdateAPI
          get API version
          get source
          parse

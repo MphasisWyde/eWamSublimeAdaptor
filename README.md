@@ -8,16 +8,21 @@ Be advised, for now this code is a prototype, a draft. Hence, you will spot some
 ## Installation
 ### eWam install
 1. Install eWam 6.1.5.0, available on Z:\Wyde Product\eWam & Related Products\Installations 6.1.5 ALPHA\eWAM 6.1.5.0 & Related Products
-2. Install eWamExtended (latest version), available on Z:\Wyde Development\eWamExtensions\eWamExtensionsInstallations\eWamExtended Products\wAddOns\eWamAdvancedFramework
+2. Install eWamExtended (latest version) (just WxWAM):   
+  * `svn export https://github.com/MphasisWyde/ewam-advanced-framework/trunk/Bundle/WxWAMAdvancedComponents`   
+  * or Copy `Z:\Wyde Development\eWamExtensions\eWamExtensionsInstallations\eWamExtended Products\wAddOns\eWamAdvancedFramework` or its equivalent on lyon
 3. Add the 2 files in the bin folder
-3. Open eWam and create the 2 classes in eWamCode and the JSON module
-4. Close eWam
-5. Run eWam as a service (you can see it with the process explorer)
+4. Open eWam and create the 2 classes in eWamCode and the JSON module
+5. Close eWam
+6. Run eWam as a service (you can see it with the process explorer)
 
 ### Sublime install
 The subfolder SublimeCode/ contains the source code (essentially python) used in the SublimeText package for eWAM Plugin
 
 If you want to use these files "as is", say for testing (i.e. without packaging it in a clean .sublime-package file), you must copy the folder you want (say v0.1_POC_via_REST) in "<user folder>/AppData/Roaming/Sublime Text 3/Packages/", where <user folder> is usualy something like C:\Users\username\.
+
+### Using your own 6.1 TGV?
+You have to first run ewam with the option `/PATCHSYSTEM`
 
 ## Features
 
