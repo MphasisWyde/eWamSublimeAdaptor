@@ -1,0 +1,1403 @@
+{
+  "swagger": "2.0",
+  "host": "localhost:8082",
+  "basePath": "/api",
+  "info": {
+    "description": "This is is the rest API for eWam",
+    "version": "0.0.1",
+    "title": "eWam Rest API",
+    "contact": {
+      "name": "API Team",
+      "url": "http://www.wynsure.com",
+      "email": "support@wynsure.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "DocumentationAPI",
+      "description": ""
+    },
+    {
+      "name": "ModuleDefAPI",
+      "description": ""
+    },
+    {
+      "name": "MMBrowserAPI",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/rest/documentation": {
+      "get": {
+        "tags": [
+          "DocumentationAPI"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded"
+          },
+          "401": {
+            "description": "User not connected or session time out, please reauthenticate and resend a token"
+          },
+          "404": {
+            "description": "You are not authorized to process this action, please contact your administrator"
+          }
+        },
+        "summary": "*/api/rest/documentation",
+        "description": ""
+      }
+    },
+    "/rest/classOrModule/": {
+      "put": {
+        "tags": [
+          "ModuleDefAPI"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded"
+          },
+          "400": {
+            "description": "Fill valid error raised an error - see error details in the response headers",
+            "schema": {
+              "$ref": "#/definitions/tErrorCode"
+            }
+          },
+          "401": {
+            "description": "User not connected or session time out, please reauthenticate and resend a token"
+          },
+          "404": {
+            "description": "You are not authorized to process this action, please contact your administrator"
+          },
+          "500": {
+            "description": "Object Not Changed"
+          }
+        },
+        "summary": "*/api/rest/classOrModule/",
+        "description": "Create a new class def\r\nthe first line needs to be:\r\n; {className} ({ancestorName}) \r\n\r\nYou can put any types, variables and method after that"
+      }
+    },
+    "/rest/classOrModule/{name}": {
+      "get": {
+        "tags": [
+          "ModuleDefAPI"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded"
+          },
+          "401": {
+            "description": "User not connected or session time out, please reauthenticate and resend a token"
+          },
+          "404": {
+            "description": "You are not authorized to process this action, please contact your administrator"
+          }
+        },
+        "summary": "*/api/rest/classOrModule/{name}",
+        "description": ""
+      },
+      "post": {
+        "tags": [
+          "ModuleDefAPI"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded",
+            "schema": {
+              "$ref": "#/definitions/Boolean"
+            }
+          },
+          "400": {
+            "description": "Fill valid error raised an error - see error details in the response headers",
+            "schema": {
+              "$ref": "#/definitions/tErrorCode"
+            }
+          },
+          "401": {
+            "description": "User not connected or session time out, please reauthenticate and resend a token"
+          },
+          "404": {
+            "description": "You are not authorized to process this action, please contact your administrator"
+          },
+          "500": {
+            "description": "Object Not Changed"
+          }
+        },
+        "summary": "*/api/rest/classOrModule/{name}",
+        "description": ""
+      }
+    },
+    "/rest/classOrModule/{name}/descendants": {
+      "get": {
+        "tags": [
+          "ModuleDefAPI"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded",
+            "schema": {
+              "$ref": "#/definitions/tIDEEntities"
+            }
+          },
+          "401": {
+            "description": "User not connected or session time out, please reauthenticate and resend a token"
+          },
+          "404": {
+            "description": "You are not authorized to process this action, please contact your administrator"
+          }
+        },
+        "summary": "*/api/rest/classOrModule/{name}/descendants",
+        "description": ""
+      }
+    },
+    "/rest/classOrModule/{name}/CheckOut": {
+      "post": {
+        "tags": [
+          "ModuleDefAPI"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded"
+          },
+          "400": {
+            "description": "Fill valid error raised an error - see error details in the response headers",
+            "schema": {
+              "$ref": "#/definitions/tErrorCode"
+            }
+          },
+          "401": {
+            "description": "User not connected or session time out, please reauthenticate and resend a token"
+          },
+          "404": {
+            "description": "You are not authorized to process this action, please contact your administrator"
+          },
+          "500": {
+            "description": "Object Not Changed"
+          }
+        },
+        "summary": "*/api/rest/classOrModule/{name}/CheckOut",
+        "description": ""
+      }
+    },
+    "/rest/classOrModule/{name}/CheckIn": {
+      "post": {
+        "tags": [
+          "ModuleDefAPI"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded"
+          },
+          "400": {
+            "description": "Fill valid error raised an error - see error details in the response headers",
+            "schema": {
+              "$ref": "#/definitions/tErrorCode"
+            }
+          },
+          "401": {
+            "description": "User not connected or session time out, please reauthenticate and resend a token"
+          },
+          "404": {
+            "description": "You are not authorized to process this action, please contact your administrator"
+          },
+          "500": {
+            "description": "Object Not Changed"
+          }
+        },
+        "summary": "*/api/rest/classOrModule/{name}/CheckIn",
+        "description": ""
+      }
+    },
+    "/rest/classOrModule/{name}/scenarios": {
+      "get": {
+        "tags": [
+          "ModuleDefAPI"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded",
+            "schema": {
+              "$ref": "#/definitions/tIDEEntities"
+            }
+          },
+          "401": {
+            "description": "User not connected or session time out, please reauthenticate and resend a token"
+          },
+          "404": {
+            "description": "You are not authorized to process this action, please contact your administrator"
+          }
+        },
+        "summary": "*/api/rest/classOrModule/{name}/scenarios",
+        "description": ""
+      }
+    },
+    "/rest/classOrModule/{name}/entityStatus": {
+      "get": {
+        "tags": [
+          "ModuleDefAPI"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded",
+            "schema": {
+              "$ref": "#/definitions/tEntityStatus"
+            }
+          },
+          "401": {
+            "description": "User not connected or session time out, please reauthenticate and resend a token"
+          },
+          "404": {
+            "description": "You are not authorized to process this action, please contact your administrator"
+          }
+        },
+        "summary": "*/api/rest/classOrModule/{name}/entityStatus",
+        "description": "Retrieve the status of the entity: checked in or not"
+      }
+    },
+    "/rest/classOrModule/{name}/scenarios/{scenarioName}": {
+      "get": {
+        "tags": [
+          "ModuleDefAPI"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "scenarioName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded",
+            "schema": {
+              "$ref": "#/definitions/aScenario"
+            }
+          },
+          "401": {
+            "description": "User not connected or session time out, please reauthenticate and resend a token"
+          },
+          "404": {
+            "description": "You are not authorized to process this action, please contact your administrator"
+          }
+        },
+        "summary": "*/api/rest/classOrModule/{name}/scenarios/{scenarioName}",
+        "description": ""
+      }
+    },
+    "/rest/searchEntities": {
+      "get": {
+        "tags": [
+          "MMBrowserAPI"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "m",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": ""
+          },
+          {
+            "name": "_class",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "_module",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "_method",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "_overrideMethod",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "_variable",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded",
+            "schema": {
+              "$ref": "#/definitions/tEntities"
+            }
+          },
+          "401": {
+            "description": "User not connected or session time out, please reauthenticate and resend a token"
+          },
+          "404": {
+            "description": "You are not authorized to process this action, please contact your administrator"
+          }
+        },
+        "summary": "*/api/rest/searchEntities",
+        "description": "Use this service to browse your metamodel\r\nUse parameters: \r\nq=Your Query\r\nm=the max size (default is 100)\r\n_class=True or False (default is True)\r\n_module=True or False (default is True)\r\n_method=True or False (default is True)\r\n_overrideMethod=True or False (default is True)\r\n_variable=True or False (default is True)\r\n\r\n"
+      }
+    }
+  },
+  "definitions": {
+    "tErrorCode": {
+      "type": "object",
+      "properties": {
+        "$parent": [],
+        "error": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "code": {
+          "type": "string",
+          "maxLength": 255
+        }
+      }
+    },
+    "tIDEEntities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 63
+      }
+    },
+    "boolean": {
+      "type": "boolean"
+    },
+    "tEntityStatus": {
+      "type": "object",
+      "properties": {
+        "$parent": [],
+        "checkedOut": {
+          "type": "boolean"
+        }
+      }
+    },
+    "aScenario": {
+      "type": "object",
+      "properties": {
+        "$version": "2147483647",
+        "$classname": "aScenario",
+        "$parent": [
+          "aEntity",
+          "aFullObject",
+          "aLightObject"
+        ],
+        "isMultiLang": {
+          "type": "string",
+          "maxLength": 0
+        },
+        "languageSpecific": {
+          "type": "integer"
+        },
+        "iRStatus": {
+          "type": "boolean"
+        },
+        "iREntity": {
+          "title": "Pointer to IREntity"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "visibility": {
+          "type": "integer"
+        },
+        "myText": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 63
+        },
+        "myOwner": {
+          "$ref": "#/definitions/TypeOfMyOwner"
+        },
+        "segs": {
+          "type": "integer"
+        },
+        "helpText": {
+          "type": "string"
+        },
+        "myAvailableEvents": {
+          "$ref": "#/definitions/TypeOfmyAvailableEvents"
+        },
+        "myMenus": {
+          "$ref": "#/definitions/TypeOfMyMenus"
+        },
+        "subComponents": {
+          "$ref": "#/definitions/TypeOfSubComponents"
+        },
+        "myCodeAndDefOrImplem": {
+          "$ref": "#/definitions/TypeOfmyCodeAndDef"
+        },
+        "derivesFrom": {
+          "$ref": "#/definitions/TypeOfMyArchetype"
+        },
+        "iconName": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "isKillOnUIAgentKill": {
+          "type": "boolean"
+        },
+        "isVirtual": {
+          "type": "boolean"
+        },
+        "defaultTitleExtractParam": {
+          "type": "integer"
+        },
+        "defaultTitleExtractKind": {
+          "title": "DefaultTitleExtractKind",
+          "enum": [
+            "DefaultExtract",
+            "idExtract",
+            "NameExtract",
+            "FullExtract",
+            "FancyExtract",
+            "TitleExtract",
+            "DroppedExtract",
+            "UserDefinedExtract",
+            "NoExtract",
+            "HelpExtract",
+            "DebugExtract"
+          ]
+        },
+        "defaultTitleKind": {
+          "title": "DefaultTitleKind",
+          "enum": [
+            "Static Text",
+            "Static Text + Extract",
+            "Extract"
+          ]
+        },
+        "defaultExecMode": {
+          "title": "DefaultExecMode",
+          "enum": [
+            "Default",
+            "Creation",
+            "Modification",
+            "Consultation"
+          ]
+        },
+        "defaultStoreMode": {
+          "title": "DefaultStoreMode",
+          "enum": [
+            "Define by Owner",
+            "No store",
+            "Store on change",
+            "Store on valid",
+            "Store on lose focus",
+            "Store and reload on lose focus"
+          ]
+        },
+        "windowPosition": {
+          "title": "WindowPosition",
+          "enum": [
+            "Use Position&Size",
+            "Minimize",
+            "Maximize",
+            "ShellPosition"
+          ]
+        },
+        "style": {
+          "type": "string",
+          "maxLength": 0
+        },
+        "border": {
+          "title": "Border",
+          "enum": [
+            "NoBorder",
+            "Dialog",
+            "Thin",
+            "Size"
+          ]
+        },
+        "defaultKinds": {
+          "type": "integer"
+        },
+        "defaultBackColor": {
+          "title": "DefaultBackColor",
+          "enum": [
+            "Black",
+            "Blue",
+            "Green",
+            "Cyan",
+            "Red",
+            "Magenta",
+            "Brown",
+            "LightGray",
+            "DarkGray",
+            "LightBlue",
+            "LightGreen",
+            "LightCyan",
+            "LightRed",
+            "LightMagenta",
+            "Yellow",
+            "White",
+            "BackGround",
+            "Neutral",
+            "BFalse",
+            "BTrue",
+            "ButtonLight",
+            "ButtonMiddle",
+            "ButtonDark",
+            "ButtonDefault",
+            "TitleBottom",
+            "Shadow",
+            "IContext",
+            "DialogBackGround",
+            "HiLiteForeGround",
+            "HiLiteBackGround",
+            "InactiveTitleTextBgnd",
+            "ActiveTitleTextBgnd",
+            "InactiveTitleText",
+            "ActiveTitleText",
+            "OutPutText",
+            "WindowStaticText",
+            "ScrollBar",
+            "WindowBackGround",
+            "ActiveTitle",
+            "InactiveTitle",
+            "Menu",
+            "Window",
+            "WindowFrame",
+            "MenuText",
+            "WindowText",
+            "TitleText",
+            "ActiveBorder",
+            "InactiveBorder",
+            "AppWorkSpace",
+            "HelpBackGround",
+            "HelpText",
+            "HelpHiLite",
+            "EntryFieldBackGround",
+            "InactiveArea",
+            "ButtonText",
+            "3DDKShadow",
+            "3DLight",
+            "ToolTipText",
+            "ToolTipBackGround",
+            "User1",
+            "User2",
+            "User3",
+            "User4",
+            "User5",
+            "User6",
+            "User7",
+            "User8",
+            "User9",
+            "User10",
+            "User11",
+            "User12",
+            "User13",
+            "User14",
+            "User15",
+            "User16",
+            "User17",
+            "User18",
+            "User19",
+            "User20",
+            "User21",
+            "User22",
+            "User23",
+            "User24",
+            "User25",
+            "User26",
+            "User27",
+            "User28",
+            "User29",
+            "User30",
+            "User31",
+            "User32",
+            "FirstUserColor",
+            "LastUserColor",
+            "ThinkColor",
+            "DarkOrangeForFolder",
+            "LightOrangeForFolder",
+            "DarkOrangeForPushButton",
+            "LightOrangeForPushButton",
+            "DarkBlueForPushButton",
+            "LightBlueForPushButton",
+            "GrayForPushButton",
+            "DarkBlueForPushButtonBackColor",
+            "DarkBlueForFolderBackColor",
+            "DarkOrangeForBitmapPushButton",
+            "LightOrangeForBitmapPushButton",
+            "DarkOrangeForBitmapPushedButton",
+            "LightOrangeForBitmapPushedButton",
+            "WhiteForFolder",
+            "GrayForFolder",
+            "FolderBody"
+          ]
+        },
+        "defaultForeColor": {
+          "title": "DefaultForeColor",
+          "enum": [
+            "Black",
+            "Blue",
+            "Green",
+            "Cyan",
+            "Red",
+            "Magenta",
+            "Brown",
+            "LightGray",
+            "DarkGray",
+            "LightBlue",
+            "LightGreen",
+            "LightCyan",
+            "LightRed",
+            "LightMagenta",
+            "Yellow",
+            "White",
+            "BackGround",
+            "Neutral",
+            "BFalse",
+            "BTrue",
+            "ButtonLight",
+            "ButtonMiddle",
+            "ButtonDark",
+            "ButtonDefault",
+            "TitleBottom",
+            "Shadow",
+            "IContext",
+            "DialogBackGround",
+            "HiLiteForeGround",
+            "HiLiteBackGround",
+            "InactiveTitleTextBgnd",
+            "ActiveTitleTextBgnd",
+            "InactiveTitleText",
+            "ActiveTitleText",
+            "OutPutText",
+            "WindowStaticText",
+            "ScrollBar",
+            "WindowBackGround",
+            "ActiveTitle",
+            "InactiveTitle",
+            "Menu",
+            "Window",
+            "WindowFrame",
+            "MenuText",
+            "WindowText",
+            "TitleText",
+            "ActiveBorder",
+            "InactiveBorder",
+            "AppWorkSpace",
+            "HelpBackGround",
+            "HelpText",
+            "HelpHiLite",
+            "EntryFieldBackGround",
+            "InactiveArea",
+            "ButtonText",
+            "3DDKShadow",
+            "3DLight",
+            "ToolTipText",
+            "ToolTipBackGround",
+            "User1",
+            "User2",
+            "User3",
+            "User4",
+            "User5",
+            "User6",
+            "User7",
+            "User8",
+            "User9",
+            "User10",
+            "User11",
+            "User12",
+            "User13",
+            "User14",
+            "User15",
+            "User16",
+            "User17",
+            "User18",
+            "User19",
+            "User20",
+            "User21",
+            "User22",
+            "User23",
+            "User24",
+            "User25",
+            "User26",
+            "User27",
+            "User28",
+            "User29",
+            "User30",
+            "User31",
+            "User32",
+            "FirstUserColor",
+            "LastUserColor",
+            "ThinkColor",
+            "DarkOrangeForFolder",
+            "LightOrangeForFolder",
+            "DarkOrangeForPushButton",
+            "LightOrangeForPushButton",
+            "DarkBlueForPushButton",
+            "LightBlueForPushButton",
+            "GrayForPushButton",
+            "DarkBlueForPushButtonBackColor",
+            "DarkBlueForFolderBackColor",
+            "DarkOrangeForBitmapPushButton",
+            "LightOrangeForBitmapPushButton",
+            "DarkOrangeForBitmapPushedButton",
+            "LightOrangeForBitmapPushedButton",
+            "WhiteForFolder",
+            "GrayForFolder",
+            "FolderBody"
+          ]
+        },
+        "defaultFont": {
+          "title": "DefaultFont",
+          "type": "object",
+          "properties": {
+            "$parent": [],
+            "fontSels": {
+              "type": "string",
+              "maxLength": 0
+            },
+            "fontSize": {
+              "type": "integer"
+            },
+            "fontName": {
+              "type": "string",
+              "maxLength": 63
+            }
+          }
+        },
+        "defaultHeightFactor": {
+          "type": "number"
+        },
+        "defaultWidthFactor": {
+          "type": "number"
+        },
+        "defaultYFactor": {
+          "type": "number"
+        },
+        "defaultXFactor": {
+          "type": "number"
+        },
+        "defaultHeight": {
+          "type": "integer"
+        },
+        "defaultWidth": {
+          "type": "integer"
+        },
+        "defaultY": {
+          "type": "integer"
+        },
+        "defaultX": {
+          "type": "integer"
+        },
+        "myType": {
+          "$ref": "#/definitions/TypeOfScenarioType"
+        },
+        "modifiers": {
+          "type": "string",
+          "maxLength": 0
+        }
+      }
+    },
+    "typeOfMyOwner": {
+      "type": "object",
+      "oneOf": [
+        {
+          "title": "aEntity",
+          "type": "object"
+        },
+        {
+          "title": "aType",
+          "type": "object"
+        },
+        {
+          "title": "aScenario",
+          "type": "object"
+        },
+        {
+          "title": "aIdentifierDesc",
+          "type": "object"
+        },
+        {
+          "title": "aDBEntity",
+          "type": "object"
+        },
+        {
+          "title": "aXAMLEntity",
+          "type": "object"
+        },
+        {
+          "title": "aQVarPresentor",
+          "type": "object"
+        },
+        {
+          "title": "aAccessPlanDesc",
+          "type": "object"
+        },
+        {
+          "title": "aApplication",
+          "type": "object"
+        },
+        {
+          "title": "aRoleType",
+          "type": "object"
+        },
+        {
+          "title": "aOption",
+          "type": "object"
+        },
+        {
+          "title": "aSqlTypeData",
+          "type": "object"
+        },
+        {
+          "title": "aSqlType",
+          "type": "object"
+        },
+        {
+          "title": "aDBDef",
+          "type": "object"
+        },
+        {
+          "title": "aExportManager",
+          "type": "object"
+        },
+        {
+          "title": "aMetaModelBrowser",
+          "type": "object"
+        },
+        {
+          "title": "aLocalIdDistributor",
+          "type": "object"
+        },
+        {
+          "title": "aLocalConfig",
+          "type": "object"
+        },
+        {
+          "title": "aRefConfig",
+          "type": "object"
+        },
+        {
+          "title": "aRunningChoice",
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "isActiveSide": {
+          "type": "boolean"
+        }
+      }
+    },
+    "typeOfmyAvailableEvents": {
+      "type": "object",
+      "properties": {
+        "isActiveSide": {
+          "type": "boolean"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "title": "aMethodType",
+              "type": "object"
+            }
+          ]
+        }
+      }
+    },
+    "typeOfMyMenus": {
+      "type": "object",
+      "properties": {
+        "isOwner": {
+          "type": "boolean"
+        },
+        "isIntegral": {
+          "type": "boolean"
+        },
+        "isActiveSide": {
+          "type": "boolean"
+        },
+        "pointsToVersion": {
+          "type": "boolean"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "title": "aQVPXXXAsMenuItem",
+              "type": "object"
+            }
+          ]
+        }
+      }
+    },
+    "typeOfSubComponents": {
+      "type": "object",
+      "properties": {
+        "isOwner": {
+          "type": "boolean"
+        },
+        "isIntegral": {
+          "type": "boolean"
+        },
+        "isActiveSide": {
+          "type": "boolean"
+        },
+        "pointsToVersion": {
+          "type": "boolean"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "title": "aQVarPresentor",
+              "type": "object"
+            },
+            {
+              "title": "aQVPRefScenario",
+              "type": "object"
+            },
+            {
+              "title": "aBoundAttributeQVP",
+              "type": "object"
+            },
+            {
+              "title": "aXAMLScenarioQVP",
+              "type": "object"
+            },
+            {
+              "title": "aQVPXXXAsShellIcon",
+              "type": "object"
+            },
+            {
+              "title": "aQVPWithExplanation",
+              "type": "object"
+            },
+            {
+              "title": "aQVPXXXAsOleControl",
+              "type": "object"
+            },
+            {
+              "title": "aQVPXXXAsMenuItem",
+              "type": "object"
+            },
+            {
+              "title": "aQVPXXXAsWindow",
+              "type": "object"
+            },
+            {
+              "title": "aQVPIndexedBuildInListScenario",
+              "type": "object"
+            },
+            {
+              "title": "aQVPXXXAsFolder",
+              "type": "object"
+            },
+            {
+              "title": "aQVPListof",
+              "type": "object"
+            },
+            {
+              "title": "aQVPGenericListOfScenario",
+              "type": "object"
+            },
+            {
+              "title": "aQVPDataTemplateScenario",
+              "type": "object"
+            },
+            {
+              "title": "aQVPVoidAsTreeBox",
+              "type": "object"
+            },
+            {
+              "title": "aQVPReturnTypeScenario",
+              "type": "object"
+            },
+            {
+              "title": "aQVPBuildInMethodTypeScenario",
+              "type": "object"
+            },
+            {
+              "title": "aQVPLinkScenario",
+              "type": "object"
+            },
+            {
+              "title": "aQVPGraphFrameLinkScenario",
+              "type": "object"
+            },
+            {
+              "title": "aQVPXXXAsGraphText",
+              "type": "object"
+            }
+          ]
+        }
+      }
+    },
+    "typeOfmyCodeAndDef": {
+      "type": "object",
+      "oneOf": [
+        {
+          "title": "aCUDef",
+          "type": "object"
+        },
+        {
+          "title": "aModuleDef",
+          "type": "object"
+        },
+        {
+          "title": "aCUImplem",
+          "type": "object"
+        },
+        {
+          "title": "aClassDef",
+          "type": "object"
+        },
+        {
+          "title": "aReimplemModuleDef",
+          "type": "object"
+        },
+        {
+          "title": "aReimplemClassDef",
+          "type": "object"
+        },
+        {
+          "title": "aModuleImplem",
+          "type": "object"
+        },
+        {
+          "title": "aMethodImplem",
+          "type": "object"
+        },
+        {
+          "title": "aClassImplem",
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "isActiveSide": {
+          "type": "boolean"
+        },
+        "pointsToVersion": {
+          "type": "boolean"
+        }
+      }
+    },
+    "typeOfMyArchetype": {
+      "type": "object",
+      "oneOf": [
+        {
+          "title": "aScenario",
+          "type": "object"
+        },
+        {
+          "title": "aToolBarScenario",
+          "type": "object"
+        },
+        {
+          "title": "aWideIdeScenario",
+          "type": "object"
+        },
+        {
+          "title": "aOpenWhereClosedScenario",
+          "type": "object"
+        },
+        {
+          "title": "aScenarioAsDesignWindow",
+          "type": "object"
+        },
+        {
+          "title": "aSimpleButFastScenario",
+          "type": "object"
+        },
+        {
+          "title": "aBuildInTypeScenario",
+          "type": "object"
+        },
+        {
+          "title": "aPathThruScenario",
+          "type": "object"
+        },
+        {
+          "title": "aBuildInRefScenario",
+          "type": "object"
+        },
+        {
+          "title": "aRefScenario",
+          "type": "object"
+        },
+        {
+          "title": "aPickerScenario",
+          "type": "object"
+        },
+        {
+          "title": "aXAMLScenario",
+          "type": "object"
+        },
+        {
+          "title": "aXAMLScenarioGenInfo",
+          "type": "object"
+        },
+        {
+          "title": "aXXXAsShellIcon",
+          "type": "object"
+        },
+        {
+          "title": "aRefClassDefScenario",
+          "type": "object"
+        },
+        {
+          "title": "aClassAsView",
+          "type": "object"
+        },
+        {
+          "title": "aMDIChildWindowScenario",
+          "type": "object"
+        },
+        {
+          "title": "aPainterScenario",
+          "type": "object"
+        },
+        {
+          "title": "aGenericListOfScenario",
+          "type": "object"
+        },
+        {
+          "title": "aGenericRefToScenario",
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "isActiveSide": {
+          "type": "boolean"
+        }
+      }
+    },
+    "typeOfScenarioType": {
+      "type": "object",
+      "oneOf": [
+        {
+          "title": "aType",
+          "type": "object"
+        },
+        {
+          "title": "aRecordDesc",
+          "type": "object"
+        },
+        {
+          "title": "aReferenceType",
+          "type": "object"
+        },
+        {
+          "title": "aBasicType",
+          "type": "object"
+        },
+        {
+          "title": "aArrayType",
+          "type": "object"
+        },
+        {
+          "title": "aRenamingType",
+          "type": "object"
+        },
+        {
+          "title": "aMethodType",
+          "type": "object"
+        },
+        {
+          "title": "aAnyType",
+          "type": "object"
+        },
+        {
+          "title": "aVoidType",
+          "type": "object"
+        },
+        {
+          "title": "aCUDef",
+          "type": "object"
+        },
+        {
+          "title": "aNativeRecordDesc",
+          "type": "object"
+        },
+        {
+          "title": "aVariantRecordDesc",
+          "type": "object"
+        },
+        {
+          "title": "aModuleDef",
+          "type": "object"
+        },
+        {
+          "title": "aCUImplem",
+          "type": "object"
+        },
+        {
+          "title": "aClassDef",
+          "type": "object"
+        },
+        {
+          "title": "aReimplemModuleDef",
+          "type": "object"
+        },
+        {
+          "title": "aReimplemClassDef",
+          "type": "object"
+        },
+        {
+          "title": "aModuleImplem",
+          "type": "object"
+        },
+        {
+          "title": "aMethodImplem",
+          "type": "object"
+        },
+        {
+          "title": "aClassImplem",
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "isActiveSide": {
+          "type": "boolean"
+        }
+      }
+    },
+    "tEntities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/tMMResponse"
+      }
+    },
+    "tMMResponse": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "theType": {
+          "type": "string",
+          "maxLength": 63
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 63
+        }
+      }
+    }
+  }
+}
