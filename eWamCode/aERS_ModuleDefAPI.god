@@ -39,7 +39,7 @@ procedure GetOutgoingURLMapping(object : aModuleDef, inOut name : CString)
    name = object.Name
 endProc 
 
-function GetMyScenario(name : aModuleDef, scenarioName : IDEName) return aScenario
+function GetMyScenario(name : aModuleDef, scenarioName : IDEName) return aLightObject
    if name = Nil
       self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
    else

@@ -540,6 +540,9 @@ procedure ewamExRouter(transaction : aSystemHttpTransaction)
       transaction.HttpStatusCode = response.GetStatusCodeAsInt4
       header = transaction.SetResponseHeader('Content-Type')
       header.SetString('application/json')
+      ;
+      header = transaction.SetResponseHeader('Access-Control-Allow-Origin')
+      header.SetString('*')
    endIf
    requestBody := ''
    dispose(request)

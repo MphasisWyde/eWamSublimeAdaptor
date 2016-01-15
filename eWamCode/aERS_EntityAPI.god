@@ -14,7 +14,7 @@ procedure GetOutgoingURLMapping(object : aEntity, inOut ownerName : CString, inO
    endIf
 endProc 
 
-function FindEntity(ownerName : CString, name : CString) return aEntity
+function _FindEntity(ownerName : CString, name : CString) return aEntity
    uses Motor, aWT_SequenceTypeExtension, aMMBrowser
    
    var input : Text
@@ -93,16 +93,16 @@ procedure EditScenario(thescenario : aScenario)
    endIf
 endProc 
 
-function UIInteractEntity(ownerName : CString, name : CString) return aEntity
-   _Result = self.FindEntity(ownerName, name)
+function UIInteractEntity(ownerName : CString, name : CString) return aLightObject
+   _Result = self._FindEntity(ownerName, name)
    if _Result <> Nil
       if _Result.Interact(Nil, Consultation, True) = rValid
       endIf
    endIf
 endFunc 
 
-function GetEntity(ownerName : CString, name : CString) return aEntity
+function GetEntity(ownerName : CString, name : CString) return aLightObject
    ;
-   _Result = self.FindEntity(ownerName, name)
+   _Result = self._FindEntity(ownerName, name)
 endFunc 
 
