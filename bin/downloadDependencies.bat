@@ -10,3 +10,5 @@ svn export --force https://github.com/MphasisWyde/ewam-advanced-framework/trunk/
 
 
 svn export --force https://github.com/MphasisWyde/eWamExtended/trunk/Bundle/WxBundleToolsEx/Bundle/BundleToolsEx
+
+svn export --force https://github.com/MphasisWyde/eWamExtended/trunk/Bundle/WxSelectiveExportManager
