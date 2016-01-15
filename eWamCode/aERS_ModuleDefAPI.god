@@ -23,6 +23,11 @@ type tError : record
    msg : CString
 endRecord
 type tErrors : sequence [UnBounded] of tError
+type tImplem : record
+   name : CString
+   ancestor : CString
+   content : Text
+endRecord
 
 
 procedure GetOutgoingURLMappingForScenario(object : aScenario, inOut name : CString, 
@@ -113,17 +118,18 @@ procedure CheckIn(name : aModuleDef)
    endIf
 endProc 
 
-procedure Get(name : aModuleDef)
+function Get(name : aModuleDef) return tImplem
    if name = Nil
       self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
    else
       name.myCurImplem.RegenerateTextFromIr
-      self.Response.Body := name.myCurImplem.myTextFromMM
-      self.Response.AppendHttpHeader('Content-Type', 'Application/text')
+      _Result.content := name.myCurImplem.myTextFromMM
+      _Result.name = name.Name
+      _Result.ancestor = name.DerivesFrom.Name
    endIf
-endProc 
+endFunc 
 
-function _ModifyImplem(name : aModuleDef, parseOnly : Boolean) return Boolean
+function _ModifyImplem(name : aModuleDef, parseOnly : Boolean, body : tImplem) return tImplem
    uses aClassPreparer, aBooleanType, lib, aWT_SequenceTypeExtension, aSequenceType, 
       JSON
    
@@ -148,11 +154,13 @@ function _ModifyImplem(name : aModuleDef, parseOnly : Boolean) return Boolean
       new(myClassPreparer)
       myClassPreparer.Name = myModule.Name
       myClassPreparer.Ancestor = myModule.DerivesFrom.Name
-      myClassPreparer.CodeText := self.Request.Body
+      myClassPreparer.CodeText := body.content
       myClassPreparer.TestSyntax
       myModuleImplem = aModuleImplem(myModule.myCurImplem)
       if myClassPreparer.ParsingStatus = SyntaxOk
-         self.Response.Body := myModuleImplem.myTextFromMM
+         _Result.content := myModuleImplem.myTextFromMM
+         _Result.name = name.Name
+         _Result.ancestor = name.DerivesFrom.Name
          ;Save the class
          if not _parseOnly
             if myClassPreparer.IsOwnedByLoggedUser
@@ -176,12 +184,12 @@ function _ModifyImplem(name : aModuleDef, parseOnly : Boolean) return Boolean
    endIf
 endFunc 
 
-function Parse(name : aModuleDef) return Boolean
-   _Result = self._ModifyImplem(name, True)
+function Parse(name : aModuleDef, body : tImplem) return tImplem
+   _Result = self._ModifyImplem(name, True, body)
 endFunc 
 
-function Modify(name : aModuleDef) return Boolean
-   _Result = self._ModifyImplem(name, False)
+function Modify(name : aModuleDef, body : tImplem) return tImplem
+   _Result = self._ModifyImplem(name, False, body)
 endFunc 
 
 function getClassNameFromSource(inOut src : Text) return CString
@@ -219,7 +227,7 @@ function getAncestorNameFromSource(inOut src : Text) return CString
    return classNameStr
 endFunc 
 
-procedure Create(body : Text)
+procedure Create(body : tImplem)
    uses aWT_JsonSerializer, aClassDef, Motor, xClassOrModuleMaker
    
    var myModule : aModuleDef
@@ -230,10 +238,9 @@ procedure Create(body : Text)
    var name : CString
    
    ;
-   src := self.Request.Body
-   name = self.getClassNameFromSource(src)
-   ;Save the class
-   ancestor = Motor.FindModuleOrClassFromName(self.getAncestorNameFromSource(src))
+   src := body.content
+   name = body.name
+   ancestor = Motor.FindModuleOrClassFromName(body.ancestor)
    if (ancestor <> Nil) and (name <> '')
       if xClassOrModuleMaker.CreateClassOrModuleWithText(ancestor, name, src, newclass, 
          False)

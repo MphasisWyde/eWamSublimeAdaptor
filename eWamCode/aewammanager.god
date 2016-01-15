@@ -516,6 +516,7 @@ procedure ewamExRouter(transaction : aSystemHttpTransaction)
    var parameter : tWT_NameValue
    var theText : Text
    var header : aSystemHttpVariable
+   var exHeader : tWT_NameValue
    
    new(request)
    Write(theText, 'http://', lib.http.Router.Config.Get('host'), transaction.HttpUrl)
@@ -543,9 +544,14 @@ procedure ewamExRouter(transaction : aSystemHttpTransaction)
       ;
       header = transaction.SetResponseHeader('Access-Control-Allow-Origin')
       header.SetString('*')
+      ;
+      forEach exHeader in response.HttpHeaders
+         header = transaction.SetResponseHeader(exHeader.Name.type.AsCString(@exHeader.Name))
+         header.SetText(exHeader.Value)
+      endFor
    endIf
-   requestBody := ''
-   dispose(request)
+   ;requestBody := ''
+   ;dispose(request)
    ;dispose(response)
 endProc 
 
