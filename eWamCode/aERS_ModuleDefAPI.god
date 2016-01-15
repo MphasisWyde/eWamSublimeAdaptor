@@ -3,7 +3,7 @@
 class aERS_ModuleDefAPI (aWT_RestResource) 
 
 uses aModuleDef, aWT_RestResponse, aWT_HttpRoot, aWT_RestRequest, aScenario, aCUImplem, 
-   aRecordDesc, aEntity
+   aRecordDesc, aEntity, aModuleImplem
 
 type tIDEEntities : sequence [UnBounded] of IDEName
 type tEntityStatus : record
@@ -31,7 +31,7 @@ procedure GetOutgoingURLMappingForScenario(object : aScenario, inOut name : CStr
    name = object.myOwner.Name
 endProc 
 
-procedure GetOutgoingURLMappingForCUImplem(object : aCUImplem, inOut name : CString)
+procedure GetOutgoingURLMappingForCUImplem(object : aModuleImplem, inOut name : CString)
    name = object.Name
 endProc 
 
@@ -123,9 +123,9 @@ procedure Get(name : aModuleDef)
    endIf
 endProc 
 
-function Post(name : aModuleDef) return Boolean
-   uses aClassPreparer, aModuleImplem, lib, aWT_SequenceTypeExtension, aSequenceType, 
-      JSON, aBooleanType
+function _ModifyImplem(name : aModuleDef, parseOnly : Boolean) return Boolean
+   uses aClassPreparer, aBooleanType, lib, aWT_SequenceTypeExtension, aSequenceType, 
+      JSON
    
    var myClassPreparer : aClassPreparer
    var myModule : aModuleDef
@@ -135,7 +135,6 @@ function Post(name : aModuleDef) return Boolean
    var myModuleImplem : aModuleImplem
    var _parseOnly : Boolean
    var _param : CString
-   var parseOnly : Boolean
    
    _param = self.Request.GetParameterAsCString('parseOnly')
    if _parseOnly.type.ConvertFromCString(_param, @_parseOnly)
@@ -177,6 +176,14 @@ function Post(name : aModuleDef) return Boolean
    endIf
 endFunc 
 
+function Parse(name : aModuleDef) return Boolean
+   _Result = self._ModifyImplem(name, True)
+endFunc 
+
+function Modify(name : aModuleDef) return Boolean
+   _Result = self._ModifyImplem(name, False)
+endFunc 
+
 function getClassNameFromSource(inOut src : Text) return CString
    uses lib, aWT_TextTypeExtension, aTextType
    
@@ -212,7 +219,7 @@ function getAncestorNameFromSource(inOut src : Text) return CString
    return classNameStr
 endFunc 
 
-procedure Put(body : Text)
+procedure Create(body : Text)
    uses aWT_JsonSerializer, aClassDef, Motor, xClassOrModuleMaker
    
    var myModule : aModuleDef

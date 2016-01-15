@@ -507,7 +507,7 @@ endProc
 
 procedure ewamExRouter(transaction : aSystemHttpTransaction)
    uses aWT_HttpRequest, aWT_HttpResponse, lib, aWT_HttpModule, aEnumType, aCStringType, 
-      aWT_HtmlTextTypeExtension, aTextType, aWT_Config
+      aWT_HtmlTextTypeExtension, aTextType, aWT_Config, aSystemHttpVariable
    
    var request : aWT_HttpRequest
    var response : aWT_HttpResponse
@@ -515,6 +515,7 @@ procedure ewamExRouter(transaction : aSystemHttpTransaction)
    var UrlInfo : tWT_UrlInfo
    var parameter : tWT_NameValue
    var theText : Text
+   var header : aSystemHttpVariable
    
    new(request)
    Write(theText, 'http://', lib.http.Router.Config.Get('host'), transaction.HttpUrl)
@@ -537,6 +538,8 @@ procedure ewamExRouter(transaction : aSystemHttpTransaction)
    if lib.http.Router.Launch(request, response)
       transaction.SetResponseBodyText(response.Body)
       transaction.HttpStatusCode = response.GetStatusCodeAsInt4
+      header = transaction.SetResponseHeader('Content-Type')
+      header.SetString('application/json')
    endIf
    requestBody := ''
    dispose(request)
