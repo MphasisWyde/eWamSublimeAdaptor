@@ -40,7 +40,7 @@ If you want to use these files "as is", say for testing (i.e. without packaging 
 			*check the run as Admin box.
 			*save
 
-##. To test this configuration open your web browser to :
+## To test this configuration open your web browser to :
 
 	http://localhost:8082/aeWamManager/openentity/aWT_CStringTypeExtension
 	this assume you are using the default port 8082.
