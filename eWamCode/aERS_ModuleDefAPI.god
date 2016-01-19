@@ -3,7 +3,7 @@
 class aERS_ModuleDefAPI (aWT_RestResource) 
 
 uses aModuleDef, aWT_RestResponse, aWT_HttpRoot, aWT_RestRequest, aScenario, aCUImplem, 
-   aRecordDesc, aEntity
+   aRecordDesc, aEntity, aModuleImplem
 
 type tIDEEntities : sequence [UnBounded] of IDEName
 type tEntityStatus : record
@@ -23,6 +23,11 @@ type tError : record
    msg : CString
 endRecord
 type tErrors : sequence [UnBounded] of tError
+type tImplem : record
+   name : CString
+   ancestor : CString
+   content : Text
+endRecord
 
 
 procedure GetOutgoingURLMappingForScenario(object : aScenario, inOut name : CString, 
@@ -31,7 +36,7 @@ procedure GetOutgoingURLMappingForScenario(object : aScenario, inOut name : CStr
    name = object.myOwner.Name
 endProc 
 
-procedure GetOutgoingURLMappingForCUImplem(object : aCUImplem, inOut name : CString)
+procedure GetOutgoingURLMappingForCUImplem(object : aModuleImplem, inOut name : CString)
    name = object.Name
 endProc 
 
@@ -39,7 +44,7 @@ procedure GetOutgoingURLMapping(object : aModuleDef, inOut name : CString)
    name = object.Name
 endProc 
 
-function GetMyScenario(name : aModuleDef, scenarioName : IDEName) return aScenario
+function GetMyScenario(name : aModuleDef, scenarioName : IDEName) return aLightObject
    if name = Nil
       self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
    else
@@ -113,19 +118,20 @@ procedure CheckIn(name : aModuleDef)
    endIf
 endProc 
 
-procedure Get(name : aModuleDef)
+function Get(name : aModuleDef) return tImplem
    if name = Nil
       self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
    else
       name.myCurImplem.RegenerateTextFromIr
-      self.Response.Body := name.myCurImplem.myTextFromMM
-      self.Response.AppendHttpHeader('Content-Type', 'Application/text')
+      _Result.content := name.myCurImplem.myTextFromMM
+      _Result.name = name.Name
+      _Result.ancestor = name.DerivesFrom.Name
    endIf
-endProc 
+endFunc 
 
-function Post(name : aModuleDef) return Boolean
-   uses aClassPreparer, aModuleImplem, lib, aWT_SequenceTypeExtension, aSequenceType, 
-      JSON, aBooleanType
+function _ModifyImplem(name : aModuleDef, parseOnly : Boolean, body : tImplem) return tImplem
+   uses aClassPreparer, aBooleanType, lib, aWT_SequenceTypeExtension, aSequenceType, 
+      JSON
    
    var myClassPreparer : aClassPreparer
    var myModule : aModuleDef
@@ -135,7 +141,6 @@ function Post(name : aModuleDef) return Boolean
    var myModuleImplem : aModuleImplem
    var _parseOnly : Boolean
    var _param : CString
-   var parseOnly : Boolean
    
    _param = self.Request.GetParameterAsCString('parseOnly')
    if _parseOnly.type.ConvertFromCString(_param, @_parseOnly)
@@ -149,11 +154,13 @@ function Post(name : aModuleDef) return Boolean
       new(myClassPreparer)
       myClassPreparer.Name = myModule.Name
       myClassPreparer.Ancestor = myModule.DerivesFrom.Name
-      myClassPreparer.CodeText := self.Request.Body
+      myClassPreparer.CodeText := body.content
       myClassPreparer.TestSyntax
       myModuleImplem = aModuleImplem(myModule.myCurImplem)
       if myClassPreparer.ParsingStatus = SyntaxOk
-         self.Response.Body := myModuleImplem.myTextFromMM
+         _Result.content := myModuleImplem.myTextFromMM
+         _Result.name = name.Name
+         _Result.ancestor = name.DerivesFrom.Name
          ;Save the class
          if not _parseOnly
             if myClassPreparer.IsOwnedByLoggedUser
@@ -175,6 +182,14 @@ function Post(name : aModuleDef) return Boolean
       endIf
       dispose(myClassPreparer)
    endIf
+endFunc 
+
+function Parse(name : aModuleDef, body : tImplem) return tImplem
+   _Result = self._ModifyImplem(name, True, body)
+endFunc 
+
+function Modify(name : aModuleDef, body : tImplem) return tImplem
+   _Result = self._ModifyImplem(name, False, body)
 endFunc 
 
 function getClassNameFromSource(inOut src : Text) return CString
@@ -212,7 +227,7 @@ function getAncestorNameFromSource(inOut src : Text) return CString
    return classNameStr
 endFunc 
 
-procedure Put(body : Text)
+procedure Create(body : tImplem)
    uses aWT_JsonSerializer, aClassDef, Motor, xClassOrModuleMaker
    
    var myModule : aModuleDef
@@ -223,10 +238,9 @@ procedure Put(body : Text)
    var name : CString
    
    ;
-   src := self.Request.Body
-   name = self.getClassNameFromSource(src)
-   ;Save the class
-   ancestor = Motor.FindModuleOrClassFromName(self.getAncestorNameFromSource(src))
+   src := body.content
+   name = body.name
+   ancestor = Motor.FindModuleOrClassFromName(body.ancestor)
    if (ancestor <> Nil) and (name <> '')
       if xClassOrModuleMaker.CreateClassOrModuleWithText(ancestor, name, src, newclass, 
          False)

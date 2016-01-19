@@ -1,0 +1,167 @@
+un fenêtre = un projet. (il semble que oui)
+
+
+
+projet:
+   - environment 
+   on restore les arborescences dans chaque fenêtre, à partir du projet au chargement du plugin. Puis on maintient l'arborsence pendant la vie du projet.
+   Quand on créér un nouveau projet on gère ....
+
+
+Compliqué. 
+   liste des environnements eWAM dans le projet, on switch de l'un à l'autre comme on veut, pour le reste, le développeur se démerde ? ouais.
+
+
+simple:
+
+au chargement du plugin, parcourir toutes les fenêtres et executer une commande "gold_restore_project" qui appel "project.restore()" localement si il y a un projet gold associé à la fenêtre. Le plugin stock un booleen "initialized" pour permettre de le différencier d'une fenêtre non initializée.
+
+projet:
+   - liste des environnements eWAM configurés
+   - environnement de travail actuel
+   On switch entre les environnements comme on veut. Le développeur se débrouille.
+
+   Ca va être de la merde. mais bon. On n'a de toute façon pas les outils pour faire quelque chose qui se tient.
+
+   On va faire du loose editing pis c'est tout. Pas de contrôle d'intégrité. Pas de gestion de projet ni d'appartenance d'un fichier à un environment...
+
+
+> Commençont simplement par faire la gestion d'environnement.
+> Puis ouverture de classe
+
+
+
+===================================
+
+edit (class, module, scenarios, Produce C++, CPP Project, Bundle, ... anything)
+   data:
+      uri (string that identifies the editable: class or module name, or <owner name>.name.)
+      owner (other editable)
+      associated view
+      associated file
+      environment (env from which it has been opened)
+   API:
+      checkout (will actually checkout the top level parent : the owning class or module)
+      check (parse if it's a module, check if it's a child)
+      save / push (must also save / push the top level parent : the owning class or module)
+      checkin (will also checkin the top level parent : the owning class or module)
+      status : checked-out
+      close (check state, ask if want to save, or discard)
+
+environment
+   data:
+      id (string that uniquely identifies this environment)
+      base url
+      route (table of API name, URL, method imported from swagger file for instance)
+   API:
+      Get API mapping (later: use https://github.com/digium/swagger-py/ or something else)
+
+project (object is here to handle the management of the project file, restore edit files object)
+   data:
+      associated project file
+      associated environment(s) <= will allow multi env. merges
+      working env.
+   API:
+      restore (re-open all modules)
+      add module
+      remove/close module (warn about unsaved changes)
+      focus module
+      is_module_in_project (lookups in all env. to see if the modules is in one of them)
+
+error window 
+   data:
+      error list
+   API:
+      add error
+      clear errors
+      focus error
+      show
+      hide
+
+
+
+
+
+helper 
+   data:
+   API:
+      is_a_valid_gold_module (i.e. is a .gold file, associated with the currently open project)
+
+plugin - see how to maintain an instance of this at plugin initialization 
+   data:
+      error window
+      gold project(s)
+   API: 
+
+
+
+   reminder:
+   class Bag:
+       def __init__(self):
+           self.data = []
+       def add(self, x):
+           self.data.append(x)
+       def addtwice(self, x):
+           self.add(x)
+           self.add(x)
+
+
+TODO:
+   - Plugin SublimeText
+   v0.1
+      * Open : 
+         * create a application command that (with menu)
+            * asks for class name
+            * open the class in a new view (not necessarily a new window though...)
+               * Put code in a function to be called when "open eWAM class" is called
+               
+      * Handle Project concept / Gestion du path de l'environnement
+         * "wyde-root" in the project
+      
+      * Parse :
+         * create a text command that parses the source currently in the view
+         * retrieves the errors list correctly
+         * sets a point for each line where there is an error, adds the message to an error list somewhere (to be defined).
+         
+      - Save :
+         - create a text command only valid for a Gold view
+         - parses before saving
+         - saves to eWam
+         
+      - Session management :
+         - reOpen project session files, re-sync the views with the project session data (when opening a project)
+         
+      - Navigation to function (e.g. CTRL+R in a Python file)
+         - ??
+         
+      - Populate autocomplete list
+         - ??
+
+      - Have some kind of metamodel browser: in CTRL+SHIFT+P, or in CTRL+R ... ?
+      
+      - Menu to show /Hide Gold Error list
+      
+      - ergonomy: 
+         - have our commands in CTRL+SHIFT+P
+         - have keyboard shortcuts
+      
+      - run a class or method:
+         - ??
+         
+      /!\ Only works in 32bits for now. Make it work in 64 too.
+   
+   v0.2
+      - v0.1 features + 
+      - Navigate through code and accross classes via right-clicks
+      - Think of the local cash. Is it necessary. Maybe work on this in later versions, when we make decide to dump ewam source code in text files
+      - Features de debuggage : exemple de Node.Js avec Chrome (ref: Damien)
+         - Place breakpoints
+      - Consult/modify eWAM options
+      - Be able to run batches
+      - Automatically update the API from the plugin
+      - Code snippets
+      - Importer un dossier pour le pusher dans un environnement eWAM. Importer tout ce qui a été modifié après telle heure
+
+
+
+

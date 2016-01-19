@@ -6,10 +6,32 @@
       "children":
       [
          {
-            "id": "gold_test",
-            "caption": "Test current feature",
-            "command": "gold_test"
-         },
+            "id": "wam_environments",
+            "caption": "Environments",
+            "children":
+            [
+               {
+                  "id": "wam_select_env",
+                  "caption": "Select working environment",
+                  "command": "wam_select_env"
+               },
+               {
+                  "id": "wam_new_env",
+                  "caption": "Add an eWAM environment",
+                  "command": "wam_new_env"
+               },
+               {
+                  "id": "wam_remove_env",
+                  "caption": "Remove an eWAM environment",
+                  "command": "wam_remove_env"
+               },
+               {
+                  "id": "wam_clear_envs",
+                  "caption": "Clear your eWAM environments",
+                  "command": "wam_clear_envs"
+               },
+            ]
+         }
       ]
    }
 ]

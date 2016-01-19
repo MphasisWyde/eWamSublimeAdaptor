@@ -1,0 +1,73 @@
+
+
+
+
+
+
+
+code snippets:
+
+sublime.active_window().set_layout({ "cols": [0.0, 0.3, 0.65, 1.0], "rows": [0.0, 0.66, 1.0], "cells": [[0, 0, 1, 2], [1, 0, 2, 1], [2, 0, 3, 1], [1, 1, 3, 2] ] })
+
+
+========= App command:
+
+import sublime_plugin
+
+class WamNewEnvCommand(sublime_plugin.ApplicationCommand):
+
+   def is_enabled(self):
+      return True
+
+   def is_visible(self):
+      return True
+
+   def is_checked(self):
+      return False
+
+   def description(self):
+      return "Open en eWAM environment in a new workspace"
+
+   def run(self):
+      pass
+
+
+========= Window command:
+
+import sublime_plugin
+
+class WamProjectInit(sublime_plugin.WindowCommand):
+
+   def is_enabled(self):
+      return True
+
+   def is_visible(self):
+      return True
+
+   def description(self):
+      return "Open en eWAM environment in a new workspace"
+
+   def run(self):
+      pass
+
+
+========= Text command:
+
+import sublime_plugin
+
+class WamProjectInit(sublime_plugin.TextCommand):
+
+   def is_enabled(self):
+      return True
+
+   def is_visible(self):
+      return True
+
+   def description(self):
+      return "Open en eWAM environment in a new workspace"
+
+   def want_event(self):
+      pass
+
+   def run(self, edit, event):
+      pass

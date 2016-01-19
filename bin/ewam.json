@@ -12,16 +12,16 @@
 		"compiler": {
 			classname:"aSystemCompilerService",
 		},
+		"aMultiUserManager": {
+			classname:"aMultiUserManager",
+		},
 		"http-service": {
 			classname:"aSystemHttpService",
-			options: {
-				url:"http://+:8082/",
-				map: {
-					"*/api/rest/*":{service:"restAPI",method:"InterpretHttpTransaction"}, 
-					"*":{service:"http-service",method:"InterpretHttpTransaction"}
-				},
+			url:"http://+:8082/",
+			map: {
+				"/api/rest/":{method:"aeWamManager/ewamex"}, 
+				"/":{method:"http-service/interpret-http-transaction"}
 			}
 		}
 	}
 }
-

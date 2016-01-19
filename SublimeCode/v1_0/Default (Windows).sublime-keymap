@@ -1,0 +1,5 @@
+[
+	{
+    	"keys": ["ctrl+shift+e"], "command": "wam_select_env"
+	},
+]
