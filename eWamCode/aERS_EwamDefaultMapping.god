@@ -7,7 +7,7 @@ uses aWT_HttpRoot, aMethodDesc
 
 procedure ReInit override
    uses aERS_DocumentationAPI, aERS_ModuleDefAPI, aERS_MMBrowserAPI, aERS_EntityAPI, 
-      aWT_DefaultProcessor
+      aWT_DefaultProcessor, aERS_Repository
    
    self.PreProcess('*', c_UNDEF, MetaModelEntity(aWT_DefaultProcessor.AllowCORS))
    ;
@@ -25,6 +25,9 @@ procedure ReInit override
    self.MapIncomingUrl('*/api/rest/classOrModule/{name}', [c_POST], MetaModelEntity(aERS_ModuleDefAPI.Modify))
    self.MapIncomingUrl('*/api/rest/classOrModule/{name}/CheckOut', [c_POST], MetaModelEntity(aERS_ModuleDefAPI.CheckOut))
    self.MapIncomingUrl('*/api/rest/classOrModule/{name}/CheckIn', [c_POST], MetaModelEntity(aERS_ModuleDefAPI.CheckIn))
+   self.MapIncomingUrl('*/api/rest/classOrModule/{name}/Deliver', [c_POST], MetaModelEntity(aERS_ModuleDefAPI.Deliver))
+   self.MapIncomingUrl('*/api/rest/classOrModule/{name}/ManageReimplem', [c_POST], 
+      MetaModelEntity(aERS_ModuleDefAPI.ManageReimplem))
    self.MapIncomingUrl('*/api/rest/classOrModule/{name}/scenarios', [c_GET], MetaModelEntity(aERS_ModuleDefAPI.GetScenarios))
    self.MapIncomingUrl('*/api/rest/classOrModule/{name}/entityStatus', [c_GET], MetaModelEntity(aERS_ModuleDefAPI.entityStatus))
    self.MapIncomingUrl('*/api/rest/classOrModule/{name}/parse', [c_POST], MetaModelEntity(aERS_ModuleDefAPI.Parse))
@@ -36,7 +39,15 @@ procedure ReInit override
    ;   ;
    self.MapOutgoingUrl('*/api/rest/entity/{ownerName}/{name}', MetaModelEntity(aERS_EntityAPI.GetOutgoingURLMapping))
    self.MapIncomingUrl('*/api/rest/entity/{ownerName}/{name}', [c_GET], MetaModelEntity(aERS_EntityAPI.GetEntity))
+   self.MapIncomingUrl('*/api/rest/entity/{ownerName}/{name}/CheckIn', [c_POST], 
+      MetaModelEntity(aERS_EntityAPI.CheckIn))
+   self.MapIncomingUrl('*/api/rest/entity/{ownerName}/{name}/CheckOut', [c_POST], 
+      MetaModelEntity(aERS_EntityAPI.CheckOut))
+   self.MapIncomingUrl('*/api/rest/entity/{ownerName}/{name}/deliver', [c_POST], 
+      MetaModelEntity(aERS_EntityAPI.Deliver))
    self.MapIncomingUrl('*/api/rest/entity/{ownerName}/{name}/interact', [c_GET], 
       MetaModelEntity(aERS_EntityAPI.GetEntity))
+   ;
+   self.MapIncomingUrl('*/api/rest/repository/deliver', [c_POST], MetaModelEntity(aERS_Repository.Deliver))
 endProc 
 

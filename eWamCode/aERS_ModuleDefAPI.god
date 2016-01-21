@@ -108,6 +108,16 @@ procedure CheckOut(name : aModuleDef)
    endIf
 endProc 
 
+procedure Deliver(name : aModuleDef)
+   uses wWamIde
+   
+   if name = Nil
+      self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
+   else
+      wWamIde.Deliver(name)
+   endIf
+endProc 
+
 procedure CheckIn(name : aModuleDef)
    uses wWamIde
    
@@ -115,6 +125,16 @@ procedure CheckIn(name : aModuleDef)
       self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
    else
       wWamIde.CheckIn(name)
+   endIf
+endProc 
+
+procedure ManageReimplem(name : aModuleDef)
+   uses wWamIde
+   
+   if name = Nil
+      self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
+   else
+      wWamIde.ManageReimplem(name, Modification)
    endIf
 endProc 
 

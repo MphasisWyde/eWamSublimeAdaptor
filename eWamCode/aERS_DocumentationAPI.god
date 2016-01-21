@@ -91,7 +91,7 @@ endProc
 function MethodInfoAsSwaggerPath(MethodLaunchInfo : tWT_MethodLaunchCandidate, inOut definitions : aListOfInstances, 
    theRouter : aWT_UrlDecorationServerRouter) return aWT_JsonCollection protected
    uses aEnumType, aWT_JsonArray, aWT_JsonText, aMethodImplem, lib, aWT_CStringTypeExtension, 
-      aTextType, aIntType, aWT_TextTypeExtension, aClassDef, aWT_JsonStatement
+      aTextType, aIntType, aWT_TextTypeExtension, aClassDef, aWT_JsonStatement, aBooleanType
    
    var method : aWT_JsonCollection
    var collection : aWT_JsonCollection
@@ -148,6 +148,8 @@ function MethodInfoAsSwaggerPath(MethodLaunchInfo : tWT_MethodLaunchCandidate, i
             paramType = parameter.myType
             if member(paramType, aIntType)
                collection.AppendCString('type', 'integer')
+            elseif member(paramType, aBooleanType)
+               collection.AppendCString('type', 'boolean')
             elseif (member(paramType, aClassDef) or member(paramType, aRecordDesc)) and 
                (lib.TextType.SearchCString(parameter.Name, MethodLaunchInfo.UrlPattern, 
                0) < 0) and (methodAsCstring <> 'get')
@@ -171,7 +173,7 @@ function MethodInfoAsSwaggerPath(MethodLaunchInfo : tWT_MethodLaunchCandidate, i
       new(collection)
       collection.AppendCString('name', 'body')
       collection.AppendCString('in', 'body')
-      collection.AppendBoolean('required', True)
+      collection.AppendBoolean('required', False)
       collection.AppendCString('type', 'string')
       jsonArray.AppendValue(collection)
    endIf
