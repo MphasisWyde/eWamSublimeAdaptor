@@ -1,11 +1,10 @@
-; JSON(Def Version:4) (Implem Version:4)
+;JSON
 
 module JSON
 
 uses aFullObject, aWT_JsonValue, aWT_JsonObj, aLightObject, aType
 
 
-;JSON
 function Stringify(object : aLightObject) return Text
    uses aWT_JsonSerializer, aClassDef
    
@@ -97,3 +96,4 @@ function ValueByKey(body : Text, key : CString) return CString
       _Result = value.asCString
    endIf
 endFunc 
+

@@ -2,7 +2,7 @@
 
 class aERS_EntityAPI (aWT_RestResource) 
 
-uses aEntity, aScenario
+uses aEntity, aScenario, aWT_RestResponse, aWT_HttpRoot
 
 
 procedure GetOutgoingURLMapping(object : aEntity, inOut ownerName : CString, inOut name : CString)
@@ -105,4 +105,43 @@ function GetEntity(ownerName : CString, name : CString) return aLightObject
    ;
    _Result = self._FindEntity(ownerName, name)
 endFunc 
+
+procedure CheckOut(ownerName : CString, name : CString)
+   uses wWamIde
+   
+   var entity : aEntity
+   
+   entity = self._FindEntity(ownerName, name)
+   if entity = Nil
+      self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
+   else
+      wWamIde.CheckOut(entity)
+   endIf
+endProc 
+
+procedure Deliver(ownerName : CString, name : CString)
+   uses wWamIde
+   
+   var entity : aEntity
+   
+   entity = self._FindEntity(ownerName, name)
+   if entity = Nil
+      self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
+   else
+      wWamIde.Deliver(entity)
+   endIf
+endProc 
+
+procedure CheckIn(ownerName : CString, name : CString)
+   uses wWamIde
+   
+   var entity : aEntity
+   
+   entity = self._FindEntity(ownerName, name)
+   if entity = Nil
+      self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
+   else
+      wWamIde.CheckIn(entity)
+   endIf
+endProc 
 
