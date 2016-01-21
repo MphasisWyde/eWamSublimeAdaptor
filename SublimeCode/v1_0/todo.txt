@@ -36,7 +36,7 @@ class WamNewEnvCommand(sublime_plugin.ApplicationCommand):
 
 import sublime_plugin
 
-class WamProjectInit(sublime_plugin.WindowCommand):
+class WamProjectCommand(sublime_plugin.WindowCommand):
 
    def is_enabled(self):
       return True
@@ -55,7 +55,7 @@ class WamProjectInit(sublime_plugin.WindowCommand):
 
 import sublime_plugin
 
-class WamProjectInit(sublime_plugin.TextCommand):
+class WamProjectCommand(sublime_plugin.TextCommand):
 
    def is_enabled(self):
       return True

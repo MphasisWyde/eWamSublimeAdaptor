@@ -73,6 +73,9 @@ def set_working_environment(index):
 
    wnd = sublime.active_window()
    prj_data = wnd.project_data()
+   if prj_data == None:
+      prj_data = {}
+
    if not 'wam' in prj_data:
       prj_data['wam'] = {}
 
@@ -114,7 +117,12 @@ def reset_working_environment():
 def get_working_environment():
    wnd = sublime.active_window()
    prj_data = wnd.project_data()
-   selected_name = prj_data['wam']['wam_working_environment']
+   if prj_data == None:
+      return None
+
+   if 'wam' in prj_data:
+      if 'wam_working_environment' in prj_data['wam']:
+         selected_name = prj_data['wam']['wam_working_environment']
    if selected_name == None:
       return None
 
