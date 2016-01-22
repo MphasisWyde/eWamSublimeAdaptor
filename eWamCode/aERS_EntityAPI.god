@@ -2,7 +2,13 @@
 
 class aERS_EntityAPI (aWT_RestResource) 
 
-uses aEntity, aScenario, aWT_RestResponse, aWT_HttpRoot
+uses aEntity, aScenario, aWT_RestResponse, aWT_HttpRoot, aERS_MMBrowserAPI, aWT_MMNode
+
+type tDelivery : record
+   bundle : CString
+   delivery : CString
+endRecord
+type tDeliveries : sequence [UnBounded] of tDelivery
 
 
 procedure GetOutgoingURLMapping(object : aEntity, inOut ownerName : CString, inOut name : CString)
@@ -93,7 +99,8 @@ procedure EditScenario(thescenario : aScenario)
    endIf
 endProc 
 
-function UIInteractEntity(ownerName : CString, name : CString) return aLightObject
+function UIInteractEntity([model(Text:'Name of the parent entity. Use ''Nil'' for a non owned entity.')] ownerName : CString, 
+   [model(Text:'Exact Name of the entity to search')] name : CString) return aLightObject
    _Result = self._FindEntity(ownerName, name)
    if _Result <> Nil
       if _Result.Interact(Nil, Consultation, True) = rValid
@@ -101,13 +108,49 @@ function UIInteractEntity(ownerName : CString, name : CString) return aLightObje
    endIf
 endFunc 
 
-function GetEntity(ownerName : CString, name : CString) return aLightObject
+;@method GET
+;@URL */api/rest/entity/{ownerName}/{name}
+function GetEntity([model(Text:'Name of the parent entity. Use ''Nil'' for a non owned entity.')] ownerName : CString, 
+   [model(Text:'Exact Name of the entity to search')] name : CString) return aLightObject
    ;
    _Result = self._FindEntity(ownerName, name)
 endFunc 
 
-procedure CheckOut(ownerName : CString, name : CString)
-   uses wWamIde
+;@method GET
+;@URL */api/rest/entity/{ownerName}/{name}/deliveries
+function GetDeliveries([model(Text:'Name of the parent entity. Use ''Nil'' for a non owned entity.')] ownerName : CString, 
+   [model(Text:'Exact Name of the entity to search')] name : CString) return tDeliveries
+   uses ERS_IDEAPI
+   
+   var entity : aEntity
+   
+   entity = self._FindEntity(ownerName, name)
+   if entity <> Nil
+      _Result = ERS_IDEAPI._SearchInBundles(entity)
+   endIf
+endFunc 
+
+;@method GET
+;@URL */api/rest/entity/{ownerName}/{name}/WhereUsed
+function WhereUsed([model(Text:'Name of the parent entity. Use ''Nil'' for a non owned entity.')] ownerName : CString, 
+   [model(Text:'Exact Name of the entity to search')] name : CString) return tEntities
+   uses aEntityMMViewer, ERS_IDEAPI
+   
+   var entity : aEntity
+   var myMMViewer : aEntityMMViewer
+   var MMResponse : tEntity
+   var node : aWT_MMNode
+   var result : aEntity
+   
+   entity = self._FindEntity(ownerName, name)
+   _Result = ERS_IDEAPI.WhereUsed(entity)
+endFunc 
+
+;@method POST
+;@URL */api/rest/entity/{ownerName}/{name}/CheckOut
+procedure CheckOut([model(Text:'Name of the parent entity. Use ''Nil'' for a non owned entity.')] ownerName : CString, 
+   [model(Text:'Exact Name of the entity to search')] name : CString)
+   uses wWamIde, ERS_IDEAPI
    
    var entity : aEntity
    
@@ -116,11 +159,15 @@ procedure CheckOut(ownerName : CString, name : CString)
       self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
    else
       wWamIde.CheckOut(entity)
+      ERS_IDEAPI.SaveToFile(entity)
    endIf
 endProc 
 
-procedure Deliver(ownerName : CString, name : CString)
-   uses wWamIde
+;@method POST
+;@URL */api/rest/entity/{ownerName}/{name}/Deliver
+procedure Deliver([model(Text:'Name of the parent entity. Use ''Nil'' for a non owned entity.')] ownerName : CString, 
+   [model(Text:'Exact Name of the entity to search')] name : CString)
+   uses wWamIde, ERS_IDEAPI
    
    var entity : aEntity
    
@@ -129,11 +176,15 @@ procedure Deliver(ownerName : CString, name : CString)
       self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
    else
       wWamIde.Deliver(entity)
+      ERS_IDEAPI.SaveToFile(entity)
    endIf
 endProc 
 
-procedure CheckIn(ownerName : CString, name : CString)
-   uses wWamIde
+;@method POST
+;@URL */api/rest/entity/{ownerName}/{name}/CheckIn
+procedure CheckIn([model(Text:'Name of the parent entity. Use ''Nil'' for a non owned entity.')] ownerName : CString, 
+   [model(Text:'Exact Name of the entity to search')] name : CString)
+   uses wWamIde, ERS_IDEAPI
    
    var entity : aEntity
    
@@ -142,6 +193,7 @@ procedure CheckIn(ownerName : CString, name : CString)
       self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
    else
       wWamIde.CheckIn(entity)
+      ERS_IDEAPI.SaveToFile(entity)
    endIf
 endProc 
 

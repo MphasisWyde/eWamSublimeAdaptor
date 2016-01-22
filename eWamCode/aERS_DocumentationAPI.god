@@ -63,28 +63,11 @@ procedure AppendDefaultResponses(toMethod : aWT_JsonCollection, methodAsCstring 
    endIf
    responses.AppendValue('200', collection)
    ;
-   new(collection)
-   collection.AppendCString('description', cWF_401_UserNotLogged)
-   responses.AppendValue('401', collection)
    ;
    new(collection)
-   collection.AppendCString('description', cWF_404_UserNotAuthorized)
+   collection.AppendCString('description', 'Entity not found')
    responses.AppendValue('404', collection)
    ;
-   if methodAsCstring <> 'get'
-      new(collection)
-      collection.AppendCString('description', cWF_400_BadRequestFillValidError)
-      new(schema)
-      schema.AppendCString('$ref', '#/definitions/' + MetaModelEntity(tErrorCode).Name)
-      definitions.AppendInexistingObject(MetaModelEntity(tErrorCode))
-      collection.AppendValue('schema', schema)
-      responses.AppendValue('400', collection)
-      ;;
-      new(collection)
-      collection.AppendCString('description', cWF_500_ObjectNotChanged)
-      responses.AppendValue('500', collection)
-   endIf
-   ;;
    toMethod.AppendValue('responses', responses)
 endProc 
 

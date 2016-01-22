@@ -4,12 +4,12 @@ class aERS_MMBrowserAPI (aWT_RestResource)
 
 uses aEntity, aWT_RestRequest, aWT_UrlDecorationServerRouter, aWT_MMNode
 
-type tMMResponse : record
+type tEntity : record
    name : IDEName
    theType : IDEName
    location : Text
 endRecord
-type tEntities : sequence [UnBounded] of tMMResponse
+type tEntities : sequence [UnBounded] of tEntity
 
 
 function GetBooleanParamValue(param : CString) return Boolean
@@ -24,16 +24,19 @@ function GetBooleanParamValue(param : CString) return Boolean
 endFunc 
 
 ;@url */api/rest/searchEntities
-function searchEntities(q : CString, m : Int4, _class : Boolean, _module : Boolean, 
-   _method : Boolean, _overrideMethod : Boolean, _variable : Boolean, _constant : Boolean, 
-   _scenario : Boolean, _parameter : Boolean, _other : Boolean) return tEntities
+function searchEntities([model(Text:'Your query. You shall use * as a wild card.')] q : CString, 
+   [model(Text:'Max results number')] m : Int4, [model(Text:'Search for classes (default is true)')] _class : Boolean, 
+   [model(Text:'Search for modules (default is true)')] _module : Boolean, [model(Text:'Search for methods (default is true)')] _method : Boolean, 
+   [model(Text:'Search for overriden methods (default is true)')] _overrideMethod : Boolean, 
+   _variable : Boolean, _constant : Boolean, _scenario : Boolean, _parameter : Boolean, 
+   _other : Boolean) return tEntities
    uses Motor, aClassDef, aMMBrowser, lib, aWT_SequenceTypeExtension, aSequenceType, 
       aIntType, aWT_UrlDecorationSettings
    
    var myMMBrowser : aMMBrowser
    var result : aEntity
    var response : Text
-   var MMResponse : tMMResponse
+   var MMResponse : tEntity
    var _q : CString
    var _param : CString
    var _m : Int4
@@ -49,7 +52,7 @@ function searchEntities(q : CString, m : Int4, _class : Boolean, _module : Boole
    myMMBrowser.CleanUpFoundEntities
    Motor.SetCurrentNsIdContext(13) ;cDevNSIdContext
    ;
-   myMMBrowser.Criterium = _q + '*'
+   myMMBrowser.Criterium = _q
    ;
    if self.GetBooleanParamValue('_class')
       myMMBrowser.BrowseAbleEntitys += [mClass]

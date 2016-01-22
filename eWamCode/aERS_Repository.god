@@ -2,34 +2,105 @@
 
 class aERS_Repository (aWT_RestResource) 
 
+uses aEntity, aERS_MMBrowserAPI
 
-procedure Deliver
-   uses aWideIde, aUser, aClassDef, aInDeliverPresentor, Risky, aWideContext, Motor
+type tMMResponseWithState : record (tEntity)
+   state : CString
+endRecord
+type tEntitiesWithState : sequence [UnBounded] of tMMResponseWithState
+
+
+;@method POST
+procedure Synchronize
+   uses aInOutPresentor
    
-   var theIde : aWideIde
-   var theUser : aUser
+   var thePresentor : aInOutPresentor
+   
+   new(thePresentor)
+   thePresentor.DoSyncAll
+   dispose(thePresentor)
+endProc 
+
+;@method POST
+procedure Deliver
+   uses aClassDef, aInDeliverPresentor, Motor
+   
    var c : aClassDef
-   var IDE : aWideIde
    var ThePresentor : aInDeliverPresentor
    
-   ;var IDEOption : aWxMultiUserOptions
-   ; Overriding reason
-   ; - instanciate any custo of aInDeliverPresentor
-   theIde = Risky.GetIDE
-   theUser = aWideContext(theIde.Context).theLoggedUser
-   if (theUser.userGroup <> Guest) and (theUser.userGroup <> Admin)
-      c = MetaModelEntity(aInDeliverPresentor)
-      IDE = Risky.GetIDE
-      ; IDEOption = aWxMultiUserOptions(IDE.GetOptionOf(MetaModelEntity(aWxMultiUserOptions).Id))
-      ;self.ChangeInDeliverCategroryScen(IDEOption.UseBaseDeliverCheckInPresentor)
-      ;if not IDEOption.UseBaseDeliverCheckInPresentor
-      ;   while c.Descendants.count > 0
-      ;      c = c.Descendants[0]
-      ;   endWhile
-      ;endIf
-      ThePresentor = Motor.NewInst(c.Id)
-      ThePresentor.Display
-      dispose(ThePresentor)
-   endIf
+   c = MetaModelEntity(aInDeliverPresentor)
+   while c.Descendants.count > 0
+      c = c.Descendants[0]
+   endWhile
+   ;
+   ThePresentor = Motor.NewInst(c.Id)
+   ThePresentor.Display
+   dispose(ThePresentor)
 endProc 
+
+;@method POST
+procedure CheckinAll
+   uses aClassDef, aInDeliverPresentor, Motor
+   
+   var c : aClassDef
+   var ThePresentor : aInDeliverPresentor
+   
+   c = MetaModelEntity(aInDeliverPresentor)
+   while c.Descendants.count > 0
+      c = c.Descendants[0]
+   endWhile
+   ;
+   ThePresentor = Motor.NewInst(c.Id)
+   ThePresentor.RefreshCategories
+   ThePresentor.checkInAll
+   dispose(ThePresentor)
+endProc 
+
+;@method POST
+procedure DeliverAll
+   uses aClassDef, aInDeliverPresentor, Motor
+   
+   var c : aClassDef
+   var ThePresentor : aInDeliverPresentor
+   
+   c = MetaModelEntity(aInDeliverPresentor)
+   while c.Descendants.count > 0
+      c = c.Descendants[0]
+   endWhile
+   ;
+   ThePresentor = Motor.NewInst(c.Id)
+   ThePresentor.RefreshCategories
+   ThePresentor.DeliverAll
+   dispose(ThePresentor)
+endProc 
+
+;@method POST
+;@url */api/rest/Repository/status
+function Status return tEntitiesWithState
+   uses aClassDef, aInDeliverPresentor, Motor, aInDeliverCategory, lib, aWT_SequenceTypeExtension, 
+      aSequenceType
+   
+   var c : aClassDef
+   var ThePresentor : aInDeliverPresentor
+   var cat : aInDeliverCategory
+   var entity : aEntity
+   var rep : tMMResponseWithState
+   
+   c = MetaModelEntity(aInDeliverPresentor)
+   while c.Descendants.count > 0
+      c = c.Descendants[0]
+   endWhile
+   ;
+   ThePresentor = Motor.NewInst(c.Id)
+   ThePresentor.RefreshCategories
+   forEach cat in ThePresentor.categories
+      forEach entity in cat.Entities
+         rep.name = entity.Name
+         rep.state = cat.ModificationState(entity)
+         rep.theType = entity.ClassDef.Name
+         lib.SequenceType.Append(rep, _Result, _Result.type)
+      endFor
+   endFor
+   dispose(ThePresentor)
+endFunc 
 

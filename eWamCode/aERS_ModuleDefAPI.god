@@ -109,22 +109,24 @@ procedure CheckOut(name : aModuleDef)
 endProc 
 
 procedure Deliver(name : aModuleDef)
-   uses wWamIde
+   uses wWamIde, ERS_IDEAPI
    
    if name = Nil
       self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
    else
       wWamIde.Deliver(name)
+      ERS_IDEAPI.SaveToFile(name)
    endIf
 endProc 
 
 procedure CheckIn(name : aModuleDef)
-   uses wWamIde
+   uses wWamIde, ERS_IDEAPI
    
    if name = Nil
       self.Response.StatusCode = HTTP_STATUS_NOT_FOUND_404
    else
       wWamIde.CheckIn(name)
+      ERS_IDEAPI.SaveToFile(name)
    endIf
 endProc 
 
