@@ -19,7 +19,7 @@ Be advised, for now this code is a prototype, a draft. Hence, you will spot some
 * Open eWam
 * Use configuration-> Selective Export Manager
   * Select the file %wyde-root%\eWamCode\api.xml
-  * Check `Use stationary ids`
+  * Uncheck `Use stationary ids`
   * Click on import
 	
 
