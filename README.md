@@ -7,22 +7,21 @@ Be advised, for now this code is a prototype, a draft. Hence, you will spot some
 
 ## Installation
 ### eWam install
-* Install eWam 6.1.5.0, available on Z:\Wyde Product\eWam & Related Products\Installations 6.1.5 ALPHA\eWAM 6.1.5.0 & Related Products
-* Install eWamExtended (latest version) (just WxWAM):   
-  * `svn export https://github.com/MphasisWyde/ewam-advanced-framework/trunk/Bundle/WxWAMAdvancedComponents`   
-  * or Copy `Z:\Wyde Development\eWamExtensions\eWamExtensionsInstallations\eWamExtended Products\wAddOns\eWamAdvancedFramework` or its equivalent on lyon:
-  * to get access to Lyon outside of the paris network
-	*Get Shrew VPN
-	*get the profile
-	*get a wyde paris account
-	*connect the VPN and navigate to the lyon server
-	Lyon.wyde.paris.local\Wyde Dev\eWamExtensions\eWamExtensionsInstallations\eWamExtended Products\wAddOns\eWamAdvancedFramework\Bundle\WxWAMAdvancedComponents
-	note that a permissions error may simply mean that your network connection is too slow.
- 
- 
-	* Add the content of bin and admin in their respective folders
-	* Close eWam
-
+* Install eWam 6.1.5.1
+  * available on Z:\Wyde Product\eWam & Related Products\Installations 6.1.5 ALPHA\eWAM 6.1.5.0 & Related Products
+* Clone this repository and copy its content into your eWamRoot
+* Double click on bin/downloaddependencies.bat
+* Open eWam
+* Install the bundle WXeWamExtended (until version 29)   
+* Install the bundle WxSelectiveExportManager (until version 13)  
+* Install the bundle WxBundleToolsEx (until version 17)
+* Close eWam
+* Open eWam
+* Use configuration-> Selective Export Manager
+  * Select the file %wyde-root%\eWamCode\api.xml
+  * Check `Use stationary ids`
+  * Click on import
+	
 
 ### Sublime install
 The subfolder SublimeCode/ contains the source code (essentially python) used in the SublimeText package for eWAM Plugin
