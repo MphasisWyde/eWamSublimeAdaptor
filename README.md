@@ -21,6 +21,7 @@ Be advised, for now this code is a prototype, a draft. Hence, you will spot some
   * Select the file %wyde-root%\eWamCode\api.xml
   * Uncheck `Use stationary ids`
   * Click on import
+  * Reparse all the created classes and module
 	
 
 ### Sublime install
