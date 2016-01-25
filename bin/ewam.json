@@ -1,26 +1,31 @@
 {
-	options: {
-		//none
+	"options": {
+      "show-model-annotation": true,
+      "minimize-model-annotation": true,
 	},
-	services: {
+	"services": {
 		"restAPI": {
-			classname:"aRestAPI",
+			"classname":"aRestAPI",
 		},
 		"aeWamManager": {
-			classname:"aeWamManager",
+			"classname":"aeWamManager",
 		},
 		"compiler": {
-			classname:"aSystemCompilerService",
+			"classname":"aSystemCompilerService",
 		},
 		"aMultiUserManager": {
-			classname:"aMultiUserManager",
+			"classname":"aMultiUserManager",
 		},
 		"http-service": {
-			classname:"aSystemHttpService",
-			url:"http://+:8082/",
-			map: {
-				"/api/rest/":{method:"aeWamManager/ewamex"}, 
-				"/":{method:"http-service/interpret-http-transaction"}
+			"classname":"aSystemHttpService",
+			"url":"http://+:8082/",
+			"map": {
+				"/api/rest/": {
+               "method" : "aeWamManager/ewamex" 
+            }, 
+				"/": {
+               "method":"http-service/interpret-http-transaction"
+            }
 			}
 		}
 	}

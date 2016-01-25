@@ -1,5 +1,15 @@
 
 
+- environnements :
+   - Initialiser l'API Swagger quand on selection l'environnement
+
+- commandes génériques : 
+   un ou plusieurs paramètres
+   avec paramètre d'action à appeler avec la response
+
+=> pour les menu
+=> pour le menu contextuel
+
 
 
 
@@ -7,7 +17,7 @@
 
 code snippets:
 
-sublime.active_window().set_layout({ "cols": [0.0, 0.3, 0.65, 1.0], "rows": [0.0, 0.66, 1.0], "cells": [[0, 0, 1, 2], [1, 0, 2, 1], [2, 0, 3, 1], [1, 1, 3, 2] ] })
+sublime.active_window().set_layout({ "cols": [0.0, 0.3, 0.65, 1.0], "rows": [0.0, 0.66, 1.0], "cells": [[0, 0, 1, 1], [0, 1, 1, 2], [1, 0, 2, 1], [2, 0, 3, 1], [1, 1, 3, 2] ] })
 
 
 ========= App command:
@@ -30,7 +40,6 @@ class WamNewEnvCommand(sublime_plugin.ApplicationCommand):
 
    def run(self):
       pass
-
 
 ========= Window command:
 
