@@ -30,15 +30,13 @@ The subfolder SublimeCode/ contains the source code (essentially python) used in
 If you want to use these files "as is", say for testing (i.e. without packaging it in a clean .sublime-package file), you must copy the folder you want (say v0.1_POC_via_REST) in "<user folder>/AppData/Roaming/Sublime Text 3/Packages/", where <user folder> is usualy something like C:\Users\username\.
 
 ## Running it 	
-* Run eWam as a service (you can see it with the process explorer)
-	make sure you run the 
-		eWAM - service.bat as administrator.
-		The easiest way to do this is to Create a Run as Admin shortcut for your bat file.
-			*create a shortcut of eWAM - service.bat, 
-			*get properties of the shortcut,
-			*click advanced
-			*check the run as Admin box.
-			*save
+Run eWam as a service (you can see it with the process explorer) make sure you run the `eWAM - service.bat` as administrator.  
+The easiest way to do this is to Create a Run as Admin shortcut for your bat file.  
+* create a shortcut of eWAM - service.bat, 
+* get properties of the shortcut,
+* click advanced
+* check the run as Admin box.
+* save
 
 ## To test this configuration open your web browser to :
 
