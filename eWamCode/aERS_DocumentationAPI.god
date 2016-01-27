@@ -2,9 +2,8 @@
 
 class aERS_DocumentationAPI (aWT_RestResource) 
 
-uses aWT_UrlDecorationServerRouter, aWT_JsonCollection, aMethodDesc, aType, aEntity, 
-   aMethodType, aWT_RestRequest, aWT_RestResponse, aParameterDesc, aListOfInstances, 
-   aFullObject, aRecordDesc, aWT_JsonValue
+uses aWT_UrlDecorationServerRouter, aWT_JsonCollection, aMethodDesc, aType, aEntity, aMethodType, aWT_RestRequest, 
+   aWT_RestResponse, aParameterDesc, aListOfInstances, aFullObject, aRecordDesc, aWT_JsonValue
 
 const cWF_401_UserNotLogged = 'User not connected or session time out, please reauthenticate and resend a token'
 const cWF_404_UserNotAuthorized = 'You are not authorized to process this action, please contact your administrator'
@@ -45,8 +44,8 @@ procedure GetSchema(inOut OutJsonValue : aWT_JsonCollection, paramater : aType)
    ; endIf
 endProc 
 
-procedure AppendDefaultResponses(toMethod : aWT_JsonCollection, methodAsCstring : CString, 
-   successParamType : aType, inOut definitions : aListOfInstances)
+procedure AppendDefaultResponses(toMethod : aWT_JsonCollection, methodAsCstring : CString, successParamType : aType, 
+   inOut definitions : aListOfInstances)
    var responses : aWT_JsonCollection
    var collection : aWT_JsonCollection
    var schema : aWT_JsonCollection
@@ -73,8 +72,8 @@ endProc
 
 function MethodInfoAsSwaggerPath(MethodLaunchInfo : tWT_MethodLaunchCandidate, inOut definitions : aListOfInstances, 
    theRouter : aWT_UrlDecorationServerRouter) return aWT_JsonCollection protected
-   uses aEnumType, aWT_JsonArray, aWT_JsonText, aMethodImplem, lib, aWT_CStringTypeExtension, 
-      aTextType, aIntType, aWT_TextTypeExtension, aClassDef, aWT_JsonStatement, aBooleanType
+   uses aEnumType, aWT_JsonArray, aWT_JsonText, aMethodImplem, lib, aWT_CStringTypeExtension, aTextType, 
+      aIntType, aWT_TextTypeExtension, aClassDef, aWT_JsonStatement, aBooleanType
    
    var method : aWT_JsonCollection
    var collection : aWT_JsonCollection
@@ -116,8 +115,7 @@ function MethodInfoAsSwaggerPath(MethodLaunchInfo : tWT_MethodLaunchCandidate, i
          else
             new(collection)
             collection.AppendCString('name', parameter.Name)
-            if lib.TextType.SearchCString(parameter.Name, MethodLaunchInfo.UrlPattern, 
-               0) > 0
+            if lib.TextType.SearchCString(parameter.Name, MethodLaunchInfo.UrlPattern, 0) > 0
                collection.AppendCString('in', 'path')
                collection.AppendBoolean('required', True)
             elseif methodAsCstring = 'get'
@@ -133,9 +131,8 @@ function MethodInfoAsSwaggerPath(MethodLaunchInfo : tWT_MethodLaunchCandidate, i
                collection.AppendCString('type', 'integer')
             elseif member(paramType, aBooleanType)
                collection.AppendCString('type', 'boolean')
-            elseif (member(paramType, aClassDef) or member(paramType, aRecordDesc)) and 
-               (lib.TextType.SearchCString(parameter.Name, MethodLaunchInfo.UrlPattern, 
-               0) < 0) and (methodAsCstring <> 'get')
+            elseif (member(paramType, aClassDef) or member(paramType, aRecordDesc)) and (lib.TextType.SearchCString(parameter.Name, 
+               MethodLaunchInfo.UrlPattern, 0) < 0) and (methodAsCstring <> 'get')
                new(schema)
                schema.AppendCString('$ref', '#/definitions/' + paramType.Name)
                definitions.AppendInexistingObject(paramType)
@@ -172,6 +169,7 @@ function MethodInfoAsSwaggerPath(MethodLaunchInfo : tWT_MethodLaunchCandidate, i
    method.AppendCString('summary', MethodLaunchInfo.UrlPattern.type.AsCString(@MethodLaunchInfo.UrlPattern))
    description := implem.Comment
    method.AppendText('description', description)
+   method.AppendCString('operationId', className + '_' + MethodLaunchInfo.MethodDesc.Name)
    ;  endIf
    ;
    _Result = method
@@ -201,8 +199,8 @@ endFunc
 ;@method GET
 ;@url */api/rest/documentation
 procedure GetSwaggerDocumentation
-   uses aWT_JsonArray, aTextType, lib, aClassDef, aWT_CStringTypeExtension, aEnumType, 
-      aWT_JsonStatement, aWT_TextTypeExtension
+   uses aWT_JsonArray, aTextType, lib, aClassDef, aWT_CStringTypeExtension, aEnumType, aWT_JsonStatement, 
+      aWT_TextTypeExtension
    
    var JsonCollection : aWT_JsonCollection
    var endPoint : aWT_JsonCollection
@@ -251,8 +249,7 @@ procedure GetSwaggerDocumentation
          lib.TextType.SubCString(baseurl, '/api', RequestURL)
          if not RequestURL.type.IsBlank(@RequestURL)
             method = lib.CStringType.LowerCase(MethodLaunchInfo.HttpMethod.type.AsCString(@MethodLaunchInfo.HttpMethod))
-            JsonCollection = self.MethodInfoAsSwaggerPath(MethodLaunchInfo, definitions, 
-               theRouter)
+            JsonCollection = self.MethodInfoAsSwaggerPath(MethodLaunchInfo, definitions, theRouter)
             if paths.ExistName(RequestURL.type.AsCString(@RequestURL))
                endPoint = aWT_JsonCollection(paths.GetStatementByName(RequestURL.type.AsCString(@RequestURL)).GetValue)
                endPoint.AppendValue(method, JsonCollection)
