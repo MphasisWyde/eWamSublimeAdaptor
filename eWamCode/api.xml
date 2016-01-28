@@ -8182,7 +8182,7 @@ You can put any types, variables and method after that]]></Comment>
 <N>268435458</N>
 <I>218103913</I>
 </myType>
-<GenTimeOffset>144</GenTimeOffset>
+<GenTimeOffset>152</GenTimeOffset>
 </Object>
 <Object N="251658495" I="28" V="1" CI="1080" CV="2147483622" CN="aLocalVarDesc">
 <Segs>1</Segs>
@@ -8197,7 +8197,7 @@ You can put any types, variables and method after that]]></Comment>
 <N>2</N>
 <I>1000</I>
 </myType>
-<GenTimeOffset>152</GenTimeOffset>
+<GenTimeOffset>160</GenTimeOffset>
 </Object>
 <Object N="251658495" I="29" V="1" CI="1080" CV="2147483622" CN="aLocalVarDesc">
 <Segs>1</Segs>
@@ -8212,7 +8212,7 @@ You can put any types, variables and method after that]]></Comment>
 <N>268435458</N>
 <I>235210200</I>
 </myType>
-<GenTimeOffset>160</GenTimeOffset>
+<GenTimeOffset>168</GenTimeOffset>
 </Object>
 <Object N="251658257" I="936749667385868290" V="6" CI="4045" CV="2147483622" CN="aMethodImplem">
 <Segs>1</Segs>
@@ -8249,7 +8249,7 @@ You can put any types, variables and method after that]]></Comment>
 <I>24</I>
 <V>1</V>
 </DerivesFrom>
-<GenTimeVarsSize>168</GenTimeVarsSize>
+<GenTimeVarsSize>176</GenTimeVarsSize>
 <myUses>
 <Item>
 <N>2</N>
@@ -10617,7 +10617,7 @@ You can put any types, variables and method after that]]></Comment>
 <N>268435458</N>
 <I>218103913</I>
 </myType>
-<GenTimeOffset>152</GenTimeOffset>
+<GenTimeOffset>160</GenTimeOffset>
 </Object>
 <Object N="251658257" I="936749452637503525" V="2" CI="1080" CV="2147483622" CN="aLocalVarDesc">
 <Segs>1</Segs>
@@ -10632,7 +10632,7 @@ You can put any types, variables and method after that]]></Comment>
 <N>2</N>
 <I>1000</I>
 </myType>
-<GenTimeOffset>160</GenTimeOffset>
+<GenTimeOffset>168</GenTimeOffset>
 </Object>
 <Object N="251658257" I="936749452637503519" V="18" CI="4045" CV="2147483622" CN="aMethodImplem">
 <Segs>1</Segs>
@@ -10669,7 +10669,7 @@ You can put any types, variables and method after that]]></Comment>
 <I>936749452637503538</I>
 <V>8</V>
 </DerivesFrom>
-<GenTimeVarsSize>168</GenTimeVarsSize>
+<GenTimeVarsSize>176</GenTimeVarsSize>
 <myUses>
 <Item>
 <N>268435458</N>
@@ -11269,7 +11269,22 @@ You can put any types, variables and method after that]]></Comment>
 </myType>
 <GenTimeOffset>128</GenTimeOffset>
 </Object>
-<Object N="251658256" I="936749448342536193" V="3" CI="4010" CV="2147483622" CN="aRecordDesc">
+<Object N="251658495" I="125" V="1" CI="1140" CV="2147483622" CN="aRecordVarDesc">
+<Segs>1</Segs>
+<myOwner>
+<N>251658256</N>
+<I>936749448342536193</I>
+</myOwner>
+<Name>entity</Name>
+<Visibility>-1</Visibility>
+<LanguageSpecific>2</LanguageSpecific>
+<myType>
+<N>2</N>
+<I>1000</I>
+</myType>
+<GenTimeOffset>136</GenTimeOffset>
+</Object>
+<Object N="251658256" I="936749448342536193" V="4" CI="4010" CV="2147483622" CN="aRecordDesc">
 <Segs>1</Segs>
 <myOwner>
 <N>251658242</N>
@@ -11278,21 +11293,28 @@ You can put any types, variables and method after that]]></Comment>
 <Name>tEntity</Name>
 <Visibility>-1</Visibility>
 <myVars>
-<N>251658256</N>
 <Item>
+<N>251658256</N>
 <I>936749448342536194</I>
 <V>1</V>
 </Item>
 <Item>
+<N>251658256</N>
 <I>936749448342536195</I>
 <V>1</V>
 </Item>
 <Item>
+<N>251658256</N>
 <I>936749448342536217</I>
 <V>1</V>
 </Item>
+<Item>
+<N>251658495</N>
+<I>125</I>
+<V>1</V>
+</Item>
 </myVars>
-<GenTimeVarsSize>136</GenTimeVarsSize>
+<GenTimeVarsSize>144</GenTimeVarsSize>
 </Object>
 <Object N="251658256" I="936749448342536196" V="1" CI="11005" CV="2147483622" CN="aSequenceType">
 <Segs>1</Segs>
@@ -11679,7 +11701,7 @@ You can put any types, variables and method after that]]></Comment>
 <I>936749448342536193</I>
 </myCurImplem>
 </Object>
-<Object N="251658242" I="251658409" V="18" CI="4050" CV="2147483622" CN="aClassDef">
+<Object N="251658242" I="251658409" V="19" CI="4050" CV="2147483622" CN="aClassDef">
 <Segs>1</Segs>
 <Name>aERS_MMBrowserAPI</Name>
 <Visibility>-1</Visibility>
@@ -11692,7 +11714,7 @@ You can put any types, variables and method after that]]></Comment>
 <N>251658256</N>
 <Item>
 <I>936749448342536193</I>
-<V>3</V>
+<V>4</V>
 </Item>
 <Item>
 <I>936749448342536196</I>
@@ -11855,7 +11877,7 @@ You can put any types, variables and method after that]]></Comment>
 </myType>
 <GenTimeOffset>24</GenTimeOffset>
 </Object>
-<Object N="251658257" I="936749448342536199" V="2" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Object N="251658257" I="936749448342536199" V="3" CI="1080" CV="2147483622" CN="aLocalVarDesc">
 <Segs>1</Segs>
 <myOwner>
 <N>251658257</N>
@@ -11868,9 +11890,9 @@ You can put any types, variables and method after that]]></Comment>
 <N>3</N>
 <I>1030</I>
 </myType>
-<GenTimeOffset>160</GenTimeOffset>
+<GenTimeOffset>168</GenTimeOffset>
 </Object>
-<Object N="251658257" I="936749448342536202" V="2" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Object N="251658257" I="936749448342536202" V="3" CI="1080" CV="2147483622" CN="aLocalVarDesc">
 <Segs>1</Segs>
 <myOwner>
 <N>251658257</N>
@@ -11883,9 +11905,9 @@ You can put any types, variables and method after that]]></Comment>
 <N>3</N>
 <I>1030</I>
 </myType>
-<GenTimeOffset>416</GenTimeOffset>
+<GenTimeOffset>424</GenTimeOffset>
 </Object>
-<Object N="251658257" I="936749448342536207" V="2" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Object N="251658257" I="936749448342536207" V="3" CI="1080" CV="2147483622" CN="aLocalVarDesc">
 <Segs>1</Segs>
 <myOwner>
 <N>251658257</N>
@@ -11898,9 +11920,9 @@ You can put any types, variables and method after that]]></Comment>
 <N>3</N>
 <I>1024</I>
 </myType>
-<GenTimeOffset>672</GenTimeOffset>
+<GenTimeOffset>680</GenTimeOffset>
 </Object>
-<Object N="251658257" I="936749448342536208" V="1" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Object N="251658257" I="936749448342536208" V="2" CI="1080" CV="2147483622" CN="aLocalVarDesc">
 <Segs>1</Segs>
 <myOwner>
 <N>251658257</N>
@@ -11913,9 +11935,9 @@ You can put any types, variables and method after that]]></Comment>
 <N>268435458</N>
 <I>218103913</I>
 </myType>
-<GenTimeOffset>676</GenTimeOffset>
+<GenTimeOffset>684</GenTimeOffset>
 </Object>
-<Object N="251658257" I="936749448342536193" V="89" CI="4045" CV="2147483622" CN="aMethodImplem">
+<Object N="251658257" I="936749448342536193" V="90" CI="4045" CV="2147483622" CN="aMethodImplem">
 <Segs>1</Segs>
 <myOwner>
 <N>251658248</N>
@@ -11944,19 +11966,19 @@ You can put any types, variables and method after that]]></Comment>
 </Item>
 <Item>
 <I>936749448342536199</I>
-<V>2</V>
+<V>3</V>
 </Item>
 <Item>
 <I>936749448342536202</I>
-<V>2</V>
+<V>3</V>
 </Item>
 <Item>
 <I>936749448342536207</I>
-<V>2</V>
+<V>3</V>
 </Item>
 <Item>
 <I>936749448342536208</I>
-<V>1</V>
+<V>2</V>
 </Item>
 </myVars>
 <DerivesFrom>
@@ -11964,7 +11986,7 @@ You can put any types, variables and method after that]]></Comment>
 <I>936749448342536197</I>
 <V>33</V>
 </DerivesFrom>
-<GenTimeVarsSize>684</GenTimeVarsSize>
+<GenTimeVarsSize>692</GenTimeVarsSize>
 <myUses>
 <Item>
 <N>2</N>
@@ -12077,7 +12099,7 @@ You can put any types, variables and method after that]]></Comment>
  endFunc ]]></myOriginalText>
 <SaveSourceAnyway>true</SaveSourceAnyway>
 </Object>
-<Object N="251658248" I="251658409" V="21" CI="4070" CV="2147483622" CN="aClassImplem">
+<Object N="251658248" I="251658409" V="22" CI="4070" CV="2147483622" CN="aClassImplem">
 <Segs>1</Segs>
 <Name>aERS_MMBrowserAPI</Name>
 <myText>Nicolas;Nicolas</myText>
@@ -12086,7 +12108,7 @@ You can put any types, variables and method after that]]></Comment>
 <DerivesFrom>
 <N>251658242</N>
 <I>251658409</I>
-<V>18</V>
+<V>19</V>
 </DerivesFrom>
 <LastMotorId>1073741823</LastMotorId>
 <LastOwnedId>16</LastOwnedId>
@@ -12098,7 +12120,7 @@ You can put any types, variables and method after that]]></Comment>
 </Item>
 <Item>
 <I>936749448342536193</I>
-<V>89</V>
+<V>90</V>
 </Item>
 </myMethodImplems>
 <myExtReferencedIds>
@@ -13935,7 +13957,7 @@ You can put any types, variables and method after that]]></Comment>
 <N>3</N>
 <I>1030</I>
 </myType>
-<GenTimeOffset>136</GenTimeOffset>
+<GenTimeOffset>144</GenTimeOffset>
 </Object>
 <Object N="251658495" I="49" V="2" CI="4010" CV="2147483622" CN="aRecordDesc">
 <Segs>1</Segs>
@@ -13956,7 +13978,7 @@ You can put any types, variables and method after that]]></Comment>
 <N>251658256</N>
 <I>936749448342536193</I>
 </DerivesFrom>
-<GenTimeVarsSize>392</GenTimeVarsSize>
+<GenTimeVarsSize>400</GenTimeVarsSize>
 </Object>
 <Object N="251658495" I="50" V="1" CI="11005" CV="2147483622" CN="aSequenceType">
 <Segs>1</Segs>
@@ -14767,7 +14789,7 @@ You can put any types, variables and method after that]]></Comment>
 <I>40</I>
 <V>3</V>
 </DerivesFrom>
-<GenTimeVarsSize>424</GenTimeVarsSize>
+<GenTimeVarsSize>432</GenTimeVarsSize>
 <myUses>
 <Item>
 <N>2</N>
@@ -14975,7 +14997,7 @@ You can put any types, variables and method after that]]></Comment>
 <I>1030</I>
 </myType>
 </Object>
-<Object N="251658495" I="36" V="1" CI="1140" CV="2147483622" CN="aRecordVarDesc">
+<Object N="251658495" I="36" V="3" CI="1140" CV="2147483622" CN="aRecordVarDesc">
 <Segs>1</Segs>
 <myOwner>
 <N>251658256</N>
@@ -14990,7 +15012,7 @@ You can put any types, variables and method after that]]></Comment>
 </myType>
 <GenTimeOffset>256</GenTimeOffset>
 </Object>
-<Object N="251658256" I="936749645911031820" V="3" CI="4010" CV="2147483622" CN="aRecordDesc">
+<Object N="251658256" I="936749645911031820" V="5" CI="4010" CV="2147483622" CN="aRecordDesc">
 <Segs>1</Segs>
 <myOwner>
 <N>251658242</N>
@@ -15007,7 +15029,7 @@ You can put any types, variables and method after that]]></Comment>
 <Item>
 <N>251658495</N>
 <I>36</I>
-<V>1</V>
+<V>3</V>
 </Item>
 </myVars>
 <GenTimeVarsSize>276</GenTimeVarsSize>
@@ -15067,7 +15089,7 @@ You can put any types, variables and method after that]]></Comment>
 </myParameters>
 <GenTimeParametersSize>16</GenTimeParametersSize>
 </Object>
-<Object N="251658256" I="936749645911031812" V="6" CI="4020" CV="2147483622" CN="aMethodDesc">
+<Object N="251658256" I="936749645911031812" V="7" CI="4020" CV="2147483622" CN="aMethodDesc">
 <Segs>1</Segs>
 <myOwner>
 <N>251658242</N>
@@ -15076,7 +15098,8 @@ You can put any types, variables and method after that]]></Comment>
 <Name>Get</Name>
 <Visibility>-1</Visibility>
 <Comment>
-<![CDATA[method GET
+<![CDATA[@url */api/rest/extractTool/getSettings
+@method GET
 ]]></Comment>
 <LanguageSpecific>2</LanguageSpecific>
 <myType>
@@ -15088,6 +15111,82 @@ You can put any types, variables and method after that]]></Comment>
 <myCurImplem>
 <N>251658257</N>
 <I>936749645911031811</I>
+</myCurImplem>
+</Object>
+<Object N="251658256" I="936749645911031824" V="1" CI="4100" CV="2147483622" CN="aParameterDesc">
+<Segs>1</Segs>
+<myOwner>
+<N>251658495</N>
+<I>141</I>
+</myOwner>
+<Name>self</Name>
+<Visibility>-1</Visibility>
+<Modifiers>Abstract,Overloaded</Modifiers>
+<myType>
+<N>251658242</N>
+<I>251658455</I>
+</myType>
+<GenTimeOffset>64</GenTimeOffset>
+</Object>
+<Object N="251658495" I="140" V="1" CI="4100" CV="2147483622" CN="aParameterDesc">
+<Segs>1</Segs>
+<myOwner>
+<N>251658495</N>
+<I>141</I>
+</myOwner>
+<Name>name</Name>
+<Visibility>-1</Visibility>
+<Modifiers>Abstract</Modifiers>
+<myType>
+<N>3</N>
+<I>2600</I>
+</myType>
+</Object>
+<Object N="251658495" I="141" V="1" CI="4110" CV="2147483622" CN="aMethodType">
+<Segs>1</Segs>
+<myOwner>
+<N>251658495</N>
+<I>142</I>
+</myOwner>
+<Name>GetBundlePreparer</Name>
+<Visibility>-1</Visibility>
+<IsInLine>true</IsInLine>
+<ReturnType>
+<N>234881026</N>
+<I>235995139</I>
+</ReturnType>
+<myParameters>
+<Item>
+<N>251658256</N>
+<I>936749645911031824</I>
+<V>1</V>
+</Item>
+<Item>
+<N>251658495</N>
+<I>140</I>
+<V>1</V>
+</Item>
+</myParameters>
+<GenTimeParametersSize>72</GenTimeParametersSize>
+</Object>
+<Object N="251658495" I="142" V="1" CI="4020" CV="2147483622" CN="aMethodDesc">
+<Segs>1</Segs>
+<myOwner>
+<N>251658242</N>
+<I>251658455</I>
+</myOwner>
+<Name>GetBundlePreparer</Name>
+<Visibility>-1</Visibility>
+<LanguageSpecific>2</LanguageSpecific>
+<myType>
+<N>251658495</N>
+<I>141</I>
+<V>1</V>
+</myType>
+<MotorId>4</MotorId>
+<myCurImplem>
+<N>251658257</N>
+<I>936749645911031815</I>
 </myCurImplem>
 </Object>
 <Object N="251658256" I="936749645911031817" V="2" CI="4100" CV="2147483622" CN="aParameterDesc">
@@ -15141,7 +15240,7 @@ You can put any types, variables and method after that]]></Comment>
 </myParameters>
 <GenTimeParametersSize>284</GenTimeParametersSize>
 </Object>
-<Object N="251658256" I="936749645911031815" V="5" CI="4020" CV="2147483622" CN="aMethodDesc">
+<Object N="251658256" I="936749645911031815" V="7" CI="4020" CV="2147483622" CN="aMethodDesc">
 <Segs>1</Segs>
 <myOwner>
 <N>251658242</N>
@@ -15150,7 +15249,8 @@ You can put any types, variables and method after that]]></Comment>
 <Name>GenerateSource</Name>
 <Visibility>-1</Visibility>
 <Comment>
-<![CDATA[method POST
+<![CDATA[@url */api/rest/extractTool/generatesource
+@method POST
 ]]></Comment>
 <LanguageSpecific>2</LanguageSpecific>
 <myType>
@@ -15164,7 +15264,7 @@ You can put any types, variables and method after that]]></Comment>
 <I>936749645911031813</I>
 </myCurImplem>
 </Object>
-<Object N="251658242" I="251658455" V="11" CI="4050" CV="2147483622" CN="aClassDef">
+<Object N="251658242" I="251658455" V="15" CI="4050" CV="2147483622" CN="aClassDef">
 <Segs>1</Segs>
 <Name>aWex_ExtractTool</Name>
 <Visibility>-1</Visibility>
@@ -15177,18 +15277,24 @@ You can put any types, variables and method after that]]></Comment>
 <N>251658256</N>
 <Item>
 <I>936749645911031820</I>
-<V>3</V>
+<V>5</V>
 </Item>
 </myTypes>
 <myMethods>
-<N>251658256</N>
 <Item>
+<N>251658256</N>
 <I>936749645911031812</I>
-<V>6</V>
+<V>7</V>
 </Item>
 <Item>
+<N>251658495</N>
+<I>142</I>
+<V>1</V>
+</Item>
+<Item>
+<N>251658256</N>
 <I>936749645911031815</I>
-<V>5</V>
+<V>7</V>
 </Item>
 </myMethods>
 <myCurImplem>
@@ -15205,20 +15311,44 @@ You can put any types, variables and method after that]]></Comment>
 <I>218103993</I>
 </Item>
 <Item>
+<N>268435458</N>
+<I>218103913</I>
+</Item>
+<Item>
 <N>251658242</N>
 <I>251658409</I>
 </Item>
 <Item>
 <N>268435458</N>
-<I>218103913</I>
+<I>218103909</I>
+</Item>
+<Item>
+<N>268435458</N>
+<I>218103902</I>
+</Item>
+<Item>
+<N>2</N>
+<I>4010</I>
 </Item>
 <Item>
 <N>268435458</N>
 <I>218103860</I>
 </Item>
+<Item>
+<N>2</N>
+<I>1000</I>
+</Item>
+<Item>
+<N>2</N>
+<I>4060</I>
+</Item>
+<Item>
+<N>234881026</N>
+<I>235995139</I>
+</Item>
 </myUses>
-<LastMotorId>3</LastMotorId>
-<LastOwnedId>15</LastOwnedId>
+<LastMotorId>4</LastMotorId>
+<LastOwnedId>16</LastOwnedId>
 <IsSyntaxOk>true</IsSyntaxOk>
 <IsLight>true</IsLight>
 <Descendants>
@@ -15256,7 +15386,7 @@ You can put any types, variables and method after that]]></Comment>
 </myType>
 <GenTimeOffset>8</GenTimeOffset>
 </Object>
-<Object N="251658495" I="37" V="1" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Object N="251658495" I="37" V="3" CI="1080" CV="2147483622" CN="aLocalVarDesc">
 <Segs>1</Segs>
 <myOwner>
 <N>251658257</N>
@@ -15271,7 +15401,7 @@ You can put any types, variables and method after that]]></Comment>
 </myType>
 <GenTimeOffset>16</GenTimeOffset>
 </Object>
-<Object N="251658495" I="38" V="1" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Object N="251658495" I="38" V="4" CI="1080" CV="2147483622" CN="aLocalVarDesc">
 <Segs>1</Segs>
 <myOwner>
 <N>251658257</N>
@@ -15284,9 +15414,9 @@ You can put any types, variables and method after that]]></Comment>
 <N>268435458</N>
 <I>218103913</I>
 </myType>
-<GenTimeOffset>152</GenTimeOffset>
+<GenTimeOffset>160</GenTimeOffset>
 </Object>
-<Object N="251658257" I="936749645911031811" V="18" CI="4045" CV="2147483622" CN="aMethodImplem">
+<Object N="251658257" I="936749645911031811" V="26" CI="4045" CV="2147483622" CN="aMethodImplem">
 <Segs>1</Segs>
 <myOwner>
 <N>251658248</N>
@@ -15309,20 +15439,20 @@ You can put any types, variables and method after that]]></Comment>
 <Item>
 <N>251658495</N>
 <I>37</I>
-<V>1</V>
+<V>3</V>
 </Item>
 <Item>
 <N>251658495</N>
 <I>38</I>
-<V>1</V>
+<V>4</V>
 </Item>
 </myVars>
 <DerivesFrom>
 <N>251658256</N>
 <I>936749645911031812</I>
-<V>6</V>
+<V>7</V>
 </DerivesFrom>
-<GenTimeVarsSize>160</GenTimeVarsSize>
+<GenTimeVarsSize>168</GenTimeVarsSize>
 <myUses>
 <Item>
 <N>2</N>
@@ -15352,12 +15482,16 @@ You can put any types, variables and method after that]]></Comment>
 <N>2</N>
 <I>11005</I>
 </Item>
+<Item>
+<N>2</N>
+<I>1140</I>
+</Item>
 </myUses>
 <LastMotorId>1073741823</LastMotorId>
 <myOriginalText>
 <![CDATA[ function Get return tGenerateParam
     uses Risky, aWAMContainer, aClassDef, aWT_UrlDecorationSettings, lib, aWT_SequenceTypeExtension, 
-       aSequenceType
+       aSequenceType, aRecordVarDesc
     
     var curDummyTool : aWexClassAndModuleExtract
     var entity : aWAMContainer
@@ -15372,6 +15506,9 @@ You can put any types, variables and method after that]]></Comment>
        forEach entity in curDummyTool.EntitiesToSaveToFile
           mmresponse.name = entity.Name
           mmresponse.theType = entity.ClassDef.Name
+          self.Response.Serializer.DontSpreadRef(MetaModelEntity(tEntity.entity), 
+             Pointer(MetaModelEntity(tEntity)))
+          mmresponse.entity = entity
           new(node)
           node.VarAddress = @entity
           node.VarType = entity.type
@@ -15380,6 +15517,126 @@ You can put any types, variables and method after that]]></Comment>
           lib.SequenceType.Append(mmresponse, _Result.entities, _Result.entities.type)
        endFor
     endIf
+ endFunc ]]></myOriginalText>
+<SaveSourceAnyway>true</SaveSourceAnyway>
+</Object>
+<Object N="251658495" I="143" V="1" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Segs>1</Segs>
+<myOwner>
+<N>251658257</N>
+<I>936749645911031815</I>
+</myOwner>
+<Name>response</Name>
+<Visibility>-1</Visibility>
+<LanguageSpecific>2</LanguageSpecific>
+<myType>
+<N>3</N>
+<I>1500</I>
+</myType>
+</Object>
+<Object N="251658495" I="144" V="1" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Segs>1</Segs>
+<myOwner>
+<N>251658257</N>
+<I>936749645911031815</I>
+</myOwner>
+<Name>isFirst</Name>
+<Visibility>-1</Visibility>
+<LanguageSpecific>2</LanguageSpecific>
+<myType>
+<N>3</N>
+<I>1026</I>
+</myType>
+<GenTimeOffset>8</GenTimeOffset>
+</Object>
+<Object N="251658495" I="145" V="1" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Segs>1</Segs>
+<myOwner>
+<N>251658257</N>
+<I>936749645911031815</I>
+</myOwner>
+<Name>bundle</Name>
+<Visibility>-1</Visibility>
+<LanguageSpecific>2</LanguageSpecific>
+<myType>
+<N>234881026</N>
+<I>235995139</I>
+</myType>
+<GenTimeOffset>9</GenTimeOffset>
+</Object>
+<Object N="251658495" I="146" V="1" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Segs>1</Segs>
+<myOwner>
+<N>251658257</N>
+<I>936749645911031815</I>
+</myOwner>
+<Name>bundleList</Name>
+<Visibility>-1</Visibility>
+<LanguageSpecific>2</LanguageSpecific>
+<myType>
+<N>234881026</N>
+<I>235995137</I>
+</myType>
+<GenTimeOffset>17</GenTimeOffset>
+</Object>
+<Object N="251658257" I="936749645911031815" V="3" CI="4045" CV="2147483622" CN="aMethodImplem">
+<Segs>1</Segs>
+<myOwner>
+<N>251658248</N>
+<I>251658455</I>
+</myOwner>
+<Name>GetBundlePreparer</Name>
+<myVars>
+<N>251658495</N>
+<Item>
+<I>143</I>
+<V>1</V>
+</Item>
+<Item>
+<I>144</I>
+<V>1</V>
+</Item>
+<Item>
+<I>145</I>
+<V>1</V>
+</Item>
+<Item>
+<I>146</I>
+<V>1</V>
+</Item>
+</myVars>
+<DerivesFrom>
+<N>251658495</N>
+<I>142</I>
+<V>1</V>
+</DerivesFrom>
+<GenTimeVarsSize>25</GenTimeVarsSize>
+<myUses>
+<N>234881026</N>
+<Item>
+<I>235995137</I>
+</Item>
+<Item>
+<I>235995151</I>
+</Item>
+</myUses>
+<LastMotorId>1073741823</LastMotorId>
+<myOriginalText>
+<![CDATA[ function GetBundlePreparer(name : IDEName) return aDeliveriesBundlePreparer
+    uses aPreparedDeliveriesBundleList, xBundle
+    
+    var response : Text
+    var isFirst : Boolean
+    var bundle : aDeliveriesBundlePreparer
+    var bundleList : aPreparedDeliveriesBundleList
+    
+    bundleList = xBundle.GetPreparedbundleCatalog
+    forEach bundle in bundleList.DelBPreparers
+       if Upcase(bundle.Name) = Upcase(name)
+          _Result = bundle
+          break
+       endIf
+    endFor
  endFunc ]]></myOriginalText>
 <SaveSourceAnyway>true</SaveSourceAnyway>
 </Object>
@@ -15397,7 +15654,37 @@ You can put any types, variables and method after that]]></Comment>
 <I>218103997</I>
 </myType>
 </Object>
-<Object N="251658257" I="936749645911031813" V="19" CI="4045" CV="2147483622" CN="aMethodImplem">
+<Object N="251658495" I="138" V="2" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Segs>1</Segs>
+<myOwner>
+<N>251658257</N>
+<I>936749645911031813</I>
+</myOwner>
+<Name>entity</Name>
+<Visibility>-1</Visibility>
+<LanguageSpecific>2</LanguageSpecific>
+<myType>
+<N>251658256</N>
+<I>936749448342536193</I>
+</myType>
+<GenTimeOffset>8</GenTimeOffset>
+</Object>
+<Object N="251658495" I="139" V="1" CI="1080" CV="2147483622" CN="aLocalVarDesc">
+<Segs>1</Segs>
+<myOwner>
+<N>251658257</N>
+<I>936749645911031813</I>
+</myOwner>
+<Name>foundentity</Name>
+<Visibility>-1</Visibility>
+<LanguageSpecific>2</LanguageSpecific>
+<myType>
+<N>2</N>
+<I>1000</I>
+</myType>
+<GenTimeOffset>152</GenTimeOffset>
+</Object>
+<Object N="251658257" I="936749645911031813" V="40" CI="4045" CV="2147483622" CN="aMethodImplem">
 <Segs>1</Segs>
 <myOwner>
 <N>251658248</N>
@@ -15407,30 +15694,58 @@ You can put any types, variables and method after that]]></Comment>
 <Comment>
 <![CDATA[Generate the source. You can override the default settings such as the target folder.]]></Comment>
 <myVars>
-<N>251658257</N>
 <Item>
+<N>251658257</N>
 <I>936749645911031814</I>
 <V>2</V>
+</Item>
+<Item>
+<N>251658495</N>
+<I>138</I>
+<V>2</V>
+</Item>
+<Item>
+<N>251658495</N>
+<I>139</I>
+<V>1</V>
 </Item>
 </myVars>
 <DerivesFrom>
 <N>251658256</N>
 <I>936749645911031815</I>
-<V>5</V>
+<V>7</V>
 </DerivesFrom>
-<GenTimeVarsSize>8</GenTimeVarsSize>
+<GenTimeVarsSize>160</GenTimeVarsSize>
 <myUses>
-<N>2</N>
 <Item>
+<N>2</N>
 <I>32803</I>
+</Item>
+<Item>
+<N>2</N>
+<I>4050</I>
+</Item>
+<Item>
+<N>2</N>
+<I>32802</I>
+</Item>
+<Item>
+<N>268435458</N>
+<I>218103870</I>
+</Item>
+<Item>
+<N>268435458</N>
+<I>218103815</I>
 </Item>
 </myUses>
 <LastMotorId>1073741823</LastMotorId>
 <myOriginalText>
 <![CDATA[ procedure GenerateSource(body : tGenerateParam)
-    uses Risky
+    uses Risky, aClassDef, Motor, lib, aWT_SequenceTypeExtension
     
     var curDummyTool : aWexClassAndModuleExtract
+    var entity : tEntity
+    var foundentity : aEntity
     
     new(curDummyTool)
     curDummyTool = Risky.ThingFromName(curDummyTool.NameNameSpaceId, cNameForPersistentMainTool, 
@@ -15440,13 +15755,28 @@ You can put any types, variables and method after that]]></Comment>
        if body.path <> ''
           curDummyTool.RootDirectory = body.path
        endIf
+       if lib.SequenceType.Len(body.entities) > 0
+          curDummyTool.EntitiesToSaveToFile.purge
+          forEach entity in body.entities
+             if (entity.theType = MetaModelEntity(aClassDef).Name) or (entity.theType = 
+                MetaModelEntity(aModuleDef).Name)
+                foundentity = Motor.FindModuleOrClassFromName(entity.name)
+             elseif entity.theType = MetaModelEntity(aDeliveriesBundlePreparer).Name
+                foundentity = self.GetBundlePreparer(entity.name)
+             endIf
+             if foundentity <> Nil
+                curDummyTool.EntitiesToSaveToFile.AppendObject(foundentity)
+             endIf
+          endFor
+       endIf
+       ;if 
        curDummyTool.ActionSaveToFiles(Nil)
        curDummyTool.CancelObject(curDummyTool)
     endIf
  endProc ]]></myOriginalText>
 <SaveSourceAnyway>true</SaveSourceAnyway>
 </Object>
-<Object N="251658248" I="251658455" V="11" CI="4070" CV="2147483622" CN="aClassImplem">
+<Object N="251658248" I="251658455" V="19" CI="4070" CV="2147483622" CN="aClassImplem">
 <Segs>1</Segs>
 <Name>aWex_ExtractTool</Name>
 <myText>Nicolas;Nicolas</myText>
@@ -15455,19 +15785,23 @@ You can put any types, variables and method after that]]></Comment>
 <DerivesFrom>
 <N>251658242</N>
 <I>251658455</I>
-<V>11</V>
+<V>15</V>
 </DerivesFrom>
 <LastMotorId>1073741823</LastMotorId>
-<LastOwnedId>6</LastOwnedId>
+<LastOwnedId>7</LastOwnedId>
 <myMethodImplems>
 <N>251658257</N>
 <Item>
 <I>936749645911031811</I>
-<V>18</V>
+<V>26</V>
+</Item>
+<Item>
+<I>936749645911031815</I>
+<V>3</V>
 </Item>
 <Item>
 <I>936749645911031813</I>
-<V>19</V>
+<V>40</V>
 </Item>
 </myMethodImplems>
 <myExtReferencedIds>
@@ -15488,8 +15822,8 @@ You can put any types, variables and method after that]]></Comment>
 <I>4030</I>
 </Item>
 <Item>
-<N>19</N>
-<I>8589934621</I>
+<N>251658256</N>
+<I>936749448342536193</I>
 </Item>
 <Item>
 <N>268435472</N>
@@ -15500,16 +15834,16 @@ You can put any types, variables and method after that]]></Comment>
 <I>4020</I>
 </Item>
 <Item>
-<N>251658256</N>
-<I>936749448342536195</I>
+<N>268435472</N>
+<I>936749126219989148</I>
 </Item>
 <Item>
 <N>18</N>
 <I>4294967296002</I>
 </Item>
 <Item>
-<N>251658256</N>
-<I>936749448342536194</I>
+<N>268435472</N>
+<I>936748881406853226</I>
 </Item>
 <Item>
 <N>268435472</N>
@@ -15536,6 +15870,66 @@ You can put any types, variables and method after that]]></Comment>
 <I>936749645911031821</I>
 </Item>
 <Item>
+<N>251658256</N>
+<I>936749448342536195</I>
+</Item>
+<Item>
+<N>251658256</N>
+<I>936749448342536194</I>
+</Item>
+<Item>
+<N>2</N>
+<I>4060</I>
+</Item>
+<Item>
+<N>19</N>
+<I>25770131466</I>
+</Item>
+<Item>
+<N>19</N>
+<I>8589934621</I>
+</Item>
+<Item>
+<N>268435458</N>
+<I>218103870</I>
+</Item>
+<Item>
+<N>268435472</N>
+<I>936748988781035531</I>
+</Item>
+<Item>
+<N>268435472</N>
+<I>936748752557834454</I>
+</Item>
+<Item>
+<N>251658495</N>
+<I>36</I>
+</Item>
+<Item>
+<N>16</N>
+<I>140883517243447</I>
+</Item>
+<Item>
+<N>2</N>
+<I>32802</I>
+</Item>
+<Item>
+<N>2</N>
+<I>4050</I>
+</Item>
+<Item>
+<N>19</N>
+<I>21474836495</I>
+</Item>
+<Item>
+<N>251658495</N>
+<I>125</I>
+</Item>
+<Item>
+<N>3</N>
+<I>1255</I>
+</Item>
+<Item>
 <N>268435472</N>
 <I>936749173464629251</I>
 </Item>
@@ -15556,26 +15950,38 @@ You can put any types, variables and method after that]]></Comment>
 <I>936749448342536217</I>
 </Item>
 <Item>
-<N>268435458</N>
-<I>218103870</I>
+<N>234881026</N>
+<I>235995151</I>
+</Item>
+<Item>
+<N>234881040</N>
+<I>941533861521653928</I>
+</Item>
+<Item>
+<N>234881040</N>
+<I>941533801392111617</I>
+</Item>
+<Item>
+<N>234881026</N>
+<I>235995139</I>
 </Item>
 <Item>
 <N>268435472</N>
-<I>936748988781035531</I>
-</Item>
-<Item>
-<N>268435472</N>
-<I>936748752557834454</I>
-</Item>
-<Item>
-<N>251658495</N>
-<I>36</I>
+<I>936748752557834560</I>
 </Item>
 </myExtReferencedIds>
 <myOwnReferencedIds>
-<N>268435472</N>
 <Item>
+<N>268435472</N>
+<I>936749143399858437</I>
+</Item>
+<Item>
+<N>268435472</N>
 <I>936749143399858463</I>
+</Item>
+<Item>
+<N>251658495</N>
+<I>142</I>
 </Item>
 </myOwnReferencedIds>
 <GlobalVersion>-2147483648</GlobalVersion>
@@ -22439,8 +22845,20 @@ You can put any types, variables and method after that]]></Comment>
 <I>235341552</I>
 </Item>
 <Item>
+<N>268435458</N>
+<I>218103902</I>
+</Item>
+<Item>
 <N>268435472</N>
 <I>936749534241882150</I>
+</Item>
+<Item>
+<N>268435472</N>
+<I>936749126219989148</I>
+</Item>
+<Item>
+<N>268435472</N>
+<I>936748881406853226</I>
 </Item>
 <Item>
 <N>268435472</N>
@@ -23985,12 +24403,39 @@ You can put any types, variables and method after that]]></Comment>
 </Descendants>
 </Object>
 <Object N="268435468" I="235341552" V="1" CI="900" CV="1"></Object>
+<Object N="268435458" I="218103902" V="47" CI="4050" CV="2147483622" CN="aClassDef">
+<Segs>16777215</Segs>
+<Name>aWT_Serializer</Name>
+<Visibility>-1</Visibility>
+<Comment>
+<![CDATA[<aClassDef>aWT_Serializer]]></Comment>
+<IsSyntaxOk>true</IsSyntaxOk>
+<Descendants>
+<N>268435468</N>
+<I>218103902</I>
+</Descendants>
+</Object>
+<Object N="268435468" I="218103902" V="1" CI="900" CV="1"></Object>
 <Object N="268435472" I="936749534241882150" V="3" CI="4020" CV="2147483622" CN="aMethodDesc">
 <Segs>16777215</Segs>
 <Name>ActionSaveToFiles</Name>
 <Visibility>-1</Visibility>
 <Comment>
 <![CDATA[<aClassDef>aWexClassAndModuleExtract.<aMethodDesc>ActionSaveToFiles]]></Comment>
+</Object>
+<Object N="268435472" I="936749126219989148" V="2" CI="4020" CV="2147483622" CN="aMethodDesc">
+<Segs>16777215</Segs>
+<Name>DontSpreadRef</Name>
+<Visibility>-1</Visibility>
+<Comment>
+<![CDATA[<aClassDef>aWT_Serializer.<aMethodDesc>DontSpreadRef]]></Comment>
+</Object>
+<Object N="268435472" I="936748881406853226" V="1" CI="4020" CV="2147483622" CN="aMethodDesc">
+<Segs>16777215</Segs>
+<Name>Serializer</Name>
+<Visibility>-1</Visibility>
+<Comment>
+<![CDATA[<aClassDef>aWT_HttpResponse.<aMethodDesc>Serializer]]></Comment>
 </Object>
 <Object N="268435472" I="936749534241882113" V="7" CI="1060" CV="2147483622" CN="aInstanceVarDesc">
 <Segs>16777215</Segs>
