@@ -1,0 +1,72 @@
+[
+   {
+      "id": "ewam",
+      "caption": "eWAM",
+      "mnemonic": "W",
+      "children":
+      [
+         {
+            "id": "wam_environments",
+            "caption": "Environments",
+            "children":
+            [
+               {
+                  "id": "wam_select_env",
+                  "caption": "Select working environment",
+                  "command": "wam_select_env"
+               },
+               {
+                  "id": "wam_new_env",
+                  "caption": "Add an eWAM environment",
+                  "command": "wam_new_env"
+               },
+               {
+                  "id": "wam_remove_env",
+                  "caption": "Remove an eWAM environment",
+                  "command": "wam_remove_env"
+               },
+               {
+                  "id": "wam_clear_envs",
+                  "caption": "Clear your eWAM environments",
+                  "command": "wam_clear_envs"
+               },
+            ]
+         },
+         {
+            "id": "wam_moduledefapi",
+            "caption": "Classes or Modules",
+            "children":
+            [
+               {
+                  "id": "wam_open_class",
+                  "caption": "Open class",
+                  "command": "wam_generic_window_command",
+                  "args" : {
+                     "method": "GET",
+                     "path": "/api/rest/classOrModule/{wam_input_entity_name}",
+                     "body": "",
+                     "action": "wam_open_in_new_window"
+                  }
+               },
+               {
+                  "id": "wam_save_class",
+                  "caption": "Save class",
+                  "command": "wam_generic_window_command",
+                  "args" : {
+                     "method": "POST",
+                     "path": "/api/rest/classOrModule/{wam_current_view_name}",
+                     "params": "body: {wam_current_view_content}",
+                     "action": "wam_update_current_view_content"
+                  }
+               },
+               {
+                  "id": "wam_swagger_open_class",
+                  "caption": "Swagger open class",
+                  "command": "wam_swagger_open_class",
+                  "args" : {}
+               },
+            ]
+         }
+      ]
+   }
+]

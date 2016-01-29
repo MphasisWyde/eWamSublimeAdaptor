@@ -1,5 +1,7 @@
 import sublime, uuid
+from bravado.client import SwaggerClient
 
+swaggerClient = None
 
 def get_environments():
    settings = sublime.load_settings("wam.sublime-settings")
@@ -12,6 +14,7 @@ def get_environments():
 
    return env_list
 
+
 def get_environment_by_index(index):
    envs = get_environments()
    for i, item in enumerate(envs):
@@ -19,12 +22,14 @@ def get_environment_by_index(index):
          return envs[item]
    return None
 
+
 def get_environment_by_name(name):
    envs = get_environments()
    if name in envs:
       return envs[name]
    else:
       return None
+
 
 def save_environment(name, url):
    env_list = get_environments()
@@ -36,12 +41,14 @@ def save_environment(name, url):
    settings.set("environments", env_list)
    sublime.save_settings("wam.sublime-settings")
 
+
 def clear_environments():
    settings = sublime.load_settings("wam.sublime-settings")
    if settings == None:
       return
 
    env_list = {}
+   setClientAPIFromEnv(None)
    settings.set("environments", env_list)
    sublime.save_settings("wam.sublime-settings")   
 
@@ -81,8 +88,10 @@ def set_working_environment(index):
 
    selected_env = get_environment_by_index(index)
    prj_data['wam']['wam_working_environment'] = selected_env['name']
+   setClientAPIFromEnv(selected_env)
 
    wnd.set_project_data(prj_data)
+
 
 def remove_environment(index):
    if index == -1:
@@ -96,6 +105,7 @@ def remove_environment(index):
       if 'wam_working_environment' in prj_data['wam']:
          if prj_data['wam']['wam_working_environment'] == selected_env['name']:
             prj_data['wam']['wam_working_environment'] = ''
+            setClientAPIFromEnv(None)
             wnd.set_project_data(prj_data)
 
    settings = sublime.load_settings("wam.sublime-settings")
@@ -112,6 +122,7 @@ def reset_working_environment():
       prj_data['wam'] = {}
 
    prj_data['wam']['wam_working_environment'] = ''
+   setClientAPIFromEnv(None)
 
 
 def get_working_environment():
@@ -132,3 +143,50 @@ def get_working_environment():
       reset_working_environment()
 
    return working_env
+
+
+def setClientAPIFromEnv(env):
+   global swaggerClient
+   if env == None:
+      swaggerClient = None
+   else:
+      print("Initializing SwaggerClient with " + env['url'] + "/api/rest/documentation")
+
+      config = {
+          # === bravado config ===
+
+          # Determines what is returned by the service call.
+          'also_return_response': False,
+
+          # === bravado-core config ====
+
+          #  validate incoming responses
+          'validate_responses': False,
+
+          # validate outgoing requests
+          'validate_requests': False,
+
+          # validate the swagger spec
+          'validate_swagger_spec': False,
+
+          # Use models (Python classes) instead of dicts for #/definitions/{models}
+          'use_models': True,
+
+          # # List of user-defined formats
+          # 'formats': [my_super_duper_format],
+      }
+
+      swagger_url = env['url'] + "/api/rest/documentation"
+
+      swaggerClient = SwaggerClient.from_url(swagger_url, config=config)
+
+   if swaggerClient == None:
+      sublime.error_message("Swagger API couldn't be loaded from environment " + env['name'] + ": " + swagger_url)
+
+
+def getSwaggerAPI():
+   global swaggerClient
+   if swaggerClient == None:
+      setClientAPIFromEnv(get_working_environment())
+
+   return swaggerClient

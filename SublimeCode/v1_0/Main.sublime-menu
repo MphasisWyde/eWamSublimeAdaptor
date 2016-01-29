@@ -31,6 +31,33 @@
                   "command": "wam_clear_envs"
                },
             ]
+         },
+         {
+            "id": "wam_moduledefapi",
+            "caption": "Classes or Modules",
+            "children":
+            [
+               {
+                  "id": "wam_swagger_open_class",
+                  "caption": "Open class",
+                  "command": "wam_swagger_generic_call",
+                  "args" : {
+                     "operationId" : "ModuleDefAPI_Get",
+                     "params" : { "name": "<<inputs.get_classname>>" },
+                     "action" : "actions.open_gold_window(response.name, response.content)"
+                  }
+               },
+               {
+                  "id": "wam_swagger_open_class",
+                  "caption": "Checkin class",
+                  "command": "wam_swagger_generic_call",
+                  "args" : {
+                     "operationId" : "ModuleDefAPI_Checkin",
+                     "params" : { "name": "<<inputs.get_classname>>" },
+                     "action" : "actions.open_gold_window(response.name, response.content)"
+                  }
+               },
+            ]
          }
       ]
    }

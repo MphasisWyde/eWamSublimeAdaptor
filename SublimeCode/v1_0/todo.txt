@@ -1,14 +1,15 @@
 
 
-- environnements :
-   - Initialiser l'API Swagger quand on selection l'environnement
-
 - commandes génériques : 
    un ou plusieurs paramètres
    avec paramètre d'action à appeler avec la response
 
 => pour les menu
 => pour le menu contextuel
+
+   paramètres d'input: un appel en chaine
+
+- ne garder en fichier de premier niveau que ceux qui contiennent l'API du développeur qui veut réutiliser notre plugin (pour ajouter des commandes par exemple)
 
 
 
@@ -80,3 +81,59 @@ class WamProjectCommand(sublime_plugin.TextCommand):
 
    def run(self, edit, event):
       pass
+
+========= Swagger calls
+
+api = environment.getSwaggerAPI()
+
+print("descendants: ", api.ModuleDefAPI.ModuleDefAPI_GetDescendants(name="aFullObject").result())
+
+print("Get: ", api.ModuleDefAPI.ModuleDefAPI_Get(name="aRedgisTest").result())
+
+print("api", locals()['api'])
+
+moduleAPI = getattr(locals()['api'], 'ModuleDefAPI')
+print("attr:", moduleAPI)
+
+method = getattr(moduleAPI, 'ModuleDefAPI_Get')
+print(method)
+
+kwargs = {'name': "aRedgisTest"}
+print(method(**kwargs).result())
+
+
+========== Regex
+
+
+""" Replaces any "<<method_name>>" string by the string value returned by the call to method_name
+"""
+def ExpandTags(stringToExpand):
+
+   tagRegex = re.compile(r"<<[a-zA-Z0-9_]+>>")
+
+   start = 0
+   expandedString = ""
+
+   match = tagRegex.search(stringToExpand)
+   while match != None:
+      methodName = stringToExpand[start+match.start()+2:start+match.end()-2]
+
+      if methodName not in globals():
+         message = "Ignoring token {" + methodName + "} : method '" + methodName + "' couldn't be found. [" + __name__ + " : " + sys._getframe().f_code.co_name + "]"
+         print("Gold Plugin Error: " + message)
+         sublime.error_message(message)
+         expandedString = expandedString + stringToExpand[start:start+match.end()]
+
+      else:
+         method = globals()[methodName]
+         sustitution = method()
+         expandedString = expandedString + stringToExpand[start:start+match.start()] + sustitution
+
+      # match = tagRegex.search(expandedString)
+      start = start = start+match.end()
+      match = tagRegex.search(stringToExpand[start:])
+
+   expandedString = expandedString + stringToExpand[start:]
+
+   return expandedString
+
