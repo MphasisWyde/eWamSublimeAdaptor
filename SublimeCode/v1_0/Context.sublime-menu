@@ -1,3 +1,73 @@
 [
-   { "command": "gold_goto_definition", "caption": "Goto eWAM definition" }
+   {
+      "caption": "Goto eWAM definition",
+      "command": "wam_goto_definition",  
+   },
+   { "caption": "-" },
+   {
+      "caption": "Parse",
+      "command": "wam_swagger_generic_contextual_call",
+      "args" : {
+         "operationId" : "ModuleDefAPI_Parse",
+         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>", "body": "tImplem(\"content\":\"<<inputs.get_module_content>>\")" },
+         "action" : "actions.update_content(self.view, response.content)"
+      }
+   },
+   {
+      "caption": "Save",
+      "command": "wam_swagger_generic_contextual_call",
+      "args" : {
+         "operationId" : "ModuleDefAPI_Modify",
+         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>", "body": "tImplem(\"content\":\"<<inputs.get_module_content>>\")" },
+         "action" : "actions.update_content(self.view, response.content)"
+      }
+   },
+   { "caption": "-" },
+   {  
+      "caption": "Check-In",
+      "command": "wam_swagger_generic_contextual_call",
+      "args" : {
+         "operationId" : "ModuleDefAPI_CheckIn",
+         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
+         "action" : "actions.update_readonly(self.view)"
+      }
+   },
+   {  
+      "caption": "Check-Out",
+      "command": "wam_swagger_generic_contextual_call",
+      "args" : {
+         "operationId" : "ModuleDefAPI_CheckOut",
+         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
+         "action" : "actions.update_readonly(self.view)"
+      }
+   },
+   {  
+      "caption": "Deliver",
+      "command": "wam_swagger_generic_contextual_call",
+      "args" : {
+         "operationId" : "ModuleDefAPI_Deliver",
+         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
+         "action" : "actions.update_readonly(self.view)"
+      }
+   },
+   { "caption" : "-" },
+   {
+      "caption": "Manage Reimplementation",
+      "command": "wam_swagger_generic_contextual_call",
+      "args" : {
+         "operationId" : "ModuleDefAPI_ManageReimplem",
+         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
+         "action" : "actions.update_readonly(self.view)"
+      }
+   },
+   {
+      "caption": "View Scenarios",
+      "command": "wam_swagger_generic_contextual_call",
+      "args" : {
+         "operationId" : "ModuleDefAPI_GetScenarios",
+         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
+         "action" : "import json; actions.open_window('Scenarios', json.dumps(response))"
+      }
+   },
+
 ]

@@ -1,6 +1,10 @@
-import sublime, sublime_plugin, sys, os
+import sublime
+import sublime_plugin
+import sys, os
+
 sys.path.append(os.path.join(os.path.dirname(__file__), "plugin"))
 sys.path.append(os.path.join(os.path.dirname(__file__), "third-party"))
+
 import environment
 
 class WamNewEnvCommand(sublime_plugin.ApplicationCommand):
@@ -79,7 +83,6 @@ class WamSelectEnvCommand(sublime_plugin.WindowCommand):
 
    def run(self):
       environment.select_environment(self.window, environment.set_working_environment)
-
 
 
 class WamRemoveEnvCommand(sublime_plugin.WindowCommand):

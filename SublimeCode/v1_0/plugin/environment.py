@@ -170,7 +170,7 @@ def setClientAPIFromEnv(env):
           'validate_swagger_spec': False,
 
           # Use models (Python classes) instead of dicts for #/definitions/{models}
-          'use_models': True,
+          'use_models': False,
 
           # # List of user-defined formats
           # 'formats': [my_super_duper_format],

@@ -43,22 +43,51 @@
                   "command": "wam_swagger_generic_call",
                   "args" : {
                      "operationId" : "ModuleDefAPI_Get",
-                     "params" : { "name": "<<inputs.get_classname>>" },
-                     "action" : "actions.open_gold_window(response.name, response.content)"
-                  }
-               },
-               {
-                  "id": "wam_swagger_open_class",
-                  "caption": "Checkin class",
-                  "command": "wam_swagger_generic_call",
-                  "args" : {
-                     "operationId" : "ModuleDefAPI_Checkin",
-                     "params" : { "name": "<<inputs.get_classname>>" },
+                     "params" : { "name": "<<inputs.get_classname(self.inputResultCallback)>>" },
                      "action" : "actions.open_gold_window(response.name, response.content)"
                   }
                },
             ]
-         }
+         },
+         {
+            "id": "wam_repository",
+            "caption": "Repository",
+            "children":
+            [
+               {
+                  "id": "wam_swagger_repo_deliver",
+                  "caption": "Deliver",
+                  "command": "wam_swagger_generic_call",
+                  "args" : {
+                     "operationId" : "Repository_Deliver",
+                  }
+               },
+               {
+                  "id": "wam_swagger_repo_deliverall",
+                  "caption": "Deliver all",
+                  "command": "wam_swagger_generic_call",
+                  "args" : {
+                     "operationId" : "Repository_DeliverAll",
+                  }
+               },
+               {
+                  "id": "wam_swagger_repo_checkinall",
+                  "caption": "Check-In all",
+                  "command": "wam_swagger_generic_call",
+                  "args" : {
+                     "operationId" : "Repository_CheckinAll",
+                  }
+               },
+               {
+                  "id": "wam_swagger_repo_synchronize",
+                  "caption": "Synchronize",
+                  "command": "wam_swagger_generic_call",
+                  "args" : {
+                     "operationId" : "Repository_Synchronize",
+                  }
+               },
+            ]
+         },
       ]
    }
 ]

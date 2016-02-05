@@ -11,8 +11,14 @@
 
 - ne garder en fichier de premier niveau que ceux qui contiennent l'API du développeur qui veut réutiliser notre plugin (pour ajouter des commandes par exemple)
 
+- requêtes avec caractères spéciaux, exemple :
+   Marche:
+   > Execution of GET '/searchEntities?q=aRedgis*&_class=true'...Done
 
-
+   Marche pas:
+   > Execution of GET '/searchEntities?_class=true&q=aRedgis%2A'...Done
+- Attention operation /rest/classOrModule/{name}/ManageReimplem : même operationId en Get et en Post. Quelle est la différence entre get et post ?
+- problème avec le parse
 
 
 
