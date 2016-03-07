@@ -12,7 +12,7 @@ goto :endofscript
 :build_package
 cd %1
 del /F /Q ..\Gold.sublime-package
-..\zip.exe -q ..\Gold.sublime-package *.py *.tmLanguage *.sublime-menu *.sublime-keymap *.png
+..\zip.exe -q ..\Gold.sublime-package *
 cd ..
 echo Created Gold.sublime-package.
 GOTO:EOF
