@@ -1,0 +1,12 @@
+<snippet>
+   <content><![CDATA[; PARAM1 (PARAM2) (Def Version:1) (Implem Version:1)
+
+class PARAM1 (PARAM2) 
+
+
+]]></content>
+   <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+   <!-- <tabTrigger>hello</tabTrigger> -->
+   <!-- Optional: Set a scope to limit where the snippet will trigger -->
+   <!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,3 +1,5 @@
 [
 	{ "keys": ["ctrl+shift+e"], "command": "wam_select_env" },
+   { "keys": ["f7"], "command": "wam_parse" },
+   { "keys": ["f1"], "command": "wam_goto_definition_from_key" },
 ]

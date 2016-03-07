@@ -38,13 +38,23 @@
             "children":
             [
                {
+                  "id": "wam_swagger_create_class",
+                  "caption": "New class",
+                  "command": "wam_new_class",
+               },
+               {
+                  "id": "wam_swagger_create_module",
+                  "caption": "New module",
+                  "command": "wam_new_module",
+               },
+               {
                   "id": "wam_swagger_open_class",
-                  "caption": "Open class",
+                  "caption": "Open class / module",
                   "command": "wam_swagger_generic_call",
                   "args" : {
                      "operationId" : "ModuleDefAPI_Get",
-                     "params" : { "name": "<<inputs.get_classname(self.inputResultCallback)>>" },
-                     "action" : "actions.open_gold_window(response.name, response.content)"
+                     "params" : { "name": "<<inputs.get_class_or_module_name(self.inputResultCallback)>>" },
+                     "action" : "actions.open_gold_window(response['name'], response['content'])"
                   }
                },
             ]
@@ -55,11 +65,11 @@
             "children":
             [
                {
-                  "id": "wam_swagger_repo_deliver",
-                  "caption": "Deliver",
+                  "id": "wam_swagger_repo_synchronize",
+                  "caption": "Synchronize",
                   "command": "wam_swagger_generic_call",
                   "args" : {
-                     "operationId" : "Repository_Deliver",
+                     "operationId" : "Repository_Synchronize",
                   }
                },
                {
@@ -77,17 +87,35 @@
                   "args" : {
                      "operationId" : "Repository_CheckinAll",
                   }
-               },
-               {
-                  "id": "wam_swagger_repo_synchronize",
-                  "caption": "Synchronize",
-                  "command": "wam_swagger_generic_call",
-                  "args" : {
-                     "operationId" : "Repository_Synchronize",
-                  }
-               },
+               }
             ]
          },
+         {
+            "id": "wam_examples",
+            "caption": "Examples",
+            "children":
+            [
+               {
+                  "id": "wam_swagger_create_class",
+                  "caption": "New class / module",
+                  "command": "wam_swagger_generic_call",
+                  "args" : {
+                     "operationId" : "ModuleDefAPI_Create",
+                     "params" : { "name": "<<inputs.get_class_or_module_name(self.inputResultCallback)>>" },
+                     "action" : "actions.open_gold_window(response['name'], response['content'])"
+                  },
+               },
+               {
+                  "id": "wam_swagger_repo_deliver",
+                  "caption": "Deliver",
+                  "command": "wam_swagger_generic_call",
+                  "args" : {
+                     "operationId" : "Repository_Deliver",
+                  }
+               }
+            ]   
+         }
+         
       ]
    }
 ]

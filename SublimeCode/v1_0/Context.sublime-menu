@@ -1,54 +1,38 @@
 [
    {
-      "caption": "Goto eWAM definition",
-      "command": "wam_goto_definition",  
+      "caption": "Goto definition",
+      "command": "wam_goto_definition",
+   },
+   { "caption": "-" },
+   {
+      "caption": "Run this method",
+      "command": "wam_run_method"
+   },
+   {
+      "caption": "Run this class",
+      "command": "wam_run_class"
    },
    { "caption": "-" },
    {
       "caption": "Parse",
-      "command": "wam_swagger_generic_contextual_call",
-      "args" : {
-         "operationId" : "ModuleDefAPI_Parse",
-         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>", "body": "tImplem(\"content\":\"<<inputs.get_module_content>>\")" },
-         "action" : "actions.update_content(self.view, response.content)"
-      }
+      "command": "wam_parse"
    },
    {
       "caption": "Save",
-      "command": "wam_swagger_generic_contextual_call",
-      "args" : {
-         "operationId" : "ModuleDefAPI_Modify",
-         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>", "body": "tImplem(\"content\":\"<<inputs.get_module_content>>\")" },
-         "action" : "actions.update_content(self.view, response.content)"
-      }
+      "command": "wam_save"
    },
    { "caption": "-" },
    {  
       "caption": "Check-In",
-      "command": "wam_swagger_generic_contextual_call",
-      "args" : {
-         "operationId" : "ModuleDefAPI_CheckIn",
-         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
-         "action" : "actions.update_readonly(self.view)"
-      }
+      "command": "wam_checkin",
    },
    {  
       "caption": "Check-Out",
-      "command": "wam_swagger_generic_contextual_call",
-      "args" : {
-         "operationId" : "ModuleDefAPI_CheckOut",
-         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
-         "action" : "actions.update_readonly(self.view)"
-      }
+      "command": "wam_checkout",
    },
    {  
       "caption": "Deliver",
-      "command": "wam_swagger_generic_contextual_call",
-      "args" : {
-         "operationId" : "ModuleDefAPI_Deliver",
-         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
-         "action" : "actions.update_readonly(self.view)"
-      }
+      "command": "wam_deliver",
    },
    { "caption" : "-" },
    {
@@ -61,13 +45,94 @@
       }
    },
    {
-      "caption": "View Scenarios",
-      "command": "wam_swagger_generic_contextual_call",
-      "args" : {
-         "operationId" : "ModuleDefAPI_GetScenarios",
-         "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
-         "action" : "import json; actions.open_window('Scenarios', json.dumps(response))"
-      }
+      "caption": "Modify/Consult Scenario",
+      "command": "wam_get_scenario",
    },
-
+   {
+      "id": "wam_examples",
+      "caption": "Examples",
+      "children":
+      [
+         {
+            "id": "wam_swagger_open_class",
+            "caption": "Open class",
+            "command": "wam_swagger_generic_call",
+            "args" : {
+               "operationId" : "ModuleDefAPI_Get",
+               "params" : { "name": "<<inputs.get_classname(self.inputResultCallback)>>" },
+               "action" : "actions.open_gold_window(response['name'], response['content'])"
+            }
+         },
+         {
+            "caption": "Goto definition",
+            "command": "wam_swagger_generic_contextual_call",
+            "args" : {
+               "operationId" : "EntityAPI_GetEntity",
+               "params" : { 
+                  "dummy" : "<<inputs.searchEntity(self.inputResultCallback, name=self.selectedWord)>>",
+                  "name": "<<self.inputResultCallback(self.dummyresult['name'])>>", 
+                  "ownerName" : "<<self.inputResultCallback(self.dummyresult['ownerName'])>>"
+               },
+               "action" : "actions.open_entity(self.selectedWord, response)"
+            }
+         },
+         {
+            "caption": "Generic Parse (not working)",
+            "command": "wam_swagger_generic_contextual_call",
+            "args" : {
+               "operationId" : "ModuleDefAPI_Parse",
+               "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>", "body": "tImplem(\"content\":\"<<inputs.get_module_content>>\")" },
+               "action" : "actions.update_content(self.view, response['content'])"
+            }
+         },
+         {
+            "caption": "Save",
+            "command": "wam_swagger_generic_contextual_call",
+            "args" : {
+               "operationId" : "ModuleDefAPI_Modify",
+               "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>", "body": "tImplem(\"content\":\"<<inputs.get_module_content>>\")" },
+               "action" : "actions.update_content(self.view, response['content'])"
+            }
+         },
+         {
+            "caption": "Modify/Consult Scenario",
+            "command": "wam_swagger_generic_contextual_call",
+            "args" : {
+               "operationId" : "ModuleDefAPI_GetMyScenario",
+               "params" : { 
+                  "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>",
+                  "scenarioName": "<<inputs.choose_scenario(self.inputResultCallback, view=self.view)>>"
+               },
+               "action" : "import json; actions.open_window('Scenarios', json.dumps(response, indent=3))"
+            }
+         },
+         {  
+            "caption": "Check-In",
+            "command": "wam_swagger_generic_contextual_call",
+            "args" : {
+               "operationId" : "ModuleDefAPI_CheckIn",
+               "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
+               "action" : "actions.update_readonly(self.view)"
+            }
+         },
+         {  
+            "caption": "Check-Out",
+            "command": "wam_swagger_generic_contextual_call",
+            "args" : {
+               "operationId" : "ModuleDefAPI_CheckOut",
+               "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
+               "action" : "actions.update_readonly(self.view)"
+            }
+         },
+         {  
+            "caption": "Deliver",
+            "command": "wam_swagger_generic_contextual_call",
+            "args" : {
+               "operationId" : "ModuleDefAPI_Deliver",
+               "params" : { "name": "<<inputs.get_module_name(self.inputResultCallback, view=self.view)>>" },
+               "action" : "actions.update_readonly(self.view)"
+            }
+         },
+      ]
+   },
 ]

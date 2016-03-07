@@ -1,13 +1,17 @@
 import sublime
+import environment
 
-def AlertError(message):
+def alert_error(message):
    print("Gold Plugin error:", message)
    sublime.error_message("Gold Plugin error: " + message)
 
-def LogError(message):
+def log_error(message):
    print("Gold Plugin error:", message)
 
-def IsAGoldView(view=None):
+def log_info(message):
+   print("Gold Plugin info:", message)
+
+def is_a_gold_view(view=None):
    if view == None:
       view = sublime.active_window().active_view()
 
@@ -54,3 +58,13 @@ def get_view_content(view=None):
       view = sublime.active_window().active_view()
 
    return view.substr(sublime.Region(0, view.size()))
+
+def get_word_at(x, y, view):
+   selectedTextPoint = view.window_to_text((x, y))
+   selectedWordRegions = view.word(selectedTextPoint)
+   return view.substr(selectedWordRegions)
+
+def is_entity_checkedout(entity_name):
+   api = environment.getSwaggerAPI()
+   res = api.ModuleDefAPI.ModuleDefAPI_entityStatus(name=entity_name).result()
+   return res['checkedOut']

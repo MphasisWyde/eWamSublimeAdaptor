@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+   <key>name</key>
+   <string>Symbol List</string>
+   <key>scope</key>
+   <string>source.gold meta.structure.gold, source.gold meta.function.gold, source.gold meta.variable.member.gold, source.gold meta.variable.local.gold, source.gold meta.type.gold</string>
+   <key>settings</key>
+   <dict>
+      <key>showInSymbolList</key>
+      <integer>1</integer>
+      <key>showInIndexedSymbolList</key>
+      <integer>1</integer>
+      <key>symbolTransformation</key>
+      <string>
+         s/^(class.*)$/$1/g;
+         s/^(module.*)$/$1/g;
+         s/^(procedure)[ \t]*([A-Za-z_][A-Za-z0-9_]*).*$/(      )[proc] $2 \(...\)/g;
+         s/^(function)[ \t]*([A-Za-z_][A-Za-z0-9_]*)(\(.*\)){0,1}([ \t]*return[ \t]+){0,1}([.A-Za-z_][A-Za-z0-9_]*){0,1}.*$/(      )[func] $2 \(...\)  --> $5/g;
+         s/^[ \t]*(var)[ \t]*(.*)$/(      )(      )[local] $2/g;
+         s/^(type)[ \t]*([A-Za-z_][A-Za-z0-9_]*[ \t]*:(.*))$/(      )[type] $2/g;
+         s/^([A-Za-z_][A-Za-z0-9_]*)[ \t]*(:)[ \t]*(.*)$/(      )+ $1 $2 $3/g;
+      </string>
+   </dict>
+</dict>
+</plist>

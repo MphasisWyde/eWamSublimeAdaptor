@@ -3,6 +3,7 @@ from bravado.client import SwaggerClient
 
 swaggerClient = None
 
+
 def get_environments():
    settings = sublime.load_settings("wam.sublime-settings")
    if settings == None:

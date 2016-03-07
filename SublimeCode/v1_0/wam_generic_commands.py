@@ -22,6 +22,8 @@ class WamSwaggerGenericCallCommand(sublime_plugin.WindowCommand):
    action = None
    paramBeingTreated = None
    currentMatch = None
+   dummyresult = None
+   opresult = None
 
    def is_enabled(self):
       return True
@@ -38,7 +40,7 @@ class WamSwaggerGenericCallCommand(sublime_plugin.WindowCommand):
          return
 
       if operationId == None or operationId == "":
-         helpers.LogError("'operationId' not provided")
+         helpers.log_error("'operationId' not provided")
          return
 
       self.operationId = operationId
@@ -53,7 +55,16 @@ class WamSwaggerGenericCallCommand(sublime_plugin.WindowCommand):
    def expandParams(self):
       tagRegex = re.compile(r"<<[^>]+>>")
 
+      dummyToTreat = False
+      if 'dummy' in self.parameters:
+         match = tagRegex.search(self.parameters['dummy'])
+         if match != None:
+            dummyToTreat = True
+
       for param in self.parameters:
+         if dummyToTreat and param != 'dummy':
+            continue
+
          match = tagRegex.search(self.parameters[param])
          if match == None:
             # Nothing left to expand in this parameter
@@ -62,26 +73,34 @@ class WamSwaggerGenericCallCommand(sublime_plugin.WindowCommand):
             self.paramBeingTreated = param
             self.currentMatch = match
             replacor = self.parameters[param][match.start()+2:match.end()-2]
-
-            sublime.set_timeout_async(eval(replacor, globals(), locals()), 10)
+            
+            sublime.set_timeout_async(exec(replacor, globals(), locals()), 10)
             # We will be waiting for the method to call back doneInputOneTag
             return
 
       self.executeCommand()
 
    def inputResultCallback(self, expandedValue):
-      oldValue = self.parameters[self.paramBeingTreated]
-      self.parameters[self.paramBeingTreated] = oldValue[:self.currentMatch.start()] + expandedValue + oldValue[self.currentMatch.end():]
+      if isinstance(expandedValue, str):
+         oldValue = self.parameters[self.paramBeingTreated]
+         self.parameters[self.paramBeingTreated] = oldValue[:self.currentMatch.start()] + expandedValue + oldValue[self.currentMatch.end():]
+      elif isinstance(expandedValue, dict):
+         self.dummyresult = expandedValue
+         oldValue = self.parameters[self.paramBeingTreated]
+         self.parameters[self.paramBeingTreated] = oldValue[:self.currentMatch.start()] + oldValue[self.currentMatch.end():]
+
       self.expandParams()
 
    def executeOperation(self):
       try:
          if self.operation != None:
+            if 'dummy' in self.parameters:
+               del self.parameters['dummy']
             kwargs = self.parameters
-            self.result = self.operation(**kwargs).result()
+            self.opresult = self.operation(**kwargs).result()
       except bravado.exception.HTTPError as e:
-         self.result = None
-         helpers.LogError(e)
+         self.opresult = None
+         helpers.log_error(e)
 
    def setOperationFromId(self):
       # We expect operationId to be the one specified in swagger documentation
@@ -89,14 +108,14 @@ class WamSwaggerGenericCallCommand(sublime_plugin.WindowCommand):
       moduleName = self.operationId.split('_')[0]
       module = getattr(self.swaggerAPI, moduleName)
       if module == None:
-         helpers.LogError("Module '" + moduleName + "' not found, deduced from '" + self.operationId + "'. [" + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name + "]")
+         helpers.log_error("Module '" + moduleName + "' not found, deduced from '" + self.operationId + "'. [" + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name + "]")
 
       self.operation = getattr(module, self.operationId)
       if self.operation == None:
-         helpers.LogError("Operation '" + self.operationId + "' not found. [" + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name + "]")
+         helpers.log_error("Operation '" + self.operationId + "' not found. [" + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name + "]")
 
    def executeAction(self):
-      response = self.result
+      response = self.opresult
       exec(self.action, globals(), locals())
 
    def executeCommand(self):
@@ -106,11 +125,10 @@ class WamSwaggerGenericCallCommand(sublime_plugin.WindowCommand):
 class WamSwaggerGoldGenericCallCommand(WamSwaggerGenericCallCommand):
 
    def is_enabled(self):
-      return helpers.IsAGoldView(self.view)
+      return helpers.is_a_gold_view(self.view)
 
    def is_visible(self):
-      return helpers.IsAGoldView(self.view)
-
+      return helpers.is_a_gold_view(self.view)
 
 class WamSwaggerGenericContextualCallCommand(sublime_plugin.TextCommand):
 
@@ -129,11 +147,14 @@ class WamSwaggerGenericContextualCallCommand(sublime_plugin.TextCommand):
    selectedWordRegions = None
    selectedWord = ""
 
+   dummyresult = None
+   opresult = None
+
    def is_enabled(self):
-      return helpers.IsAGoldView(self.view)
+      return helpers.is_a_gold_view(self.view)
 
    def is_visible(self):
-      return helpers.IsAGoldView(self.view)
+      return helpers.is_a_gold_view(self.view)
 
    def description(self):
       return "Open en eWAM environment in a new workspace"
@@ -156,7 +177,7 @@ class WamSwaggerGenericContextualCallCommand(sublime_plugin.TextCommand):
          return
 
       if operationId == None or operationId == "":
-         helpers.LogError("'operationId' not provided")
+         helpers.log_error("'operationId' not provided")
          return
 
       self.operationId = operationId
@@ -171,7 +192,16 @@ class WamSwaggerGenericContextualCallCommand(sublime_plugin.TextCommand):
    def expandParams(self):
       tagRegex = re.compile(r"<<[^>]+>>")
 
+      dummyToTreat = False
+      if 'dummy' in self.parameters:
+         match = tagRegex.search(self.parameters['dummy'])
+         if match != None:
+            dummyToTreat = True
+
       for param in self.parameters:
+         if dummyToTreat and param != 'dummy':
+            continue
+
          match = tagRegex.search(self.parameters[param])
          if match == None:
             # Nothing left to expand in this parameter
@@ -180,26 +210,34 @@ class WamSwaggerGenericContextualCallCommand(sublime_plugin.TextCommand):
             self.paramBeingTreated = param
             self.currentMatch = match
             replacor = self.parameters[param][match.start()+2:match.end()-2]
-
-            sublime.set_timeout_async(eval(replacor, globals(), locals()), 10)
+            
+            sublime.set_timeout_async(exec(replacor, globals(), locals()), 10)
             # We will be waiting for the method to call back doneInputOneTag
             return
 
       self.executeCommand()
 
    def inputResultCallback(self, expandedValue):
-      oldValue = self.parameters[self.paramBeingTreated]
-      self.parameters[self.paramBeingTreated] = oldValue[:self.currentMatch.start()] + expandedValue + oldValue[self.currentMatch.end():]
+      if isinstance(expandedValue, str):
+         oldValue = self.parameters[self.paramBeingTreated]
+         self.parameters[self.paramBeingTreated] = oldValue[:self.currentMatch.start()] + expandedValue + oldValue[self.currentMatch.end():]
+      elif isinstance(expandedValue, dict):
+         self.dummyresult = expandedValue
+         oldValue = self.parameters[self.paramBeingTreated]
+         self.parameters[self.paramBeingTreated] = oldValue[:self.currentMatch.start()] + oldValue[self.currentMatch.end():]
+
       self.expandParams()
 
    def executeOperation(self):
       try:
          if self.operation != None:
+            if 'dummy' in self.parameters:
+               del self.parameters['dummy']
             kwargs = self.parameters
-            self.result = self.operation(**kwargs).result()
+            self.opresult = self.operation(**kwargs).result()
       except bravado.exception.HTTPError as e:
-         self.result = None
-         helpers.LogError(e)
+         self.opresult = None
+         helpers.log_error(e)
 
    def setOperationFromId(self):
       # We expect operationId to be the one specified in swagger documentation
@@ -207,38 +245,16 @@ class WamSwaggerGenericContextualCallCommand(sublime_plugin.TextCommand):
       moduleName = self.operationId.split('_')[0]
       module = getattr(self.swaggerAPI, moduleName)
       if module == None:
-         helpers.LogError("Module '" + moduleName + "' not found, deduced from '" + self.operationId + "'. [" + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name + "]")
+         helpers.log_error("Module '" + moduleName + "' not found, deduced from '" + self.operationId + "'. [" + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name + "]")
 
       self.operation = getattr(module, self.operationId)
       if self.operation == None:
-         helpers.LogError("Operation '" + self.operationId + "' not found. [" + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name + "]")
+         helpers.log_error("Operation '" + self.operationId + "' not found. [" + __name__ + ": " + type(self).__name__ + "." + sys._getframe().f_code.co_name + "]")
 
    def executeAction(self):
-      response = self.result
-      print("response:", response, self.action)
+      response = self.opresult
       exec(self.action, globals(), locals())
 
    def executeCommand(self):
       self.executeOperation()
       self.executeAction()
-
-
-
-class WamInsertTextCommand(sublime_plugin.TextCommand):
-
-   def is_enabled(self):
-      return True
-
-   def is_visible(self):
-      return True
-
-   def description(self):
-      return "Insert text in a buffer..."
-
-   def want_event(self):
-      False
-
-   def run(self, edit, text):
-      self.view.insert(edit, 0, text)
-
-
