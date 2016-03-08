@@ -1,6 +1,6 @@
 # eWamSublimeAdaptor
 
-![front end screen shot](screens/screenshot2.png)
+![front end screen shot](screenshots/screenshot2.png)
 
 ## SublimeText "Gold plugin" source code.
 Be advised, for now this code is a prototype, a draft. Hence, you will spot some ugly code, some code that's here only for testing purpose, a bunch of commented code lines, clumsy design and lots of debug output in the console. Work in progress.
@@ -22,34 +22,32 @@ Depending on how you installed Sublime, your Packages folder can be in <user hom
 
 ## Features
 
-![front end screen shot2](screens/screenshot.png)
-
 * Gold syntax highlighting
 * Symbol navigation inside class
 * Symbol navigation accross classes
 
-![class navigation](screens/class-navigation.gif)
+![class navigation](screenshots/class-navigation.gif)
 
 * Open, create, modify, parse, save class or module
 * Autocompletion
 
-![writing code](screens/code-writing2.gif)
+![writing code](screenshots/code-writing2.gif)
 
 * Synchronize environment
 * Checkin / checkout / deliver entities
 
-![synchronize](screens/synchronize.gif)
+![synchronize](screenshots/synchronize.gif)
 
 * Consult / modify scenario
 * Run a method or a class
 * Manage reimplementations
 
-![scenarios](screens/scenarios.gif)
+![scenarios](screenshots/scenarios.gif)
 
 
 * Setup different eWAM environments
 
-![environments](screens/general-environments.gif)
+![environments](screenshots/general-environments.gif)
 
 
 ## Customize the plugin
@@ -69,3 +67,5 @@ Commands are defined in python files (see http://docs.sublimetext.info/en/latest
 ### Python source code
 
 ... extensively uses SublimeText API (http://www.sublimetext.com/docs/3/api_reference.html).
+
+![front end screen shot2](screenshots/screenshot.png)
