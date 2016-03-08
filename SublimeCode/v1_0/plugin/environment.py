@@ -7,11 +7,11 @@ swaggerClient = None
 def get_environments():
    settings = sublime.load_settings("wam.sublime-settings")
    if settings == None:
-      return []
+      return dict([])
 
    env_list = settings.get("environments")
    if env_list == None:
-      env_list = []
+      env_list = dict([])
 
    return env_list
 
