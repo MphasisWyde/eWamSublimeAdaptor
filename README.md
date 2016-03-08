@@ -15,10 +15,10 @@ This plugin for SublimeText is based on eWAM APIs. So you need an eWAM 6.1.5 ins
 ### Sublime install
 The subfolder SublimeCode/ contains the source code (essentially python) used in the SublimeText package.
 
-* copy the content of https://github.com/MphasisWyde/eWamSublimeAdaptor/tree/master/SublimeCode/v1_0/ in "<Sublime Packages Folder>/Gold/" (you will need to create the Gold/ subdirectory)
+* copy the content of https://github.com/MphasisWyde/eWamSublimeAdaptor/tree/master/SublimeCode/v1_0/ in "[Sublime Packages Folder]/Gold/" (you will need to create the Gold/ subdirectory)
 
-Depending on how you installed Sublime, your Packages folder can be in <user home>\AppData\Roaming\Sublime Text 3\Packages\ or in <Sublime Install Folder>\Data\Packages\
-<user home> may be somthing like that : C:\Users\martinez_r.
+Depending on how you installed Sublime, your Packages folder can be in [user home]\AppData\Roaming\Sublime Text 3\Packages\ or in <Sublime Install Folder>\Data\Packages\
+[user home] may be somthing like that : C:\Users\martinez_r.
 
 ## Features
 
