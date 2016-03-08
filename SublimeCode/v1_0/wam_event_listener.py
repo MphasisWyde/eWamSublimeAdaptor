@@ -240,7 +240,7 @@ class WamEventListener(sublime_plugin.EventListener):
 
       result = []
       for item in fullChoiceList["items"]:
-         if item['inserText'] == "":
+         if item['insertText'] == "":
             result.append((item["label"], item["label"]))
          else:
             result.append((item["label"], item["insertText"]))

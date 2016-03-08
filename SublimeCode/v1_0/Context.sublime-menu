@@ -48,7 +48,7 @@
       "caption": "Modify/Consult Scenario",
       "command": "wam_get_scenario",
    },
-   {
+/*   {
       "id": "wam_examples",
       "caption": "Examples",
       "children":
@@ -134,5 +134,5 @@
             }
          },
       ]
-   },
+   },*/
 ]

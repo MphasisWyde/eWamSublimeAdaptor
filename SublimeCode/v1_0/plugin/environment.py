@@ -88,6 +88,7 @@ def set_working_environment(index):
       prj_data['wam'] = {}
 
    selected_env = get_environment_by_index(index)
+
    prj_data['wam']['wam_working_environment'] = selected_env['name']
    setClientAPIFromEnv(selected_env)
 
@@ -132,10 +133,12 @@ def get_working_environment():
    if prj_data == None:
       return None
 
+   selected_name = None
+   
    if 'wam' in prj_data:
       if 'wam_working_environment' in prj_data['wam']:
          selected_name = prj_data['wam']['wam_working_environment']
-   if selected_name == None:
+   if selected_name == None or selected_name == '':
       return None
 
    working_env = get_environment_by_name(selected_name)
@@ -182,7 +185,7 @@ def setClientAPIFromEnv(env):
       swaggerClient = SwaggerClient.from_url(swagger_url, config=config)
 
    if swaggerClient == None:
-      sublime.error_message("Swagger API couldn't be loaded from environment " + env['name'] + ": " + swagger_url)
+      sublime.status_message("WARNING *** Swagger API couldn't be loaded from environment.")
 
 
 def getSwaggerAPI():

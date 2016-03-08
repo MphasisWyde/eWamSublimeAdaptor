@@ -11,14 +11,14 @@
             "children":
             [
                {
-                  "id": "wam_select_env",
-                  "caption": "Select working environment",
-                  "command": "wam_select_env"
-               },
-               {
                   "id": "wam_new_env",
                   "caption": "Add an eWAM environment",
                   "command": "wam_new_env"
+               },
+               {
+                  "id": "wam_select_env",
+                  "caption": "Select working environment",
+                  "command": "wam_select_env"
                },
                {
                   "id": "wam_remove_env",
@@ -90,7 +90,7 @@
                }
             ]
          },
-         {
+/*         {
             "id": "wam_examples",
             "caption": "Examples",
             "children":
@@ -114,7 +114,7 @@
                   }
                }
             ]   
-         }
+         }*/
          
       ]
    }
