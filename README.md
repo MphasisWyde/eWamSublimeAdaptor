@@ -12,14 +12,18 @@ This plugin for SublimeText is based on eWAM APIs. So you need an eWAM 6.1.5 ins
 * Install eWam 6.1.5
   * see : https://github.com/MphasisWyde/WydeActiveModelerAPI	
 
-### Sublime install
-The subfolder SublimeCode/ contains the source code (essentially python) used in the SublimeText package.
+### Sublime Plugin install
 
-* copy the content of https://github.com/MphasisWyde/eWamSublimeAdaptor/tree/master/SublimeCode/v1_0/ in "[Sublime Packages Folder]/Gold/" (you will need to create the Gold/ subdirectory)
+To install eWAM Sublime Text plugin, you only need to copy the Gold.sublime-package file in the Default Packages folder of Sublime Text.
 
-Depending on how you installed Sublime, your Packages folder can be in [user home]\AppData\Roaming\Sublime Text 3\Packages\ or in [Sublime Install Folder]\Data\Packages\
+This folder is usually in his path: [SublimeText Installation Folder]\Packages\
 
-[user home] may be somthing like that : C:\Users\martinez_r.
+You should see a number of aldready existing packages in this folder:
+
+![synchronize](screenshots/install-folder.png)
+
+You can get the Gold.sublime-package file here : https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/v1_0/Gold.sublime-package
+
 
 ## Features
 
@@ -45,13 +49,25 @@ Depending on how you installed Sublime, your Packages folder can be in [user hom
 
 ![scenarios](screenshots/scenarios.gif)
 
-
 * Setup different eWAM environments
 
 ![environments](screenshots/general-environments.gif)
 
-
 ## Customize the plugin
+
+### Installing de developpment version of the plugin
+
+ATTENTION : YOU CANNOT INSTALL THE PACKAGE "Gold.sublime-package" AND THIS DEVELOPPMENT PACKAGE AT THE SAME TIME !
+
+The subfolder SublimeCode/ contains the source code (essentially python) used in the SublimeText package.
+
+* remove the Gold.sublime-package file from the defaults packages folder, if you have previously installed it;
+* copy the content of https://github.com/MphasisWyde/eWamSublimeAdaptor/tree/master/SublimeCode/v1_0/ in "[Sublime Packages Folder]/Gold/" (you will need to create the Gold/ subdirectory).
+
+Depending on how you installed Sublime, your Packages folder can be in [user home]\AppData\Roaming\Sublime Text 3\Packages\ or in [Sublime Install Folder]\Data\Packages\
+
+[user home] may be somthing like that : C:\Users\martinez_r.
+
 
 ### Syntax highlighting
 
