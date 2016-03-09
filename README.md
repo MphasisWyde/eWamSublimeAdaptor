@@ -14,7 +14,7 @@ This plugin for SublimeText is based on eWAM APIs. So you need an eWAM 6.1.5 ins
 
 ### Sublime Plugin install
 
-To install eWAM Sublime Text plugin, you only need to copy the Gold.sublime-package file in the Default Packages folder of Sublime Text.
+To install eWAM Sublime Text plugin, you only need to copy the Gold.sublime-package file in the default Packages folder of Sublime Text.
 
 This folder is usually in his path: [SublimeText Installation Folder]\Packages\
 
@@ -22,7 +22,7 @@ You should see a number of aldready existing packages in this folder:
 
 ![synchronize](screenshots/install-folder.png)
 
-You can get the Gold.sublime-package file here : https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/v1_0/Gold.sublime-package
+You can get the [Gold.sublime-package](https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/Gold.sublime-package?raw=true) file in the SublimeCode/ subdirectory: https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/Gold.sublime-package?raw=true
 
 
 ## Features
