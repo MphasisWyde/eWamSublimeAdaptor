@@ -1,7 +1,0 @@
-{
-    "router":{
-        "mapping":"aERS_EwamDefaultMapping",
-        "decoration":false,
-		"host":"localhost:8082"
-    }
-}

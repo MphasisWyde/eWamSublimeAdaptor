@@ -10,9 +10,9 @@ goto :endofscript
 
 
 :build_package
-cd %1
-del /F /Q ..\Gold.sublime-package
-..\zip.exe -r -q ..\Gold.sublime-package *
+cd ..\src
+del /F /Q ..\release\Gold.sublime-package
+..\build\zip.exe -r -q ..\release\Gold.sublime-package *
 cd ..
 echo Created Gold.sublime-package.
 GOTO:EOF

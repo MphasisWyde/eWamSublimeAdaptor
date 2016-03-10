@@ -1,6 +1,6 @@
 # eWam Sublime Text plugin
 
-![front end screen shot](screenshots/screenshot2.png)
+![front end screen shot](doc/screenshots/screenshot2.png)
 
 ## Installation
 
@@ -30,27 +30,27 @@ You can get the [Gold.sublime-package](https://github.com/MphasisWyde/eWamSublim
 * Symbol navigation inside class
 * Symbol navigation accross classes
 
-![class navigation](screenshots/class-navigation.gif)
+![class navigation](doc/screenshots/class-navigation.gif)
 
 * Open, create, modify, parse, save class or module
 * Autocompletion
 
-![writing code](screenshots/code-writing2.gif)
+![writing code](doc/screenshots/code-writing2.gif)
 
 * Synchronize environment
 * Checkin / checkout / deliver entities
 
-![synchronize](screenshots/synchronize.gif)
+![synchronize](doc/screenshots/synchronize.gif)
 
 * Consult / modify scenario
 * Run a method or a class
 * Manage reimplementations
 
-![scenarios](screenshots/scenarios.gif)
+![scenarios](doc/screenshots/scenarios.gif)
 
 * Setup different eWAM environments
 
-![environments](screenshots/general-environments.gif)
+![environments](doc/screenshots/general-environments.gif)
 
 ## Customize the plugin
 
@@ -84,4 +84,4 @@ Commands are defined in python files (see http://docs.sublimetext.info/en/latest
 
 ... extensively uses SublimeText API (http://www.sublimetext.com/docs/3/api_reference.html).
 
-![front end screen shot2](screenshots/screenshot.png)
+![front end screen shot2](doc/screenshots/screenshot.png)

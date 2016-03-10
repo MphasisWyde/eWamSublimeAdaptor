@@ -1,27 +1,5 @@
 
 
-- commandes génériques : 
-   un ou plusieurs paramètres
-   avec paramètre d'action à appeler avec la response
-
-=> pour les menu
-=> pour le menu contextuel
-
-   paramètres d'input: un appel en chaine
-
-- ne garder en fichier de premier niveau que ceux qui contiennent l'API du développeur qui veut réutiliser notre plugin (pour ajouter des commandes par exemple)
-
-- requêtes avec caractères spéciaux, exemple :
-   Marche:
-   > Execution of GET '/searchEntities?q=aRedgis*&_class=true'...Done
-
-   Marche pas:
-   > Execution of GET '/searchEntities?_class=true&q=aRedgis%2A'...Done
-- Attention operation /rest/classOrModule/{name}/ManageReimplem : même operationId en Get et en Post. Quelle est la différence entre get et post ?
-- problème avec le parse
-
-
-
 code snippets:
 
 sublime.active_window().set_layout({ "cols": [0.0, 0.3, 0.65, 1.0], "rows": [0.0, 0.66, 1.0], "cells": [[0, 0, 1, 1], [0, 1, 1, 2], [1, 0, 2, 1], [2, 0, 3, 1], [1, 1, 3, 2] ] })
