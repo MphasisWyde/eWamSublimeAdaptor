@@ -1,12 +1,11 @@
-# eWamSublimeAdaptor
+# eWam Sublime Text plugin
 
 ![front end screen shot](screenshots/screenshot2.png)
 
-## SublimeText "Gold plugin" source code.
-Be advised, for now this code is a prototype, a draft. Hence, you will spot some ugly code, some code that's here only for testing purpose, a bunch of commented code lines, clumsy design and lots of debug output in the console. Work in progress.
-
 ## Installation
+
 ### eWam install
+
 This plugin for SublimeText is based on eWAM APIs. So you need an eWAM 6.1.5 installed.
 
 * Install eWam 6.1.5
@@ -16,14 +15,12 @@ This plugin for SublimeText is based on eWAM APIs. So you need an eWAM 6.1.5 ins
 
 To install eWAM Sublime Text plugin, you only need to 
 * close all Sublime Text instances
-* copy the [Gold.sublime-package file](https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/Gold.sublime-package?raw=true) in the default Packages folder of Sublime Text.
+* copy the [Gold.sublime-package file](https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/Gold.sublime-package?raw=true) in the "Installed Packages" folder of Sublime Text.
 * open Sublime Text
 
-This folder is usually in his path: [SublimeText Installation Folder]\Packages\
+Depending on how you installed Sublime, your "Installed Packages" folder can be in [user home]\AppData\Roaming\Sublime Text 3\Installed Packages\ or in [Sublime Install Folder]\Data\Installed Packages\
 
-You should see a number of existing packages in this folder :
-
-![synchronize](screenshots/install-folder.png)
+[user home] is usually something like that : C:\Users\martinez_r.
 
 You can get the [Gold.sublime-package](https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/Gold.sublime-package?raw=true) file in the SublimeCode/ subdirectory: https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/Gold.sublime-package?raw=true
 
