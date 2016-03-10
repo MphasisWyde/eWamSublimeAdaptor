@@ -15,14 +15,14 @@ This plugin for SublimeText is based on eWAM APIs. So you need an eWAM 6.1.5 ins
 
 To install eWAM Sublime Text plugin, you only need to 
 * close all Sublime Text instances
-* copy the [Gold.sublime-package file](https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/Gold.sublime-package?raw=true) in the "Installed Packages" folder of Sublime Text.
+* copy the [Gold.sublime-package file](https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/release/Gold.sublime-package?raw=true) in the "Installed Packages" folder of Sublime Text.
 * open Sublime Text
 
 Depending on how you installed Sublime, your "Installed Packages" folder can be in [user home]\AppData\Roaming\Sublime Text 3\Installed Packages\ or in [Sublime Install Folder]\Data\Installed Packages\
 
 [user home] is usually something like that : C:\Users\martinez_r.
 
-You can get the [Gold.sublime-package](https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/Gold.sublime-package?raw=true) file in the SublimeCode/ subdirectory: https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/Gold.sublime-package?raw=true
+You can get the [Gold.sublime-package](https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/release/Gold.sublime-package?raw=true) file in the SublimeCode/ subdirectory: https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/Gold.sublime-package?raw=true
 
 ## Features
 
@@ -61,7 +61,7 @@ ATTENTION : YOU CANNOT INSTALL THE PACKAGE "Gold.sublime-package" AND THIS DEVEL
 The subfolder SublimeCode/ contains the source code (essentially python) used in the SublimeText package.
 
 * remove the Gold.sublime-package file from the defaults packages folder, if you have previously installed it;
-* copy the content of https://github.com/MphasisWyde/eWamSublimeAdaptor/tree/master/SublimeCode/v1_0/ in "[Sublime Packages Folder]/Gold/" (you will need to create the Gold/ subdirectory).
+* copy the content of https://github.com/MphasisWyde/eWamSublimeAdaptor/tree/master/src/ in "[Sublime Packages Folder]/Gold/" (you will need to create the Gold/ subdirectory).
 
 Depending on how you installed Sublime, your Packages folder can be in [user home]\AppData\Roaming\Sublime Text 3\Packages\ or in [Sublime Install Folder]\Data\Packages\
 
