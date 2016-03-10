@@ -22,7 +22,7 @@ Depending on how you installed Sublime, your "Installed Packages" folder can be 
 
 [user home] is usually something like that : C:\Users\martinez_r.
 
-You can get the [Gold.sublime-package](https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/release/Gold.sublime-package?raw=true) file in the SublimeCode/ subdirectory: https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/SublimeCode/Gold.sublime-package?raw=true
+You can get the [Gold.sublime-package](https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/release/Gold.sublime-package?raw=true) file in the release/ subdirectory: https://github.com/MphasisWyde/eWamSublimeAdaptor/blob/master/release/
 
 ## Features
 
@@ -58,7 +58,7 @@ You can get the [Gold.sublime-package](https://github.com/MphasisWyde/eWamSublim
 
 ATTENTION : YOU CANNOT INSTALL THE PACKAGE "Gold.sublime-package" AND THIS DEVELOPPMENT PACKAGE AT THE SAME TIME !
 
-The subfolder SublimeCode/ contains the source code (essentially python) used in the SublimeText package.
+The subfolder src/ contains the source code (essentially python) used in the SublimeText package.
 
 * remove the Gold.sublime-package file from the defaults packages folder, if you have previously installed it;
 * copy the content of https://github.com/MphasisWyde/eWamSublimeAdaptor/tree/master/src/ in "[Sublime Packages Folder]/Gold/" (you will need to create the Gold/ subdirectory).
